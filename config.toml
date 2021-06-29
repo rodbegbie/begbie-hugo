@@ -1,4 +1,4 @@
-baseURL = "https://begbie-hugo.pages.dev/"
+baseURL = "https://coaching.begbie.com/"
 languageCode = "en-gb"
 paginate = 6
 theme = "portio"
