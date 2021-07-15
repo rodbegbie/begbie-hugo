@@ -2,17 +2,17 @@
 enable: true
 topTitle: Testimonials
 title: >
-  ## What People are Say About Me?
+  ## What People are Saying About Me?
 
 testimonial:
-  - name: Ryan Cook
-    comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
-    time: Jan 20, 2020
-    star: 5
-  - name: Justin Trudo
-    comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
-    time: Jan 16, 2020
-    star: 4
+  - name: VP Engineering
+    comment: I've been meeting with Rod for a few months now and he's had insightful guidance on our big-picture strategic initiatives as well as the smaller-scale, sometimes interpersonal, tactical issues that come up in a leadership role.
+    time: 75 person SaaS company
+    star: 0
+  - name: Software Engineer
+    comment: Rod has really helped me take my career to the next level. I always look forward to learning something new in our sessions.
+    time: Series A funded startup
+    star: 0
   - name: Franky Filth
     comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
     time: Mar 08, 2020

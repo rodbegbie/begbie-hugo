@@ -15,6 +15,6 @@ content: >
   working as a Visual designer from.
 button1Name: Hire me
 button2Name: Download CV
-button1Target: contact
+button1Target: https://bestpracticer.com/coaching
 button2Target: contact
 image: images/about/about-img.jpg

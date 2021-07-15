@@ -9,27 +9,27 @@ title = "Rod Begbie"
 name = "Home"
 url = "#home"
 weight = 1
+
 [[menu.main]]
 name = "About"
 url = "#about"
 weight = 2
+
 [[menu.main]]
 name = "Coaching"
 url = "#coaching"
 weight = 3
-[[menu.main]]
-name = "Work"
-url = "#portfolio"
-weight = 4
 
 [[menu.main]]
 name = "Resume"
 url = "#resume"
 weight = 5
+
 [[menu.main]]
 name = "Writing"
 url = "#writing"
 weight = 6
+
 [[menu.main]]
 name = "Contact"
 url = "#contact"
@@ -56,7 +56,7 @@ weight = 4
 [params]
 blogPageURL = "blog"
 contactLink = "contact"
-copyright = "All right reserved copyright © Rod Begbie 2020"
+copyright = "All right reserved copyright © Rod Begbie 2021"
 footerLogo = "images/contact/widget-logo.png"
 formspreeURL = "YOUR FORMSPREE URL"
 googleAnalytics = "YOUR GOOGLE ANALYTICS CODE"
