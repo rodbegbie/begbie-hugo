@@ -13,7 +13,11 @@ testimonial:
     comment: Rod has really helped me take my career to the next level. I always look forward to learning something new in our sessions.
     time: Series A funded startup
     star: 0
-  - name: Franky Filth
+  - name: Made Up Person
     comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
-    time: Mar 08, 2020
-    star: 3
+    time: Made Up Company
+    star: 0
+  - name: Made Up Person Jr.
+    comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
+    time: Made Up Company 2
+    star: 0

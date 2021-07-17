@@ -55,8 +55,8 @@ weight = 4
 
 [params]
 blogPageURL = "blog"
-contactLink = "contact"
-copyright = "All right reserved copyright © Rod Begbie 2021"
+contactLink = "mailto:rod@begbie.com"
+copyright = "Copyright © Rod Begbie 2021"
 footerLogo = "images/contact/widget-logo.png"
 formspreeURL = "YOUR FORMSPREE URL"
 googleAnalytics = "YOUR GOOGLE ANALYTICS CODE"
