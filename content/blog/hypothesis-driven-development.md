@@ -26,9 +26,16 @@ However, we ran into some interesting challenges when we were building experimen
 
 At one point, a teammate shared a [blog post by a product manager at Patreon](https://medium.com/@talraviv/thats-not-a-hypothesis-25666b01d5b4) which I highly recommend.  To quote a couple of key paragraphs:
 
-> **A good hypothesis is a statement about what you believe to be true today.** It is not what you think will happen when you try X. It contains neither the words “If” nor “Then.” In fact, it has nothing to do with what you’re about to try — it’s all about your users.
+> **A good hypothesis is a statement about what you believe to be true today.**
+> It is not what you think will happen when you try X. It contains neither the words “If” nor
+> “Then.” In fact, it has nothing to do with what you’re about to try — it’s all about your
+> users.
 > 
-> Why be pedantic about this? Because hypotheses are the key to learning. Product growth doesn’t happen from a few cool tricks. Product growth comes from fumbling around in the dark, trying a lot of things, and improving our aim over the course of months and years. In other words, this is a long game that is ultimately about learning. **Clear learnings come only from clear hypotheses.**
+> Why be pedantic about this? Because hypotheses are the key to learning. Product growth
+> doesn’t happen from a few cool tricks. Product growth comes from fumbling around in the
+> dark, trying a lot of things, and improving our aim over the course of months and years. In
+> other words, this is a long game that is ultimately about learning. **Clear learnings come
+> only from clear hypotheses.**
 
 ---
 

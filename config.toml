@@ -27,7 +27,7 @@ weight = 5
 
 [[menu.main]]
 name = "Writing"
-url = "#writing"
+url = "blog"
 weight = 6
 
 [[menu.main]]

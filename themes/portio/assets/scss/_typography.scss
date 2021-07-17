@@ -14,6 +14,14 @@ a.text-dark {
     }
 }
 
+blockquote {
+    // border-left: solid $primary 3px;
+    background: $body-color;
+    color: $yiq-text-light;
+    padding: 1em;
+    border-radius: 10px;
+}
+
 .top-title {
     font-size: 20px;
     display: block;
