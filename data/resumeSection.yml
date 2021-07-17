@@ -2,12 +2,10 @@
 enable: true
 topTitle: My Resume
 title: >
-  ## My Expertises
+  ## My Experience
 
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore  
-
-
-  Magna aliquyam erat, sed diam voluptua. At vero eos accusam justo.
+  Here's a summary of places I've worked and what I've worked on.  For more details,
+  check out my [LinkedIn profile](https://linkedin.com/in/rodbegbie).
 tab1Name: Education
 tab2Name: Experiences
 tab1Target: education
@@ -15,44 +13,47 @@ tab2Target: experience
 
 education:
   - content: >
-      #### Master in Arts
+      #### Senior Engineering Manager, _Dropbox_
 
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2008-2010
+      * Led teams of web, desktop and mobile engineers building _Dropbox Paper_ and _Dropbox Spaces_. Shipped tons of new functionality, hit company growth goals, and made processes like on-call manageable and decreasingly painful.
+      
+      * Built strong partnerships with Product & Design peers to maximise impact engineering teams could deliver.
+      
+      * Created and led IGNITE, Dropbox's apprenticeship program for new engineers from non-traditional backgrounds. In first two years, 17 apprentices joined DBX for six month placements, with 13 receiving (and accepting) full-time offers.
+      
+      * Worked on question set and designed & delivered interviewer training for Dropbox's behavioural interviews.
+    time: 2016–2020
   - content: >
-      #### Master in Arts
+      #### VP Software Engineering, _Anova Culinary_
 
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2008-2010
+      * Transitioned web & mobile software development for "smart" kitchen appliance produxts from teams of external contractors (in the U.S. and Ukraine) to being a core internal discipline.
+      
+      * Defined, sourced, interviewed and closed two engineering roles in my first 30 days.
+
+    time: 2015–2016
   - content: >
-      #### Master in Arts
+      #### Co-Founder & CTO, _Sosh_
 
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2008-2010
+      * Engineering co-founder. Worked closely with my two co-founders to define our company & product goals. Grew company to 55 people, with 16 engineers reporting in to me.
+      
+      * Built first version of site from scratch, then recruited an awesome engineering team. Defined roles, wrote job postings, built interviewing process, had hundreds of initial coffees and phone screens, and sold to & closed incredible candidates.
+      
+      * Worked closely with co-founders and heads of product & business development on business strategy.  Translated those into engineering goals to set expectations of success for eng team.
+      
+      * Defined and evolved our product development process as team and product-scale grew.
+      
+    time: 2010–2015
   - content: >
-      #### Master in Arts
+      #### Engineering Manager, _Slide_
 
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2008-2010
-
-experience:
+      * Joined as a Python software engineer, building early, massively viral social games on Facebook platform.
+      
+      * Transitioned to being an Engineering Manager for four engineers. Went through the standard experience of getting the title with no training, trying to figure things out like hiring, delivering feedback, retaining engineers, and setting direction. Made a ton of mistakes, but learned from them!
+    time: 2008–2010
   - content: >
-      #### Umbrella co. 
-
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2016-Present
-  - content: >
-      #### Aperture Science 
-
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2010-2016
-  - content: >
-      #### ACME Inc. 
-
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2005-2010
-  - content: >
-      #### LexCorp 
-
-      Lorem ipsum dolor sit amet conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-    time: 2001-2005
+      #### Software Engineer
+      
+      * Spent ten years writing code and building interesting things at companies like Bose, Current TV and Sapient.
+      
+      * In retrospect, was incredibly hard work for my managers to manage — which means I'm pretty experienced with handling hard-to-manage people now!
+    time: 1998–2008
