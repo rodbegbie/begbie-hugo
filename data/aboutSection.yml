@@ -1,20 +1,19 @@
 ---
 enable: true
-topTitle: About
+# topTitle: About
 title: >
   ## About me
-
-  Enjoy team diversity and increase their networks among others people in
-  various fields by provided.
 content: >
-  ### I design and build ultimate things.
+  ### An experience engineering leader with over two decades of product engineering and leadership experience.
 
-  I love to work in User Experience & User Interface designing. Because I love
-  to solve the design problem and find easy and better solutions to solve it. I always
-  try my best to make good user interface with the best user experience. I have been
-  working as a Visual designer from.
+  * Originally from Scotland, Rod now lives in Barcelona and is an engineering leadership coach with [BestPracticer](https://bestpracticer.com/).
+
+  * Before this, he spent four years as a Senior Engineering Manager at Dropbox. Past lives have been as Co-Founder & CTO of Sosh, VP of Software Engineering at Anova Culinary, and writing code at places like Slide, Bose, and – for 39 days – Google.
+
+  * His writing is featured on [LeadDev.com](https://leaddev.com/community/rod-begbie) and in O’Reilly’s [*97 Things Every Programmer Should Know:* Collective Wisdom from the Experts](https://www.oreilly.com/library/view/97-things-every/9780596809515/).
+
 button1Name: Hire me
 button2Name: Download CV
 button1Target: https://bestpracticer.com/coaching
 button2Target: contact
-image: images/about/about-img.jpg
+image: images/about/masked.jpg
