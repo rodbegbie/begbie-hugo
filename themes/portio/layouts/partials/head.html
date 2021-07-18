@@ -1,7 +1,15 @@
 <head>
   <meta charset="utf-8" />
   <title>{{ .Title }}</title>
-
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RodBegbie" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  <meta name="og:title" content="{{ .Title }}" />
+  <meta name="og:type" content="article" />
+  <meta name="og:url" content="{{ "#" | absURL }}" />
+  <!-- <meta name="twitter:description" content="View the album on Flickr." /> -->
+  
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
