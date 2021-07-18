@@ -1,6 +1,6 @@
 ---
 title: "Increase your hiring success with job success profiles"
-date: 2021-04-13T12:49:27+06:00
+date: 2021-04-19
 featureImage: images/allpost/allPost-7.jpg
 postImage: images/single-blog/feature-image.jpg
 ---
@@ -109,3 +109,5 @@ First, I’d ask if there were any surprises on the page (there rarely were), bu
 
 Getting the concept of the Job Success Profile into place, and using it during hiring, was a turning point for us as a team. There are many things that go into being able to build, manage, and tune your hiring pipeline, but no tool I’ve seen has been so impactful across the whole process. I highly recommend writing one the next time you have a position to fill.
 
+---
+_This article was originally posted on [LeadDev.com](https://leaddev.com/hiring-onboarding-retention/increase-your-hiring-success-job-success-profiles) and edited by Ellie Spencer-Failes._

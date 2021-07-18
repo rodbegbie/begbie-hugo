@@ -1,6 +1,6 @@
 ---
 title: "Taking Charge of Your Career Growth"
-date: 2020-10-10T12:49:27+06:00
+date: 2020-10-12
 featureImage: images/allpost/allPost-7.jpg
 postImage: images/single-blog/feature-image.jpg
 ---
@@ -81,3 +81,5 @@ My key results for this goal have looked different across the quarters. They’v
 
 These key results have pushed me to adapt my approaches and become an all-around better manager.  And I take satisfaction in knowing that these are skills that will serve me well for the rest of my career. I hope they are skills that will serve you too.
 
+---
+_This article was originally posted on [LeadDev.com](https://leaddev.com/professional-development/taking-charge-your-career-growth) and edited by Ellie Spencer-Failes._

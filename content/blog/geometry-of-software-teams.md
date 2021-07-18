@@ -1,6 +1,6 @@
 ---
 title: "The geometry of software teams"
-date: 2020-12-14T12:49:27+06:00
+date: 2020-12-14
 featureImage: images/allpost/allPost-7.jpg
 postImage: images/single-blog/feature-image.jpg
 ---
@@ -64,3 +64,5 @@ While I think it is essential to have people explicitly in these roles, I am tho
 
 Pulling these together can hopefully give you a perspective and set of tools to look at your current teams and start to see ways you can tweak structures to increase effectiveness, productivity & happiness for their members. And as you experiment, I hope you uncover new ways to evaluate the shapes of your teams in order to make forming and growing them in the future faster and easier.
 
+---
+_This article was originally posted on [LeadDev.com](https://leaddev.com/building-happy-teams/geometry-software-teams) and edited by Ellie Spencer-Failes._

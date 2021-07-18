@@ -1,6 +1,6 @@
 ---
 title: "Estimating your way to success in software engineering"
-date: 2021-02-09T12:49:27+06:00
+date: 2021-02-15
 featureImage: images/allpost/allPost-7.jpg
 postImage: images/single-blog/feature-image.jpg
 ---
@@ -96,3 +96,5 @@ Imagine if they’d shown their first set of estimates to a peer.
 
 Any of which could have saved them before they laced their walking shoes!
 
+---
+_This article was originally posted on [LeadDev.com](https://leaddev.com/productivity-eng-velocity/estimating-your-way-success) and edited by Ellie Spencer-Failes._

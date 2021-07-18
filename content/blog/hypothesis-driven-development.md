@@ -1,6 +1,6 @@
 ---
 title: "Hypothesis-driven development"
-date: 2020-08-20T12:49:27+06:00
+date: 2020-08-26
 featureImage: images/allpost/allPost-7.jpg
 postImage: images/single-blog/feature-image.jpg
 ---
@@ -99,3 +99,6 @@ My favourite observation from adopting this approach has been seeing increased p
 ---
 
 So if you’re in a position where you’re planning future work for your team, I encourage you to take a step back, look at your goals, and ask yourself ‘What are the things we believe, and what are the cheapest ways to test whether those beliefs hold up to scrutiny?’  It’s the way scientists have been working for centuries, and it might help you and your team avoid costly mistakes.
+
+---
+_This article was originally posted on [LeadDev.com](https://leaddev.com/technical-decision-making/hypothesis-driven-development) and edited by Ellie Spencer-Failes._
