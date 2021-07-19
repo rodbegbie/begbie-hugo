@@ -2,13 +2,14 @@
   <meta charset="utf-8" />
   <title>{{ .Title }}</title>
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@RodBegbie" />
-  <meta name="twitter:title" content="{{ .Title }}" />
   <meta name="og:title" content="{{ .Title }}" />
   <meta name="og:type" content="article" />
-  <meta name="og:url" content="{{ "#" | absURL }}" />
-  <!-- <meta name="twitter:description" content="View the album on Flickr." /> -->
+  <meta name="og:url" content="{{ .Permalink | absURL }}" />
+  {{- with .Description | default .Params.subtitle | default .Site.Params.subtitle | default .Summary }}
+  <meta property="og:description" content="{{ . }}">
+  {{- end }}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@RodBegbie" />
   
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1" />

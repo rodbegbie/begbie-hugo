@@ -61,6 +61,7 @@ footerLogo = "images/contact/widget-logo.png"
 formspreeURL = "YOUR FORMSPREE URL"
 googleAnalytics = "YOUR GOOGLE ANALYTICS CODE"
 logo = "images/site-navigation/logo.png"
+subtitle = "Software Engineering Leadership Coach"
 
 [params.address]
 address = "Barcelona, Spain"
