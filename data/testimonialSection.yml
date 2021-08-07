@@ -9,14 +9,14 @@ testimonial:
     comment: I've been meeting with Rod for a few months now and he's had insightful guidance on our big-picture strategic initiatives as well as the smaller-scale, sometimes interpersonal, tactical issues that come up in a leadership role.
     time: 75 person SaaS company
     star: 0
+  - name: Senior Software Engineer & Tech Lead
+    comment: I've spent so much time just focusing on mastering product development I didn't have a good system for thinking about engineering leadership or for considering my options. With Rod's coaching I was able to level up my leadership skills and get better at showing coworkers those skills. Most importantly, Rod helped me develop a way to think about the different paths in engineering leadership and to work through my doubts about considering management as a viable path.
+    time: Lattice
+    star: 0
   - name: Software Engineer
     comment: Rod has really helped me take my career to the next level. I always look forward to learning something new in our sessions.
     time: Series A funded startup
     star: 0
-  # - name: Made Up Person
-  #   comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
-  #   time: Made Up Company
-  #   star: 0
   # - name: Made Up Person Jr.
   #   comment: Takimata sanctus est lorem ipsum dolor sit amet lorem ipsum dolor sit amet consetur sad ipscing elitr sed diam nonumy eirmod tempor invidunt labore dolore magna.
   #   time: Made Up Company 2
