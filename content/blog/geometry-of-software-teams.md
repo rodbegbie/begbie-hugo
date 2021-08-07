@@ -1,8 +1,8 @@
 ---
 title: "The geometry of software teams"
 date: 2020-12-14
-featureImage: images/allpost/allPost-7.jpg
-postImage: images/single-blog/feature-image.jpg
+featureImage: images/writing/geometry-320.jpg
+postImage: images/writing/geometry-970.jpg
 subtitle: To get your team in shape, you need to think about what the right shape should be…
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Increase your hiring success with job success profiles"
 date: 2021-04-19
-featureImage: images/allpost/allPost-7.jpg
-postImage: images/single-blog/feature-image.jpg
+featureImage: images/writing/handshake-320.jpg
+postImage: images/writing/handshake-970.jpg
 subtitle: Hiring the right person is a hard task. Don’t make your life harder by not knowing who the right person is.
 ---
 
