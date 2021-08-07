@@ -15,13 +15,9 @@ name = "About"
 url = "#about"
 weight = 2
 
-[[menu.main]]
-name = "Coaching"
-url = "#coaching"
-weight = 3
 
 [[menu.main]]
-name = "Resume"
+name = "Résumé"
 url = "#resume"
 weight = 5
 
