@@ -75,7 +75,7 @@ pinImage = "images/pin.png"
 
 [[params.social]]
 icon = "fa-linkedin-square"
-url = "https://www.linkedin.com/rodbegbie"
+url = "https://www.linkedin.com/in/rodbegbie"
 weight = 2
 
 [[params.social]]
