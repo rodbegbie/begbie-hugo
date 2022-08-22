@@ -76,9 +76,9 @@ This advice comes to you both from my experience guiding the growth of engineers
 My key results for this goal have looked different across the quarters. They’ve included:
 
 
-– Read _Radical Candor_, _No Hard Feelings_, and _Resilient Management_ 
-– Everyone reporting to me will have spent some of their learning and development budget by the end of the quarter
-– In total, my reports will achieve at least 50% of their growth goals this quarter 
+* Read _Radical Candor_, _No Hard Feelings_, and _Resilient Management_ 
+* Everyone reporting to me will have spent some of their learning and development budget by the end of the quarter
+* In total, my reports will achieve at least 50% of their growth goals this quarter 
 
 These key results have pushed me to adapt my approaches and become an all-around better manager.  And I take satisfaction in knowing that these are skills that will serve me well for the rest of my career. I hope they are skills that will serve you too.
 
