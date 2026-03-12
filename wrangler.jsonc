@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-worker-dev",
+  "vars": {
+    "HUGO_VERSION": "0.157.0"
+  }
+}
