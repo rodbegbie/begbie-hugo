@@ -94,10 +94,10 @@
 	</div>
 </section>
 {{ $navbarjs := resources.Get "js/navbar.js" | minify }}
-<script src="{{ $navbarjs.Permalink }}"></script>
+<script src="{{ $navbarjs.RelPermalink }}"></script>
 {{ $testimonialjs := resources.Get "js/testimonial-carousel.js" | minify }}
-<script src="{{ $testimonialjs.Permalink }}"></script>
+<script src="{{ $testimonialjs.RelPermalink }}"></script>
 {{ $videopopupjs := resources.Get "js/video-popup.js" | minify }}
-<script src="{{ $videopopupjs.Permalink }}"></script>
+<script src="{{ $videopopupjs.RelPermalink }}"></script>
 {{ $formhandler := resources.Get "js/form-handler.js" | minify }}
-<script src="{{ $formhandler.Permalink }}"></script>
+<script src="{{ $formhandler.RelPermalink }}"></script>
