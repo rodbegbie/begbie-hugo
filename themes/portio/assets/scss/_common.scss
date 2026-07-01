@@ -8,3 +8,13 @@
   margin-right: 0;
 }
 
+.icon {
+  display: inline-block;
+  vertical-align: -0.125em;
+  svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+  }
+}
+
