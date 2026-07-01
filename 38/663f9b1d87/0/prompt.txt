@@ -453,3 +453,73 @@ None — no leftover `fa fa-`/`class="fa `/font-awesome references anywhere in s
 **Reasoning:** Every requirement in the brief is implemented exactly as specified — verified directly against the diff and two targeted filesystem checks, not just the implementer's claims — with no scope creep, no missing call sites, and exact SVG path fidelity confirmed by direct comparison rather than visual inspection.</result>
 <usage><subagent_tokens>47734</subagent_tokens><tool_uses>8</tool_uses><duration_ms>80324</duration_ms></usage>
 </task-notification>
+
+---
+
+<task-notification>
+<task-id>a65e98e7270668b27</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a65e98e7270668b27.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2: trim Bootstrap SCSS" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE
+
+Commits created:
+- `be3e599` Trim Bootstrap SCSS import to only the partials in use
+
+Test summary: `hugo` builds exit 0, no Sass errors; `style.min.css` 169,864 → 116,362 bytes (~31.5% smaller). Visual spot-check (headless Chrome) of homepage, contact, blog list, blog single, and mobile navbar hamburger all rendered correctly.
+
+Concerns:
+- One screenshot came back blank mid-check; investigated via computed styles and confirmed it was a browser-tool capture-timing artifact, not a CSS regression (background colour/opacity were correct).
+- `.superpowers/sdd/task-2-report.md` had a stale, unrelated report from a different task in it before I overwrote it — flagged in the report itself in case that reuse is unexpected.
+
+Report: `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-2-report.md`</result>
+<usage><subagent_tokens>64589</subagent_tokens><tool_uses>50</tool_uses><duration_ms>363341</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>af52e079dafcb96b8</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/af52e079dafcb96b8.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 Bootstrap SCSS trim" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+**Import list:** The diff (`themes/portio/assets/scss/style.scss:9-23`) replaces the single `@import "../bootstrap-4.5.2/scss/bootstrap";` with exactly the 15 partials listed in the brief — functions, variables, mixins, root, reboot, type, grid, forms, buttons, transitions, nav, navbar, breadcrumb, pagination, utilities. Nothing missing, nothing extra. I diffed this list against upstream `themes/portio/assets/bootstrap-4.5.2/scss/bootstrap.scss` (which imports 27 partials in a fixed order) — the 15 kept partials are an exact ordered subset of that list, with `images, code, tables, dropdown, button-group, input-group, custom-forms, card, badge, jumbotron, alert, progress, media, list-group, close, toasts, modal, tooltip, popover, carousel, spinners, print` correctly dropped.
+
+**No extra partials added back:** confirmed by diff stat (`1 file changed, 15 insertions(+), 1 deletion(-)`) — no other partial lines appear anywhere in the file. The report's claim that the build compiled cleanly on the first attempt with no Sass errors, so nothing extra was needed, is consistent with the diff containing zero additional imports.
+
+**No misapplication:** this is a straight line-for-line swap in place, at the same location in the file (right after `@import "variables";`, before `@import "typography";`), nothing else in the file touched.
+
+⚠️ Cannot verify from diff alone (expected, non-diff-visible):
+- Actual rendered visual equivalence across homepage/contact/blog-list/blog-single/mobile-navbar — the controller's independent visual pass should confirm this.
+- The reported byte sizes (169,864 → 116,362) can't be verified from the diff, but I checked the current build artifact on disk without rebuilding: `public/scss/style.min.css` is currently 114 KB, consistent with the reported post-edit size.
+
+### Strengths
+- Import order exactly mirrors upstream Bootstrap's own dependency ordering (functions → variables → mixins → root → reboot → type → grid → forms → buttons → transitions → nav → navbar → breadcrumb → pagination → utilities) — this is the correct, safe way to do it, not an arbitrary reordering.
+- Scope discipline: single file, single hunk, no unrelated SCSS touched.
+- The report's selector-presence/absence check (confirming `.modal`, `.popover`, `.carousel`, `.card`, `.badge`, `.alert-` are gone, and that `.tooltip`/`.dropdown-menu` string hits are false positives from kept partials) shows real verification work rather than a rubber-stamp pass.
+- The build succeeding at exit 0 with zero added-back partials is itself informative: it confirms none of the theme's own component SCSS (`components/resume-section.scss`, etc.) silently depends on a dropped Bootstrap mixin/variable — Sass would hard-error on that, not degrade silently.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None — the change is clean enough that I don't have nitpicks on the diff itself.
+
+**On the blank-screenshot explanation:** I checked whether the diff could plausibly explain it. `resume__background` and the resume section's markup (`themes/portio/layouts/partials/resumeSection.html`) is styled by the theme's own `components/resume-section.scss` (imported separately, unaffected by this diff), and the only Bootstrap-derived classes involved (`tab-pane`, `tab-content`, `active`) live in `nav.scss`, which is on the kept list. Nothing in the trimmed import list touches this section. Combined with the implementer's `getComputedStyle` check (correct `background-color`, `opacity: 1`, `display: block`) and a subsequent successful full-page screenshot of the same section, the "capture-timing artifact, not a CSS regression" explanation is credible and consistent with what the diff shows — it is not a case of the diff plausibly having caused it.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The import-list swap exactly matches the brief, preserves correct Bootstrap-internal dependency order, touches no unrelated code, and the one anomaly flagged (blank screenshot) traces to a theme-owned SCSS component and a kept Bootstrap partial, not to anything the diff removed — a credible non-regression explanation, not a hand-wave.</result>
+<usage><subagent_tokens>34503</subagent_tokens><tool_uses>7</tool_uses><duration_ms>54510</duration_ms></usage>
+</task-notification>
