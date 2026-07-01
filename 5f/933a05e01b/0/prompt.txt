@@ -1,0 +1,582 @@
+/init
+
+---
+
+Modernize the code in this repo
+
+---
+
+Sounds good. We'll do the SCSS/Bootstrap/JS upgrade late
+
+---
+
+Rety
+
+---
+
+go
+
+---
+
+1
+
+---
+
+<task-notification>
+<task-id>aaae801f7ec56a039</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aaae801f7ec56a039.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I've encountered an issue that requires clarification. The brief shows that navbar.html should have the `{{ $menu := .Site.Menus.main }}` line removed (lines 14-15 in the old version are removed in the new version). However, this line, even though it doesn't produce visible HTML, does produce whitespace in the template output. Removing it causes the rendered HTML to differ from the baseline.
+
+Specifically:
+- One blank line is removed after the `&lt;ul&gt;` in the navbar
+- One blank line is added after `&lt;/nav&gt;` (possible file-ending issue)
+
+This contradicts the task requirement: "the rendered HTML output must not change at all" and the brief's verification expectation: "no output (identical trees)."
+
+The diff shows the change is causing exactly the HTML differences the task says must not happen. I need clarification before proceeding:
+
+**Option 1:** Should I keep the `{{ $menu := ... }}` line (or use `{{-` to suppress whitespace) to maintain identical HTML output?
+
+**Option 2:** Is the whitespace-only difference acceptable despite the "no output changes" requirement?
+
+**Option 3:** Is there an error in the brief that I should not follow it as written?
+
+Rod, I want to get this right. The brief itself seems to contain a change that would necessarily cause HTML output to differ from the baseline. What's the correct approach here?</result>
+<usage><subagent_tokens>40227</subagent_tokens><tool_uses>31</tool_uses><duration_ms>114574</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aaae801f7ec56a039</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aaae801f7ec56a039.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE_WITH_CONCERNS
+
+**Commit:** `cdb1943` "Modernize global chrome partials to site/absURL" (branch `chore/hugo-template-modernize`)
+
+**Test summary:** grep confirms zero `.Site` references remain in all three files; full-site diff showed 9 files differing (all navbar-containing pages), verified via whitespace-stripped diff to be whitespace-only (blank line removed in nav `&lt;ul&gt;`, blank line added after `&lt;/nav&gt;`) — no content/URL/attribute changes.
+
+**Concern:** The brief's Step 3 navbar.html rewrite (removing the `{{ $menu := .Site.Menus.main }}` line) inherently changes rendered whitespace, contradicting the brief's own "identical trees" success criterion. I escalated mid-task; the coordinator relayed Rod's direction to keep the clean template as written and accept the whitespace-only diff, using a stricter blank-line-stripped comparison for verification instead. Worth checking whether Tasks 2–5 have similar dead-variable removals that could hit the same issue.
+
+Report: `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-1-report.md`</result>
+<usage><subagent_tokens>66593</subagent_tokens><tool_uses>14</tool_uses><duration_ms>126565</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ad2a5c294883874ec</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ad2a5c294883874ec.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 1 chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+All three files match the brief's literal instructions exactly:
+- `head.html:8` (diff line 118) — `.Site.Params.subtitle` → `site.Params.subtitle`, matching brief step 2 verbatim.
+- `navbar.html` (diff lines 136–168) — whole-file replace matches brief step 3 verbatim: brand link `{{ "" | absURL }}`, commented logo `{{ site.Params.logo | absURL }}`, `$menu` intermediate variable removed with `range` now iterating `site.Menus.main` directly, nav-link href `{{ .URL | absURL }}`, CTA href `{{ "#contact" | absURL }}`.
+- `footer.html` (diff lines 28–94) — all seven line replacements present and match brief step 4 verbatim: `contactLink`, `footerLogo`, `$sitemap`, `$address`, `copyright`, `$social`, and the commented-out `map.APIkey` script line.
+
+Diff stat cross-check: footer.html 7 deletions/7 insertions, head.html 1/1, navbar.html 7/6 (the imbalance is the `$menu`+`range` two-lines-collapsed-to-one, plus the trailing-newline line touch) — totals 15 deletions / 14 insertions, matching the file header exactly. No untouched `.Site` reference is visible anywhere in the diff's context lines, consistent with the implementer's grep result.
+
+The navbar.html whitespace diff (blank line removed from the `$menu` line collapse, plus a trailing-newline addition on `&lt;/nav&gt;`) is exactly the approved exception scenario described in the task constraints — a line-count change from removing the dead variable line, not a content change. Per the explicit reviewer instruction to not flag whitespace-only differences in navbar-including pages as defects, this is not treated as an issue. No non-whitespace difference (URL, text, attribute, or tag-structure change) is evident in the diff.
+
+- ⚠️ Cannot verify from diff alone: that `hugo` was actually run from repo root, and that the full-site `diff -rq` / whitespace-stripped comparison the report describes actually produced zero non-whitespace diffs across all 9 affected pages. This is a build/render-time claim not checkable from the source diff itself; per review instructions I'm not re-running the build to confirm it.
+
+### Strengths
+- Mechanical, disciplined refactor — no scope creep. Exactly the 3 files listed in the brief were touched, nothing else.
+- Consistent adoption of Hugo's `site` global + `absURL` idiom throughout all three files, including inside the commented-out (but still template-evaluated) sitemap/address block and the commented-out Google Maps script tag — easy to miss but correctly handled.
+- The `$menu` intermediate variable was cleanly eliminated rather than left half-converted (e.g., `$menu := site.Menus.main` retained) — genuinely simplifies the template rather than just swapping tokens.
+- Implementer surfaced the whitespace discrepancy proactively during the run rather than silently forcing a byte-identical diff or silently ignoring the mismatch, and did rigorous verification (whitespace-stripped diff, full-tree file listing, `comm -3`) before concluding the differences were whitespace-only.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- The trailing-newline addition to `navbar.html` (diff lines 166–168, `\ No newline at end of file` → newline added) is an incidental byte-level artifact of the rewrite rather than a deliberate normalization. Not worth a fix given it's covered by the approved whitespace exception, but worth noting for consistency in later tasks if the same partial gets touched again.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All edits match the brief's literal before/after text exactly across all three files, no `.Site` references remain, scope was held to exactly the three specified files, and the one rendered-output difference (whitespace-only, from the intentional `$menu` line removal) falls squarely within the pre-approved exception.</result>
+<usage><subagent_tokens>36395</subagent_tokens><tool_uses>3</tool_uses><duration_ms>65123</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a739f4b21e06ebb11</task-id>
+<tool-use-id>toolu_012nykt273D1jNf6nGbHQb7u</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a739f4b21e06ebb11.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2: section partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>## Status: DONE
+
+**Commit created:**
+- 295b7f6 Modernize homepage section partials to site.RegularPages
+
+**Test summary:**
+- Grep verification: no .Site references remain in either file ✓
+- HTML diff verification: public/index.html is byte-identical to baseline ✓
+
+**Files changed:**
+- themes/portio/layouts/partials/blogSection.html
+- themes/portio/layouts/partials/portfolioSection.html
+
+**Self-review findings:** All checks pass — both edits applied exactly as specified, no .Site references remain, HTML output is unchanged, commit is properly scoped.
+
+**Report:** /Users/rod/build/begbie-hugo/.superpowers/sdd/task-2-report.md</result>
+<usage><subagent_tokens>24116</subagent_tokens><tool_uses>14</tool_uses><duration_ms>47722</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aacbadcbc759a1cbc</task-id>
+<tool-use-id>toolu_01Gkr7F1mi1rY9fMiDtngNKV</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aacbadcbc759a1cbc.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 section partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+The diff contains exactly the two edits specified in the brief:
+- `themes/portio/layouts/partials/blogSection.html:27` — `$.Site.RegularPages` → `site.RegularPages` (diff line 27→28)
+- `themes/portio/layouts/partials/portfolioSection.html:54` — `$.Site.RegularPages` → `site.RegularPages` (diff line 54→55)
+
+No other lines are touched in either file (all surrounding context lines are unchanged), and no other files appear in the diff's stat summary (`2 files changed, 2 insertions(+), 2 deletions(-)`). Single commit `295b7f6` matches the report's claimed SHA and message.
+
+### Strengths
+- Minimal, surgical diff — exactly the two `$.Site` → `site` substitutions requested, nothing more.
+- Both occurrences of `.Site.RegularPages` in these files were caught (blog and portfolio sections), leaving no stray `.Site` references per the diff content.
+- Report's verification steps (grep for `.Site`, hugo rebuild + diff against baseline) match the brief's prescribed procedure exactly, and the disabled-portfolio-section caveat from the brief is correctly acknowledged in the report's Notes section.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- ⚠️ Cannot verify from diff alone: byte-identical `public/index.html` output and the `.Site`-grep result are asserted only in the report/task checklist, not independently confirmed here (per review instructions, tests were already run by the implementer and are not to be re-run). The diff itself is consistent with a no-op rendering change (`site.RegularPages` and `$.Site.RegularPages` are documented equivalents in Hugo), so this is a low-risk assumption, but it's the report's claim rather than something directly visible in the diff.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The diff is a clean, minimal two-line substitution matching the brief exactly, scoped to only the two named files, with no drift into unrelated changes or leftover `.Site` references visible in the diff.</result>
+<usage><subagent_tokens>29714</subagent_tokens><tool_uses>3</tool_uses><duration_ms>16706</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a72c2f5a9dc9a94e7</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a72c2f5a9dc9a94e7.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 3: blog templates" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE
+
+**Commit created:**
+- 68da624 Modernize blog templates to site/absURL
+
+**Test summary:**
+All three edits implemented as specified; grep, build, and byte-identical diffs all pass.
+
+**Concerns:**
+None. All verification steps completed successfully.
+
+**Report:** `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-3-report.md`</result>
+<usage><subagent_tokens>25311</subagent_tokens><tool_uses>13</tool_uses><duration_ms>50427</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a63a1916e8d2d26b7</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a63a1916e8d2d26b7.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 3 blog templates" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Confirms scope is exactly the 2 files requested, nothing else touched. Verified the report's build/diff claims are consistent with the diff evidence (task brief's own verification steps were followed exactly; no reason to distrust given diff matches spec line-for-line).
+
+### Spec Compliance
+- ✅ Spec compliant. The diff matches the task brief's prescribed edits exactly:
+  - `themes/portio/layouts/blog/list.html:27` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}` (matches brief line 32).
+  - `themes/portio/layouts/blog/single.html:9-10` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}` and `{{ .Site.Params.blogPageURL | absURL }}` → `{{ site.Params.blogPageURL | absURL }}` (matches brief lines 47-48).
+- Scope check: `git diff 295b7f6..68da624 --stat` shows only these two files touched, 3 insertions/3 deletions total — no drift into unrelated files.
+- ⚠️ Cannot verify from diff alone: byte-identical rendered HTML output (hugo build + diff against baseline) since I did not re-run the build per instructions; relying on the implementer's reported PASS results, which are consistent with the nature of the change (both substitutions are semantically equivalent Hugo idioms — `"" | absURL` and `.Site.BaseURL` both resolve to the configured baseURL, and `site.Params.X` is functionally identical to `.Site.Params.X`, just using the newer `site` global instead of the page-context `.Site`).
+
+### Strengths
+- Minimal, mechanical, single-purpose commit — exactly 3 line changes across exactly the 2 in-scope files, no scope creep.
+- Both breadcrumb "Home" links (list.html and single.html) modernized consistently using the same `{{ "" | absURL }}` idiom, and `blogPageURL` swapped to `site.Params...` rather than left as `.Site.Params...` — a genuinely narrow refactor with no stylistic inconsistency introduced.
+- Directly verified via grep: no `.Site` references remain in either file, and the only `site.` usage present is the correct `site.Params.blogPageURL` (single.html:11).
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- The task brief's own diff step (comparing rebuilt `public/blog/index.html` and `public/blog/job-success-profiles/index.html` against baseline) was not independently re-run by this review per instructions — this is a reasonable and expected gap given the review constraints, not a defect in the implementation.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The change is byte-for-byte what the task brief specified, touches only the two files in scope, and independently-run grep confirms zero leftover `.Site` references and correct use of the `site` global — a clean, mechanical modernization with no drift.</result>
+<usage><subagent_tokens>30755</subagent_tokens><tool_uses>5</tool_uses><duration_ms>30453</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ae6c6752eea2d75d1</task-id>
+<tool-use-id>toolu_013p6h5bEHasJFmNEhpsadCh</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ae6c6752eea2d75d1.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 4: contact template" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>## Summary
+
+**Status:** DONE
+
+**Commit:** `3150086` - Modernize contact template to site/absURL
+
+**Test Summary:** All four edits applied exactly as specified; grep confirms no `.Site` references remain; Hugo builds successfully; HTML output byte-identical to baseline.
+
+**Self-Review:** All four line edits correct. Grep verification passed. Diff verification passed. Commit scoped to single file. No concerns.
+
+**Report:** `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-4-report.md`</result>
+<usage><subagent_tokens>35876</subagent_tokens><tool_uses>12</tool_uses><duration_ms>54054</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ab1235e97cca8b376</task-id>
+<tool-use-id>toolu_01Ca3MtzhoaPrKaBoR87BWiE</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ab1235e97cca8b376.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 4 contact template" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Confirmed: no remaining `.Site` references, all four edits present at the expected lines, and consistent with existing `absURL` usage elsewhere in the file (lines 5, 22, 54, 74, 95).
+
+### Spec Compliance
+- ✅ Spec compliant
+
+All four required edits are present exactly as specified in the task brief:
+- `themes/portio/layouts/contact/list.html:30` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}`
+- `themes/portio/layouts/contact/list.html:39` — `.Site.Params.address` → `site.Params.address`
+- `themes/portio/layouts/contact/list.html:116` — `.Site.Params.formspreeURL` → `site.Params.formspreeURL`
+- `themes/portio/layouts/contact/list.html:182` — `.Site.Params.map` → `site.Params.map`
+
+Scope: exactly 1 file touched, 4 insertions/4 deletions — matches the diff stat and the task brief's declared scope. No other files appear in the diff.
+
+Independently re-grepped the file (not re-running the reported test suite, just confirming file state) — no `.Site` references remain anywhere in `list.html`, and the new `site.Params.X` / `absURL` usage is consistent with the pre-existing `absURL` calls at lines 5, 22, 54, 74, 95.
+
+### Strengths
+- Mechanical, narrow refactor — no drift into unrelated lines or unrequested changes.
+- Correct choice of `{{ "" | absURL }}` for the bare home-link case rather than inventing a different pattern (`"." | absURL` etc. would have also worked but this matches the brief precisely).
+- Report is consistent with the diff — every claimed edit matches actual content, and the "no `.Site` references remain" claim checks out.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All four specified `.Site` → `site`/`absURL` conversions are present, correctly scoped to the single file, no stray `.Site` references remain, and the implementer's byte-identical build claim is consistent with a purely idiom-level template change (no logic or output-affecting alteration).</result>
+<usage><subagent_tokens>31690</subagent_tokens><tool_uses>4</tool_uses><duration_ms>26013</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a66b78e44e46e36c5</task-id>
+<tool-use-id>toolu_01BJSDiRtwNXXwrjHyCdXfou</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a66b78e44e46e36c5.output</output-file>
+<status>completed</status>
+<summary>Agent "Final whole-branch review" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I have everything I need. The empirical diff oracle lived in the per-task reports; my job here is to confirm plausibility and check for anything that snuck in. Here's my review.
+
+---
+
+## Code Review: Hugo Template Modernization (`chore/hugo-template-modernize`)
+
+### Strengths
+
+- **Scope is exactly on-target.** `git diff --name-only d4d2e42..HEAD` shows precisely the 8 scoped theme files plus the 2 planning docs — nothing else. No SCSS, Bootstrap, JS, `exampleSite`, `data/*.yml`, or `content/*.md` touched.
+- **The theme is now fully self-consistent.** `grep -rn '\.Site' themes/portio/layouts/` and `grep -rn 'BaseURL' themes/portio/layouts/` both return zero matches. These 8 files were the *complete* set of `.Site`/`BaseURL` users in the layouts — there is no lingering mixed-idiom state. This is a stronger outcome than "8 files done, rest deferred": the whole layer is modernized.
+- **The `absURL` equivalence is genuinely sound, not just asserted.** I verified `config.toml`: `baseURL = "https://coaching.begbie.com/"` (trailing slash) and menu URLs are `#home`, `blog`, `#contact`, etc. Because the baseURL path is `/`, Hugo's `absURL` (parse-then-resolve) produces byte-identical results to the old `BaseURL`-concat for every case — fragment-only (`#home` → `.../#home`), bare path (`blog` → `.../blog`), and empty (`""` → `.../`). The spec called out this exact nuance rather than hand-waving it.
+- **Commit hygiene is clean:** one commit per task, sensible messages, docs committed separately from code. Diffs are purely template-syntax swaps with zero logic alteration — consistent with the claimed build-and-diff verification.
+- **Idiomatic and DRY.** `navbar.html` correctly drops the `{{ $menu := ... }}` scope-dodging indirection now that `site.Menus.main` is callable directly inside `range`. No premature abstraction introduced anywhere.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+
+- **`navbar.html` — the approved whitespace exception has a *second* contributor the docs don't mention.** Beyond removing the `{{ $menu := .Site.Menus.main }}` line, the "replace whole file" edit also added a trailing newline: the file previously ended `&lt;/nav&gt;` with no EOF newline, and now ends `&lt;/nav&gt;\n` (confirmed via `tail -c 20 | xxd`). Since navbar is included as `{{ partial "navbar.html" . }}` in `baseof.html:6`, that trailing newline also lands in rendered output on every page. **This is still 100% whitespace-only and nothing non-whitespace snuck in** — I checked, the only two deltas are the removed dead `$menu` line and the added EOF newline. In fact the net effect (a blank line removed mid-nav, a blank line gained after `&lt;/nav&gt;`) is *exactly* the human's "a blank line shifted" description, so the approved exception already covers it. The only nit: the spec (line 41-43) attributes the whitespace diff solely to the `$menu` line removal and doesn't note the trailing-newline change. Worth a one-line addendum to the spec for accuracy, but no code change needed. Do NOT re-flag as a bug.
+
+- **Doc drift (harmless):** Plan Task 5, Step 3 lists `CLAUDE.md` among "expected pre-existing untracked files," but it isn't present in the actual working tree's untracked set. Cosmetic; the plan is a historical artifact and this doesn't affect the merge.
+
+### Recommendations
+
+- Consider *not* merging the planning artifacts (`docs/superpowers/specs/…` and `docs/superpowers/plans/…`) to `main` if you follow the "don't merge planning artifacts to main" convention — though for a personal repo, keeping them as an audit trail is a defensible choice. Your call.
+- Optional future hardening: `contact/list.html` still points its form at `formspreeURL = "YOUR FORMSPREE URL"` (a placeholder in `config.toml`). Pre-existing, out of scope for this refactor, and not introduced here — just noting it exists.
+
+### Assessment
+
+**Ready to merge?** Yes
+
+**Reasoning:** The refactor does exactly what the spec/plan promised — every `.Site` and raw `BaseURL` in the theme layouts converted to `site.X`/`absURL`, byte-equivalent output (verified equivalence against real config), no scope creep, and the theme left in a fully consistent single-idiom state. The only deviation is the pre-approved, verified-whitespace-only navbar change, whose two sub-parts both fall within the "blank line shifted" exception the human already signed off.</result>
+<usage><subagent_tokens>54012</subagent_tokens><tool_uses>7</tool_uses><duration_ms>126489</duration_ms></usage>
+</task-notification>
+
+---
+
+2
+
+---
+
+OK, that's squashed onto main.
+
+---
+
+Can you commit the CLAUDE.md, .claude and .entire folders?
+
+---
+
+push it up.
+
+---
+
+OK, let's modernise the SASS and JS code.  Primary goal is improving the page load performance/
+
+---
+
+Yes. You have the browsing skill to drive a browser for visual inspection
+
+---
+
+go
+
+---
+
+1
+
+---
+
+<task-notification>
+<task-id>ac669644dab0eb019</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ac669644dab0eb019.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: icon partial + FA migration" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>- **Status:** DONE
+- Commit: `71d5f58` "Replace Font Awesome webfont with inline SVG icons" (on branch `chore/css-modernize-phase1`)
+- Tests: grep for leftover FA references clean; `hugo` builds exit 0 with no new warnings; verified inline `&lt;svg&gt;` renders in built `public/index.html` footer social icons; verified compiled CSS contains new `.icon` rule and updated `.inactive` selector via a local `hugo server` fetch.
+- Concern (non-blocking): testimonial star icons have no live visual coverage on the site since all `data/testimonialSection.yml` entries have `star: 0` (falsy in Go templates, pre-existing, unrelated to this change) — code path validated by successful build only, not visually.
+- Report: `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-1-report.md`</result>
+<usage><subagent_tokens>67975</subagent_tokens><tool_uses>38</tool_uses><duration_ms>245782</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>abe83a495cd66f005</task-id>
+<tool-use-id>toolu_01NAaRjvxFzRA6fZgMANjhCK</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/abe83a495cd66f005.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 1 icon migration" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+All 7 icons present in `themes/portio/layouts/partials/icon.html` (diff lines 104-113 of the review package) with SVG path data verified **character-for-character identical** to the brief (I diffed the brief's Step 1 code block against `git show HEAD:themes/portio/layouts/partials/icon.html` directly — the only delta was a stray markdown fence from my own extraction, zero delta in the icon.html content itself). All 4 call sites migrated: `testimonialSection.html:29-32`, `footer.html:66-67,70,80`, `portfolio/single.html:138,142,145`. Both SCSS changes present (`_common.scss` new `.icon` rule, `_testimonial-section.scss` `i` → `.icon`). `head.html`'s two Font Awesome lines removed (confirmed via `git show HEAD:...head.html` — no trace remains). `font-awesome` static directory confirmed fully gone (`ls` → "No such file or directory"), matching the 15-file/~5030-line deletion in the stat.
+
+Grep check re-run independently: `grep -rn 'class="fa \|fa fa-\|font-awesome' themes/portio/layouts` → exit 1, no output. Clean.
+
+`class` param handling verified correct against all three call-site patterns in the brief: `dict "name" "fa-star" "class" "inactive"` in the star loop, `dict "name" .icon` (no class) in the footer social loop, and `dict "name" "fa-facebook-official" "class" "btn-zoom"` in `portfolio/single.html` — the `{{ with $class }} {{ . }}{{ end }}` construct in `icon.html:112-113` correctly appends the extra class with a leading space only when present, and skips cleanly when absent.
+
+The commented-out address widget in `footer.html` was confirmed to genuinely sit inside an HTML comment (`&lt;!-- ... &lt;/div&gt; --&gt;` at footer.html, verified via `git show HEAD:...footer.html`), matching the brief's note that it's template-evaluated but not visually rendered — no discrepancy.
+
+### Strengths
+- Byte-for-byte fidelity to the brief's literal SVG path data (verified via direct file diff, not eyeballing) — exactly what a "no visual change" requirement demands for icon geometry.
+- Scope discipline: diff touches only the 7 named files plus the vendor directory deletion; no drive-by refactors, no unrelated formatting churn.
+- The report correctly identifies and doesn't try to "fix" the pre-existing `star: 0` data issue — appropriately out of scope, and independently confirmed by the controller per the task setup.
+- Grep verification step performed and reported honestly (including checking that `icon.html`'s own dict-key strings wouldn't false-positive against the same pattern).
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None — no leftover `fa fa-`/`class="fa `/font-awesome references anywhere in scope, no structural drift, no extraneous changes.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** Every requirement in the brief is implemented exactly as specified — verified directly against the diff and two targeted filesystem checks, not just the implementer's claims — with no scope creep, no missing call sites, and exact SVG path fidelity confirmed by direct comparison rather than visual inspection.</result>
+<usage><subagent_tokens>47734</subagent_tokens><tool_uses>8</tool_uses><duration_ms>80324</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a65e98e7270668b27</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a65e98e7270668b27.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2: trim Bootstrap SCSS" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE
+
+Commits created:
+- `be3e599` Trim Bootstrap SCSS import to only the partials in use
+
+Test summary: `hugo` builds exit 0, no Sass errors; `style.min.css` 169,864 → 116,362 bytes (~31.5% smaller). Visual spot-check (headless Chrome) of homepage, contact, blog list, blog single, and mobile navbar hamburger all rendered correctly.
+
+Concerns:
+- One screenshot came back blank mid-check; investigated via computed styles and confirmed it was a browser-tool capture-timing artifact, not a CSS regression (background colour/opacity were correct).
+- `.superpowers/sdd/task-2-report.md` had a stale, unrelated report from a different task in it before I overwrote it — flagged in the report itself in case that reuse is unexpected.
+
+Report: `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-2-report.md`</result>
+<usage><subagent_tokens>64589</subagent_tokens><tool_uses>50</tool_uses><duration_ms>363341</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>af52e079dafcb96b8</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/af52e079dafcb96b8.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 Bootstrap SCSS trim" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+**Import list:** The diff (`themes/portio/assets/scss/style.scss:9-23`) replaces the single `@import "../bootstrap-4.5.2/scss/bootstrap";` with exactly the 15 partials listed in the brief — functions, variables, mixins, root, reboot, type, grid, forms, buttons, transitions, nav, navbar, breadcrumb, pagination, utilities. Nothing missing, nothing extra. I diffed this list against upstream `themes/portio/assets/bootstrap-4.5.2/scss/bootstrap.scss` (which imports 27 partials in a fixed order) — the 15 kept partials are an exact ordered subset of that list, with `images, code, tables, dropdown, button-group, input-group, custom-forms, card, badge, jumbotron, alert, progress, media, list-group, close, toasts, modal, tooltip, popover, carousel, spinners, print` correctly dropped.
+
+**No extra partials added back:** confirmed by diff stat (`1 file changed, 15 insertions(+), 1 deletion(-)`) — no other partial lines appear anywhere in the file. The report's claim that the build compiled cleanly on the first attempt with no Sass errors, so nothing extra was needed, is consistent with the diff containing zero additional imports.
+
+**No misapplication:** this is a straight line-for-line swap in place, at the same location in the file (right after `@import "variables";`, before `@import "typography";`), nothing else in the file touched.
+
+⚠️ Cannot verify from diff alone (expected, non-diff-visible):
+- Actual rendered visual equivalence across homepage/contact/blog-list/blog-single/mobile-navbar — the controller's independent visual pass should confirm this.
+- The reported byte sizes (169,864 → 116,362) can't be verified from the diff, but I checked the current build artifact on disk without rebuilding: `public/scss/style.min.css` is currently 114 KB, consistent with the reported post-edit size.
+
+### Strengths
+- Import order exactly mirrors upstream Bootstrap's own dependency ordering (functions → variables → mixins → root → reboot → type → grid → forms → buttons → transitions → nav → navbar → breadcrumb → pagination → utilities) — this is the correct, safe way to do it, not an arbitrary reordering.
+- Scope discipline: single file, single hunk, no unrelated SCSS touched.
+- The report's selector-presence/absence check (confirming `.modal`, `.popover`, `.carousel`, `.card`, `.badge`, `.alert-` are gone, and that `.tooltip`/`.dropdown-menu` string hits are false positives from kept partials) shows real verification work rather than a rubber-stamp pass.
+- The build succeeding at exit 0 with zero added-back partials is itself informative: it confirms none of the theme's own component SCSS (`components/resume-section.scss`, etc.) silently depends on a dropped Bootstrap mixin/variable — Sass would hard-error on that, not degrade silently.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None — the change is clean enough that I don't have nitpicks on the diff itself.
+
+**On the blank-screenshot explanation:** I checked whether the diff could plausibly explain it. `resume__background` and the resume section's markup (`themes/portio/layouts/partials/resumeSection.html`) is styled by the theme's own `components/resume-section.scss` (imported separately, unaffected by this diff), and the only Bootstrap-derived classes involved (`tab-pane`, `tab-content`, `active`) live in `nav.scss`, which is on the kept list. Nothing in the trimmed import list touches this section. Combined with the implementer's `getComputedStyle` check (correct `background-color`, `opacity: 1`, `display: block`) and a subsequent successful full-page screenshot of the same section, the "capture-timing artifact, not a CSS regression" explanation is credible and consistent with what the diff shows — it is not a case of the diff plausibly having caused it.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The import-list swap exactly matches the brief, preserves correct Bootstrap-internal dependency order, touches no unrelated code, and the one anomaly flagged (blank screenshot) traces to a theme-owned SCSS component and a kept Bootstrap partial, not to anything the diff removed — a credible non-regression explanation, not a hand-wave.</result>
+<usage><subagent_tokens>34503</subagent_tokens><tool_uses>7</tool_uses><duration_ms>54510</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a89a721692529ba51</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a89a721692529ba51.output</output-file>
+<status>completed</status>
+<summary>Agent "Final whole-branch review Phase 1" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Review complete. I read the full diff package, both spec and plan docs, and independently verified the skill-section reasoning, the `enable: false` claim, the on-disk `icon.html`, and swept for residual references.
+
+---
+
+### Strengths
+
+- **Scope is exactly honoured.** The `git diff --stat` contains precisely the 8 declared source files + the font-awesome directory deletion + the 2 planning docs. Nothing in `data/*.yml`, `content/*.md`, `config.toml`, JS, or other SCSS components was touched. Phase boundaries respected.
+- **Clean, DRY icon partial.** A single `dict`-driven partial with an optional `class` param replaces 4 call sites without over-engineering. The `{{ with $class }} {{ . }}{{ end }}` guard avoids the stray trailing space the spec's earlier draft (`icon--{{ .name }} {{ $class }}`) would have produced — a genuine improvement over the spec.
+- **`safeHTML` is safely scoped.** `index $icons .name | safeHTML` only ever renders fixed literal SVG strings from the partial's own dict. `.name` (site-owner-controlled config or hardcoded literals) selects a key; a miss returns nil and renders empty. No user-controlled input ever reaches `safeHTML`. No injection surface.
+- **Correct SCSS selector migration.** `_testimonial-section.scss` `i` → `.icon` compiles to `.icon` / `.icon.inactive`, and the rendered span carries `class="icon icon--fa-star inactive"`, so both colour rules still match. `fill="currentColor"` + the new `.icon` colour rule preserves the colouring mechanism.
+- **No residual references.** Zero `&lt;i&gt;` tags, zero `fa fa-`/`class="fa `/`font-awesome` references remain in layouts, and nothing outside the deleted dir/docs references the removed CSS path. `head.html` `&lt;link&gt;` cleanly removed.
+- **The skill-section "non-issue" reasoning holds up.** I confirmed independently: `_skill-section.scss` defines its own `.progress`/`.progress-bar` rules (width, background, height, border-radius, animation) under `.skill__progress_item.js-animation` — fully self-contained, not dependent on Bootstrap's dropped `_progress.scss`. And `data/skillSection.yml` line 2 is `enable: false`, so the section never renders anyway. Not a regression.
+- **Payload numbers are directionally consistent.** ~5,000 deleted lines of vendor CSS + 5 removed binary webfont files matches the ~1.1MB font-awesome removal; dropping ~20 Bootstrap partials is consistent with the claimed ~31.5% `style.min.css` reduction.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+
+1. **`.icon svg { width: 1em; height: 1em }` ignores non-square viewBoxes** — `themes/portio/assets/scss/_common.scss:14-15`. Forcing both dimensions to `1em` squashes icons whose viewBox isn't square: the brand squares are `448×512` (rendered ~14% wider than tall) and `fa-star` is `576×512`. Font Awesome's own renderer preserves aspect ratio (`height:1em; width:&lt;aspect&gt;em`). The visual pass reportedly found no regression, so this is acceptable, but the more faithful fix is `svg { height: 1em; width: auto }` (or per-icon aspect). Worth noting because a future icon with a more extreme aspect (e.g. the `384×512` map-marker) would visibly distort.
+
+2. **Orphaned `.fa-ul` / `.fa-li` classes in footer** — `themes/portio/layouts/partials/footer.html:66-70`. The address widget still uses `class="fa-ul"` / `class="fa-li"`, which were styled only by the now-deleted font-awesome CSS. No current regression because the entire block sits inside an HTML comment (closing `&lt;/div&gt; --&gt;` at line 74, confirmed). But it's a latent trap: if anyone uncomments the address widget later, the list layout will be unstyled. Out of this phase's stated icon-line scope, so leaving it is defensible — just flagging the loose end.
+
+3. **Spec doc's icon snippet is stale vs the implementation** — `docs/.../2026-06-30-css-modernization-phase1-design.md:104-114` shows escaped double-quote strings with inline `width="1em" height="1em"` on the SVG, whereas the shipped partial uses backtick raw strings with **no** inline sizing (sizing moved to CSS). The *plan* doc (lines 67-79) matches the implementation exactly and is clearly the authoritative artifact; the spec snippet is illustrative (`"..."`). Minor accuracy drift only.
+
+4. **Provenance of `fa-twitter-square` / `fa-facebook-official` path data is unverified here** — these FA4-era brand names don't exist in Font Awesome 7.3.0 (twitter-square became x-twitter; facebook-official was retired), yet the spec cites 7.3.0 as the source. The embedded paths do render the correct classic glyphs (bird-in-square, f-in-square), but I could not independently confirm the literal bytes are unmodified FA data without fetching upstream, which was out of my read-only remit. This rests on the prior per-task review. Low priority — the icons are only reachable via the unused testimonial/social paths and the dead portfolio template.
+
+5. **Process: planning artifacts are committed on the branch** — the plan and spec under `docs/superpowers/` are part of this diff and will merge to `main`. Your own workflow convention is "don't merge planning artifacts to main." The review brief explicitly includes them, so this may be intentional for this personal repo — just confirming it's a deliberate choice, not an oversight.
+
+### Recommendations
+
+- If you want belt-and-braces icon fidelity, switch `_common.scss` to `svg { height: 1em; width: auto }` and re-run the visual pass on the star rating + footer socials. Optional; current output passed inspection.
+- Consider a Phase 2 (or a quick follow-up) note to strip the orphaned `.fa-ul`/`.fa-li` from the commented address widget so it doesn't mislead later.
+- Decide whether the `docs/superpowers/` artifacts should land on `main` or be kept off it per your usual convention.
+
+### Assessment
+
+**Ready to merge?** Yes
+
+**Reasoning:** The implementation matches the plan step-for-step, stays exactly within declared scope, introduces no security or correctness issues, and the one "known quirk" (skill-section progress classes) is independently confirmed to be a genuine non-issue. All findings are Minor polish/process items, none blocking.</result>
+<usage><subagent_tokens>65192</subagent_tokens><tool_uses>8</tool_uses><duration_ms>135331</duration_ms></usage>
+</task-notification>
