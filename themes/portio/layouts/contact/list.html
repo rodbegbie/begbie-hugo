@@ -27,7 +27,7 @@
         <h3 class="breadCrumb__title">{{ .Title }}</h3>
         <nav aria-label="breadcrumb" class="d-flex justify-content-center">
           <ol class="breadcrumb align-items-center">
-            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ "" | absURL }}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ .Params.breadcrumb }}</li>
           </ol>
         </nav>
@@ -36,7 +36,7 @@
   </div>
 </header>
 
-{{ $address := .Site.Params.address }}
+{{ $address := site.Params.address }}
 <section class="section contact__info">
   <div class="container">
     <div class="row">
@@ -113,7 +113,7 @@
           <h3>Contact Form</h3>
         </div>
         <div class="contact-form-input">
-          <form id="contact-form" action="{{ .Site.Params.formspreeURL }}" method="POST">
+          <form id="contact-form" action="{{ site.Params.formspreeURL }}" method="POST">
 
             <div class="form-row">
 
@@ -179,7 +179,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        {{ $map := .Site.Params.map }}
+        {{ $map := site.Params.map }}
         <div id="map" data-lat={{ $map.latitude }} data-long={{ $map.longitude }} data-pin={{ $map.pinImage | absURL }}>
         </div>
       </div>
