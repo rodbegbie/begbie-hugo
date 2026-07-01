@@ -1,0 +1,46 @@
+.video-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3000;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+  &.is-visible {
+    opacity: 1;
+  }
+  &_backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
+  &_dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    iframe {
+      height: 100%;
+      width: 100%;
+      border: 0;
+    }
+  }
+  &_close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: transparent;
+    border: 0;
+    color: $white;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}

@@ -93,16 +93,11 @@
 		</div>
 	</div>
 </section>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.map.APIkey }}&libraries=geometry"></script> -->
-<script src="{{ "plugins/jQuery/jquery.min.js" | absURL }}"></script>
-<script src="{{ "plugins/bootstrap/bootstrap.min.js" | absURL }}"></script>
-<script src="{{ "plugins/slick/slick.min.js" | absURL }}"></script>
-<script src="{{ "plugins/waypoint/jquery.waypoints.min.js" | absURL }}"></script>
-<script src="{{ "plugins/magnafic-popup/jquery.magnific-popup.min.js" | absURL }}"></script>
-<script src="{{ "plugins/tweenmax/TweenMax.min.js" | absURL }}"></script>
-<script src="{{ "plugins/imagesloaded/imagesloaded.min.js" | absURL }}"></script>
-<script src="{{ "plugins/masonry/masonry.min.js" | absURL }}"></script>
+{{ $navbarjs := resources.Get "js/navbar.js" | minify }}
+<script src="{{ $navbarjs.RelPermalink }}"></script>
+{{ $testimonialjs := resources.Get "js/testimonial-carousel.js" | minify }}
+<script src="{{ $testimonialjs.RelPermalink }}"></script>
+{{ $videopopupjs := resources.Get "js/video-popup.js" | minify }}
+<script src="{{ $videopopupjs.RelPermalink }}"></script>
 {{ $formhandler := resources.Get "js/form-handler.js" | minify }}
-<script src="{{ $formhandler.Permalink }}"></script>
-{{ $script := resources.Get "js/script.js" | minify }}
-<script src="{{ $script.Permalink }}"></script>
+<script src="{{ $formhandler.RelPermalink }}"></script>
