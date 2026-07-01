@@ -1,0 +1,364 @@
+/init
+
+---
+
+Modernize the code in this repo
+
+---
+
+Sounds good. We'll do the SCSS/Bootstrap/JS upgrade late
+
+---
+
+Rety
+
+---
+
+go
+
+---
+
+1
+
+---
+
+<task-notification>
+<task-id>aaae801f7ec56a039</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aaae801f7ec56a039.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I've encountered an issue that requires clarification. The brief shows that navbar.html should have the `{{ $menu := .Site.Menus.main }}` line removed (lines 14-15 in the old version are removed in the new version). However, this line, even though it doesn't produce visible HTML, does produce whitespace in the template output. Removing it causes the rendered HTML to differ from the baseline.
+
+Specifically:
+- One blank line is removed after the `&lt;ul&gt;` in the navbar
+- One blank line is added after `&lt;/nav&gt;` (possible file-ending issue)
+
+This contradicts the task requirement: "the rendered HTML output must not change at all" and the brief's verification expectation: "no output (identical trees)."
+
+The diff shows the change is causing exactly the HTML differences the task says must not happen. I need clarification before proceeding:
+
+**Option 1:** Should I keep the `{{ $menu := ... }}` line (or use `{{-` to suppress whitespace) to maintain identical HTML output?
+
+**Option 2:** Is the whitespace-only difference acceptable despite the "no output changes" requirement?
+
+**Option 3:** Is there an error in the brief that I should not follow it as written?
+
+Rod, I want to get this right. The brief itself seems to contain a change that would necessarily cause HTML output to differ from the baseline. What's the correct approach here?</result>
+<usage><subagent_tokens>40227</subagent_tokens><tool_uses>31</tool_uses><duration_ms>114574</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aaae801f7ec56a039</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aaae801f7ec56a039.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE_WITH_CONCERNS
+
+**Commit:** `cdb1943` "Modernize global chrome partials to site/absURL" (branch `chore/hugo-template-modernize`)
+
+**Test summary:** grep confirms zero `.Site` references remain in all three files; full-site diff showed 9 files differing (all navbar-containing pages), verified via whitespace-stripped diff to be whitespace-only (blank line removed in nav `&lt;ul&gt;`, blank line added after `&lt;/nav&gt;`) — no content/URL/attribute changes.
+
+**Concern:** The brief's Step 3 navbar.html rewrite (removing the `{{ $menu := .Site.Menus.main }}` line) inherently changes rendered whitespace, contradicting the brief's own "identical trees" success criterion. I escalated mid-task; the coordinator relayed Rod's direction to keep the clean template as written and accept the whitespace-only diff, using a stricter blank-line-stripped comparison for verification instead. Worth checking whether Tasks 2–5 have similar dead-variable removals that could hit the same issue.
+
+Report: `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-1-report.md`</result>
+<usage><subagent_tokens>66593</subagent_tokens><tool_uses>14</tool_uses><duration_ms>126565</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ad2a5c294883874ec</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ad2a5c294883874ec.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 1 chrome partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+All three files match the brief's literal instructions exactly:
+- `head.html:8` (diff line 118) — `.Site.Params.subtitle` → `site.Params.subtitle`, matching brief step 2 verbatim.
+- `navbar.html` (diff lines 136–168) — whole-file replace matches brief step 3 verbatim: brand link `{{ "" | absURL }}`, commented logo `{{ site.Params.logo | absURL }}`, `$menu` intermediate variable removed with `range` now iterating `site.Menus.main` directly, nav-link href `{{ .URL | absURL }}`, CTA href `{{ "#contact" | absURL }}`.
+- `footer.html` (diff lines 28–94) — all seven line replacements present and match brief step 4 verbatim: `contactLink`, `footerLogo`, `$sitemap`, `$address`, `copyright`, `$social`, and the commented-out `map.APIkey` script line.
+
+Diff stat cross-check: footer.html 7 deletions/7 insertions, head.html 1/1, navbar.html 7/6 (the imbalance is the `$menu`+`range` two-lines-collapsed-to-one, plus the trailing-newline line touch) — totals 15 deletions / 14 insertions, matching the file header exactly. No untouched `.Site` reference is visible anywhere in the diff's context lines, consistent with the implementer's grep result.
+
+The navbar.html whitespace diff (blank line removed from the `$menu` line collapse, plus a trailing-newline addition on `&lt;/nav&gt;`) is exactly the approved exception scenario described in the task constraints — a line-count change from removing the dead variable line, not a content change. Per the explicit reviewer instruction to not flag whitespace-only differences in navbar-including pages as defects, this is not treated as an issue. No non-whitespace difference (URL, text, attribute, or tag-structure change) is evident in the diff.
+
+- ⚠️ Cannot verify from diff alone: that `hugo` was actually run from repo root, and that the full-site `diff -rq` / whitespace-stripped comparison the report describes actually produced zero non-whitespace diffs across all 9 affected pages. This is a build/render-time claim not checkable from the source diff itself; per review instructions I'm not re-running the build to confirm it.
+
+### Strengths
+- Mechanical, disciplined refactor — no scope creep. Exactly the 3 files listed in the brief were touched, nothing else.
+- Consistent adoption of Hugo's `site` global + `absURL` idiom throughout all three files, including inside the commented-out (but still template-evaluated) sitemap/address block and the commented-out Google Maps script tag — easy to miss but correctly handled.
+- The `$menu` intermediate variable was cleanly eliminated rather than left half-converted (e.g., `$menu := site.Menus.main` retained) — genuinely simplifies the template rather than just swapping tokens.
+- Implementer surfaced the whitespace discrepancy proactively during the run rather than silently forcing a byte-identical diff or silently ignoring the mismatch, and did rigorous verification (whitespace-stripped diff, full-tree file listing, `comm -3`) before concluding the differences were whitespace-only.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- The trailing-newline addition to `navbar.html` (diff lines 166–168, `\ No newline at end of file` → newline added) is an incidental byte-level artifact of the rewrite rather than a deliberate normalization. Not worth a fix given it's covered by the approved whitespace exception, but worth noting for consistency in later tasks if the same partial gets touched again.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All edits match the brief's literal before/after text exactly across all three files, no `.Site` references remain, scope was held to exactly the three specified files, and the one rendered-output difference (whitespace-only, from the intentional `$menu` line removal) falls squarely within the pre-approved exception.</result>
+<usage><subagent_tokens>36395</subagent_tokens><tool_uses>3</tool_uses><duration_ms>65123</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a739f4b21e06ebb11</task-id>
+<tool-use-id>toolu_012nykt273D1jNf6nGbHQb7u</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a739f4b21e06ebb11.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2: section partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>## Status: DONE
+
+**Commit created:**
+- 295b7f6 Modernize homepage section partials to site.RegularPages
+
+**Test summary:**
+- Grep verification: no .Site references remain in either file ✓
+- HTML diff verification: public/index.html is byte-identical to baseline ✓
+
+**Files changed:**
+- themes/portio/layouts/partials/blogSection.html
+- themes/portio/layouts/partials/portfolioSection.html
+
+**Self-review findings:** All checks pass — both edits applied exactly as specified, no .Site references remain, HTML output is unchanged, commit is properly scoped.
+
+**Report:** /Users/rod/build/begbie-hugo/.superpowers/sdd/task-2-report.md</result>
+<usage><subagent_tokens>24116</subagent_tokens><tool_uses>14</tool_uses><duration_ms>47722</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aacbadcbc759a1cbc</task-id>
+<tool-use-id>toolu_01Gkr7F1mi1rY9fMiDtngNKV</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/aacbadcbc759a1cbc.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 section partials" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+- ✅ Spec compliant
+
+The diff contains exactly the two edits specified in the brief:
+- `themes/portio/layouts/partials/blogSection.html:27` — `$.Site.RegularPages` → `site.RegularPages` (diff line 27→28)
+- `themes/portio/layouts/partials/portfolioSection.html:54` — `$.Site.RegularPages` → `site.RegularPages` (diff line 54→55)
+
+No other lines are touched in either file (all surrounding context lines are unchanged), and no other files appear in the diff's stat summary (`2 files changed, 2 insertions(+), 2 deletions(-)`). Single commit `295b7f6` matches the report's claimed SHA and message.
+
+### Strengths
+- Minimal, surgical diff — exactly the two `$.Site` → `site` substitutions requested, nothing more.
+- Both occurrences of `.Site.RegularPages` in these files were caught (blog and portfolio sections), leaving no stray `.Site` references per the diff content.
+- Report's verification steps (grep for `.Site`, hugo rebuild + diff against baseline) match the brief's prescribed procedure exactly, and the disabled-portfolio-section caveat from the brief is correctly acknowledged in the report's Notes section.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- ⚠️ Cannot verify from diff alone: byte-identical `public/index.html` output and the `.Site`-grep result are asserted only in the report/task checklist, not independently confirmed here (per review instructions, tests were already run by the implementer and are not to be re-run). The diff itself is consistent with a no-op rendering change (`site.RegularPages` and `$.Site.RegularPages` are documented equivalents in Hugo), so this is a low-risk assumption, but it's the report's claim rather than something directly visible in the diff.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The diff is a clean, minimal two-line substitution matching the brief exactly, scoped to only the two named files, with no drift into unrelated changes or leftover `.Site` references visible in the diff.</result>
+<usage><subagent_tokens>29714</subagent_tokens><tool_uses>3</tool_uses><duration_ms>16706</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a72c2f5a9dc9a94e7</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a72c2f5a9dc9a94e7.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 3: blog templates" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**Status:** DONE
+
+**Commit created:**
+- 68da624 Modernize blog templates to site/absURL
+
+**Test summary:**
+All three edits implemented as specified; grep, build, and byte-identical diffs all pass.
+
+**Concerns:**
+None. All verification steps completed successfully.
+
+**Report:** `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-3-report.md`</result>
+<usage><subagent_tokens>25311</subagent_tokens><tool_uses>13</tool_uses><duration_ms>50427</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a63a1916e8d2d26b7</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a63a1916e8d2d26b7.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 3 blog templates" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Confirms scope is exactly the 2 files requested, nothing else touched. Verified the report's build/diff claims are consistent with the diff evidence (task brief's own verification steps were followed exactly; no reason to distrust given diff matches spec line-for-line).
+
+### Spec Compliance
+- ✅ Spec compliant. The diff matches the task brief's prescribed edits exactly:
+  - `themes/portio/layouts/blog/list.html:27` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}` (matches brief line 32).
+  - `themes/portio/layouts/blog/single.html:9-10` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}` and `{{ .Site.Params.blogPageURL | absURL }}` → `{{ site.Params.blogPageURL | absURL }}` (matches brief lines 47-48).
+- Scope check: `git diff 295b7f6..68da624 --stat` shows only these two files touched, 3 insertions/3 deletions total — no drift into unrelated files.
+- ⚠️ Cannot verify from diff alone: byte-identical rendered HTML output (hugo build + diff against baseline) since I did not re-run the build per instructions; relying on the implementer's reported PASS results, which are consistent with the nature of the change (both substitutions are semantically equivalent Hugo idioms — `"" | absURL` and `.Site.BaseURL` both resolve to the configured baseURL, and `site.Params.X` is functionally identical to `.Site.Params.X`, just using the newer `site` global instead of the page-context `.Site`).
+
+### Strengths
+- Minimal, mechanical, single-purpose commit — exactly 3 line changes across exactly the 2 in-scope files, no scope creep.
+- Both breadcrumb "Home" links (list.html and single.html) modernized consistently using the same `{{ "" | absURL }}` idiom, and `blogPageURL` swapped to `site.Params...` rather than left as `.Site.Params...` — a genuinely narrow refactor with no stylistic inconsistency introduced.
+- Directly verified via grep: no `.Site` references remain in either file, and the only `site.` usage present is the correct `site.Params.blogPageURL` (single.html:11).
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- The task brief's own diff step (comparing rebuilt `public/blog/index.html` and `public/blog/job-success-profiles/index.html` against baseline) was not independently re-run by this review per instructions — this is a reasonable and expected gap given the review constraints, not a defect in the implementation.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The change is byte-for-byte what the task brief specified, touches only the two files in scope, and independently-run grep confirms zero leftover `.Site` references and correct use of the `site` global — a clean, mechanical modernization with no drift.</result>
+<usage><subagent_tokens>30755</subagent_tokens><tool_uses>5</tool_uses><duration_ms>30453</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ae6c6752eea2d75d1</task-id>
+<tool-use-id>toolu_013p6h5bEHasJFmNEhpsadCh</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ae6c6752eea2d75d1.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 4: contact template" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>## Summary
+
+**Status:** DONE
+
+**Commit:** `3150086` - Modernize contact template to site/absURL
+
+**Test Summary:** All four edits applied exactly as specified; grep confirms no `.Site` references remain; Hugo builds successfully; HTML output byte-identical to baseline.
+
+**Self-Review:** All four line edits correct. Grep verification passed. Diff verification passed. Commit scoped to single file. No concerns.
+
+**Report:** `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-4-report.md`</result>
+<usage><subagent_tokens>35876</subagent_tokens><tool_uses>12</tool_uses><duration_ms>54054</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ab1235e97cca8b376</task-id>
+<tool-use-id>toolu_01Ca3MtzhoaPrKaBoR87BWiE</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/ab1235e97cca8b376.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 4 contact template" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Confirmed: no remaining `.Site` references, all four edits present at the expected lines, and consistent with existing `absURL` usage elsewhere in the file (lines 5, 22, 54, 74, 95).
+
+### Spec Compliance
+- ✅ Spec compliant
+
+All four required edits are present exactly as specified in the task brief:
+- `themes/portio/layouts/contact/list.html:30` — `{{ .Site.BaseURL }}` → `{{ "" | absURL }}`
+- `themes/portio/layouts/contact/list.html:39` — `.Site.Params.address` → `site.Params.address`
+- `themes/portio/layouts/contact/list.html:116` — `.Site.Params.formspreeURL` → `site.Params.formspreeURL`
+- `themes/portio/layouts/contact/list.html:182` — `.Site.Params.map` → `site.Params.map`
+
+Scope: exactly 1 file touched, 4 insertions/4 deletions — matches the diff stat and the task brief's declared scope. No other files appear in the diff.
+
+Independently re-grepped the file (not re-running the reported test suite, just confirming file state) — no `.Site` references remain anywhere in `list.html`, and the new `site.Params.X` / `absURL` usage is consistent with the pre-existing `absURL` calls at lines 5, 22, 54, 74, 95.
+
+### Strengths
+- Mechanical, narrow refactor — no drift into unrelated lines or unrequested changes.
+- Correct choice of `{{ "" | absURL }}` for the bare home-link case rather than inventing a different pattern (`"." | absURL` etc. would have also worked but this matches the brief precisely).
+- Report is consistent with the diff — every claimed edit matches actual content, and the "no `.Site` references remain" claim checks out.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All four specified `.Site` → `site`/`absURL` conversions are present, correctly scoped to the single file, no stray `.Site` references remain, and the implementer's byte-identical build claim is consistent with a purely idiom-level template change (no logic or output-affecting alteration).</result>
+<usage><subagent_tokens>31690</subagent_tokens><tool_uses>4</tool_uses><duration_ms>26013</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a66b78e44e46e36c5</task-id>
+<tool-use-id>toolu_01BJSDiRtwNXXwrjHyCdXfou</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/8fb9c608-e9d6-441a-a521-ca4f3b79a9b4/tasks/a66b78e44e46e36c5.output</output-file>
+<status>completed</status>
+<summary>Agent "Final whole-branch review" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I have everything I need. The empirical diff oracle lived in the per-task reports; my job here is to confirm plausibility and check for anything that snuck in. Here's my review.
+
+---
+
+## Code Review: Hugo Template Modernization (`chore/hugo-template-modernize`)
+
+### Strengths
+
+- **Scope is exactly on-target.** `git diff --name-only d4d2e42..HEAD` shows precisely the 8 scoped theme files plus the 2 planning docs — nothing else. No SCSS, Bootstrap, JS, `exampleSite`, `data/*.yml`, or `content/*.md` touched.
+- **The theme is now fully self-consistent.** `grep -rn '\.Site' themes/portio/layouts/` and `grep -rn 'BaseURL' themes/portio/layouts/` both return zero matches. These 8 files were the *complete* set of `.Site`/`BaseURL` users in the layouts — there is no lingering mixed-idiom state. This is a stronger outcome than "8 files done, rest deferred": the whole layer is modernized.
+- **The `absURL` equivalence is genuinely sound, not just asserted.** I verified `config.toml`: `baseURL = "https://coaching.begbie.com/"` (trailing slash) and menu URLs are `#home`, `blog`, `#contact`, etc. Because the baseURL path is `/`, Hugo's `absURL` (parse-then-resolve) produces byte-identical results to the old `BaseURL`-concat for every case — fragment-only (`#home` → `.../#home`), bare path (`blog` → `.../blog`), and empty (`""` → `.../`). The spec called out this exact nuance rather than hand-waving it.
+- **Commit hygiene is clean:** one commit per task, sensible messages, docs committed separately from code. Diffs are purely template-syntax swaps with zero logic alteration — consistent with the claimed build-and-diff verification.
+- **Idiomatic and DRY.** `navbar.html` correctly drops the `{{ $menu := ... }}` scope-dodging indirection now that `site.Menus.main` is callable directly inside `range`. No premature abstraction introduced anywhere.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+
+- **`navbar.html` — the approved whitespace exception has a *second* contributor the docs don't mention.** Beyond removing the `{{ $menu := .Site.Menus.main }}` line, the "replace whole file" edit also added a trailing newline: the file previously ended `&lt;/nav&gt;` with no EOF newline, and now ends `&lt;/nav&gt;\n` (confirmed via `tail -c 20 | xxd`). Since navbar is included as `{{ partial "navbar.html" . }}` in `baseof.html:6`, that trailing newline also lands in rendered output on every page. **This is still 100% whitespace-only and nothing non-whitespace snuck in** — I checked, the only two deltas are the removed dead `$menu` line and the added EOF newline. In fact the net effect (a blank line removed mid-nav, a blank line gained after `&lt;/nav&gt;`) is *exactly* the human's "a blank line shifted" description, so the approved exception already covers it. The only nit: the spec (line 41-43) attributes the whitespace diff solely to the `$menu` line removal and doesn't note the trailing-newline change. Worth a one-line addendum to the spec for accuracy, but no code change needed. Do NOT re-flag as a bug.
+
+- **Doc drift (harmless):** Plan Task 5, Step 3 lists `CLAUDE.md` among "expected pre-existing untracked files," but it isn't present in the actual working tree's untracked set. Cosmetic; the plan is a historical artifact and this doesn't affect the merge.
+
+### Recommendations
+
+- Consider *not* merging the planning artifacts (`docs/superpowers/specs/…` and `docs/superpowers/plans/…`) to `main` if you follow the "don't merge planning artifacts to main" convention — though for a personal repo, keeping them as an audit trail is a defensible choice. Your call.
+- Optional future hardening: `contact/list.html` still points its form at `formspreeURL = "YOUR FORMSPREE URL"` (a placeholder in `config.toml`). Pre-existing, out of scope for this refactor, and not introduced here — just noting it exists.
+
+### Assessment
+
+**Ready to merge?** Yes
+
+**Reasoning:** The refactor does exactly what the spec/plan promised — every `.Site` and raw `BaseURL` in the theme layouts converted to `site.X`/`absURL`, byte-equivalent output (verified equivalence against real config), no scope creep, and the theme left in a fully consistent single-idiom state. The only deviation is the pre-approved, verified-whitespace-only navbar change, whose two sub-parts both fall within the "blank line shifted" exception the human already signed off.</result>
+<usage><subagent_tokens>54012</subagent_tokens><tool_uses>7</tool_uses><duration_ms>126489</duration_ms></usage>
+</task-notification>
