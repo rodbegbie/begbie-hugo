@@ -15,9 +15,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
+  {{ "<!-- Fonts -->" | safeHTML }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900|Yeseva+One&display=swap">
+
   {{ "<!-- Stylesheets -->" | safeHTML }}
-  {{ $style := resources.Get "scss/style.scss" | css.Sass | minify }}
-  <link href="{{ $style.RelPermalink }}" rel="stylesheet" />
+  {{ $style := resources.Get "scss/style.scss" | css.Sass | minify | fingerprint }}
+  <link href="{{ $style.RelPermalink }}" rel="stylesheet"
+    integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" />
 
   {{ "<!--Favicon-->" | safeHTML }}
   <link rel="shortcut icon" href="{{ "images/favicon.ico" | absURL }}" type="image/x-icon" />

@@ -93,11 +93,11 @@
 		</div>
 	</div>
 </section>
-{{ $navbarjs := resources.Get "js/navbar.js" | minify }}
-<script src="{{ $navbarjs.RelPermalink }}"></script>
-{{ $testimonialjs := resources.Get "js/testimonial-carousel.js" | minify }}
-<script src="{{ $testimonialjs.RelPermalink }}"></script>
-{{ $videopopupjs := resources.Get "js/video-popup.js" | minify }}
-<script src="{{ $videopopupjs.RelPermalink }}"></script>
-{{ $formhandler := resources.Get "js/form-handler.js" | minify }}
-<script src="{{ $formhandler.RelPermalink }}"></script>
+{{ $navbarjs := resources.Get "js/navbar.js" }}
+{{ $testimonialjs := resources.Get "js/testimonial-carousel.js" }}
+{{ $videopopupjs := resources.Get "js/video-popup.js" }}
+{{ $formhandler := resources.Get "js/form-handler.js" }}
+{{ $bundle := slice $navbarjs $testimonialjs $videopopupjs $formhandler
+  | resources.Concat "js/bundle.js" | minify | fingerprint }}
+<script defer src="{{ $bundle.RelPermalink }}"
+  integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>
