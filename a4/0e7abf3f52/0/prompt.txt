@@ -1,0 +1,9 @@
+/init
+
+---
+
+Modernize the code in this repo
+
+---
+
+Sounds good. We'll do the SCSS/Bootstrap/JS upgrade late
