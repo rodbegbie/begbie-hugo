@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "ffc69a9fa0e8",
+  "strategy": "manual-commit",
+  "branch": "chore/hugo-template-modernize",
+  "checkpoints_count": 7,
+  "files_touched": [
+    "docs/superpowers/plans/2026-06-30-hugo-template-modernization.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/ff/c69a9fa0e8/0/metadata.json",
+      "transcript": "/ff/c69a9fa0e8/0/full.jsonl",
+      "compact_transcript": "/ff/c69a9fa0e8/0/transcript.jsonl",
+      "content_hash": "/ff/c69a9fa0e8/0/content_hash.txt",
+      "prompt": "/ff/c69a9fa0e8/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 13350,
+    "cache_creation_tokens": 340915,
+    "cache_read_tokens": 11985960,
+    "output_tokens": 64515,
+    "api_call_count": 102
+  }
+}
