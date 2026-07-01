@@ -5,7 +5,7 @@
   <meta name="og:title" content="{{ .Title }}" />
   <meta name="og:type" content="article" />
   <meta name="og:url" content="{{ .Permalink | absURL }}" />
-  {{- with .Description | default .Params.subtitle | default .Site.Params.subtitle | default .Summary }}
+  {{- with .Description | default .Params.subtitle | default site.Params.subtitle | default .Summary }}
   <meta property="og:description" content="{{ . }}">
   {{- end }}
   <meta name="twitter:card" content="summary" />
