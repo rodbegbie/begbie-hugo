@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "6932d404a77e",
+  "strategy": "manual-commit",
+  "branch": "chore/asset-pipeline-phase3",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "themes/portio/layouts/partials/footer.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/69/32d404a77e/0/metadata.json",
+      "transcript": "/69/32d404a77e/0/full.jsonl",
+      "compact_transcript": "/69/32d404a77e/0/transcript.jsonl",
+      "content_hash": "/69/32d404a77e/0/content_hash.txt",
+      "prompt": "/69/32d404a77e/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 78258,
+    "cache_creation_tokens": 1976731,
+    "cache_read_tokens": 105141734,
+    "output_tokens": 333267,
+    "api_call_count": 446
+  }
+}
