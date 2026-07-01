@@ -19,6 +19,18 @@ depends on:
 
 This spec upgrades the vendored Bootstrap source from 4.5.2 to the
 latest 5.3.x production release, updating whatever the upgrade breaks.
+At your request, it also bumps the Hugo version Cloudflare Pages builds
+with — `wrangler.jsonc`'s `HUGO_VERSION` is currently pinned to
+`0.157.0`, while every local `hugo` build this whole session has run on
+`0.163.3`. Checked against Hugo's actual GitHub releases:
+[v0.163.3](https://github.com/gohugoio/hugo/releases/tag/v0.163.3),
+published 2026-06-18, is genuinely the latest non-prerelease Hugo
+version — not an assumption, confirmed via `gh api
+repos/gohugoio/hugo/releases/latest`. Bumping the pin to `0.163.3`
+means the deployed build finally matches what's been tested locally
+this entire session, closing the exact local/deploy version gap that
+caused a real bug in Phase 2 (`Permalink` vs `RelPermalink`) and a
+report-accuracy near-miss in Phase 3.
 
 ## Findings that shape this upgrade
 
@@ -137,7 +149,15 @@ the theme's values win as long as they're set before Bootstrap's own
 - **`skillSection.html`** (unreachable today — `enable: false` — fixed
   anyway, same reasoning): `float-right` → `float-end`.
 
-### 4. Rename data attributes for BS5 convention
+### 4. Bump the Cloudflare Pages Hugo version
+
+In `wrangler.jsonc`, change `"HUGO_VERSION": "0.157.0"` to
+`"HUGO_VERSION": "0.163.3"`. One-line change, independent of the
+Bootstrap work above — bundled into this same phase at your request
+rather than split into its own spec, since it's a single config value
+with no design decisions attached.
+
+### 5. Rename data attributes for BS5 convention
 
 Per your call: `navbar.html`'s `data-toggle="collapse"` →
 `data-bs-toggle="collapse"`, `data-target="#navbarCollapse"` →
@@ -168,6 +188,8 @@ convention this project is on.
   restructured file layout, that's corrected during implementation, but
   the goal is to preserve the same set of Bootstrap-provided
   functionality this theme uses today, not add or remove capability.
+- No other Cloudflare Pages/`wrangler.jsonc` configuration changes
+  beyond the `HUGO_VERSION` bump in Section 4.
 
 ## Testing/verification
 
@@ -195,3 +217,9 @@ browser checks, consistent with every prior phase:
    site still builds) and by reading the diff to confirm the class
    renames are correct 1:1 substitutions, same verification approach
    Phase 1 used for the same two files.
+5. **Cloudflare Pages preview build check:** since this phase bumps the
+   pinned Hugo version, verify the actual Cloudflare Pages preview
+   deploy for this branch builds successfully under `0.163.3` (not just
+   locally) — the build log confirms which Hugo version actually ran,
+   and the same live-preview browser verification from item 2 doubles
+   as confirmation the new pinned version doesn't change anything.
