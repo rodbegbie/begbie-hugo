@@ -1,0 +1,29 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "8cb0cf357835",
+  "strategy": "manual-commit",
+  "branch": "chore/hugo-template-modernize",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "themes/portio/layouts/partials/footer.html",
+    "themes/portio/layouts/partials/head.html",
+    "themes/portio/layouts/partials/navbar.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/8c/b0cf357835/0/metadata.json",
+      "transcript": "/8c/b0cf357835/0/full.jsonl",
+      "compact_transcript": "/8c/b0cf357835/0/transcript.jsonl",
+      "content_hash": "/8c/b0cf357835/0/content_hash.txt",
+      "prompt": "/8c/b0cf357835/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 12874,
+    "cache_creation_tokens": 309712,
+    "cache_read_tokens": 6819240,
+    "output_tokens": 49500,
+    "api_call_count": 72
+  }
+}
