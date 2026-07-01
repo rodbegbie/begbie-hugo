@@ -6,7 +6,21 @@ VERSION:	1.0.0
 -------------------------------------------------------------------*/
 @import "variables";
 
-@import "../bootstrap-4.5.2/scss/bootstrap";
+@import "../bootstrap-4.5.2/scss/functions";
+@import "../bootstrap-4.5.2/scss/variables";
+@import "../bootstrap-4.5.2/scss/mixins";
+@import "../bootstrap-4.5.2/scss/root";
+@import "../bootstrap-4.5.2/scss/reboot";
+@import "../bootstrap-4.5.2/scss/type";
+@import "../bootstrap-4.5.2/scss/grid";
+@import "../bootstrap-4.5.2/scss/forms";
+@import "../bootstrap-4.5.2/scss/buttons";
+@import "../bootstrap-4.5.2/scss/transitions";
+@import "../bootstrap-4.5.2/scss/nav";
+@import "../bootstrap-4.5.2/scss/navbar";
+@import "../bootstrap-4.5.2/scss/breadcrumb";
+@import "../bootstrap-4.5.2/scss/pagination";
+@import "../bootstrap-4.5.2/scss/utilities";
 
 @import "typography";
 
