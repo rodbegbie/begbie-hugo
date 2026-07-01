@@ -362,3 +362,15 @@ None.
 **Reasoning:** The refactor does exactly what the spec/plan promised — every `.Site` and raw `BaseURL` in the theme layouts converted to `site.X`/`absURL`, byte-equivalent output (verified equivalence against real config), no scope creep, and the theme left in a fully consistent single-idiom state. The only deviation is the pre-approved, verified-whitespace-only navbar change, whose two sub-parts both fall within the "blank line shifted" exception the human already signed off.</result>
 <usage><subagent_tokens>54012</subagent_tokens><tool_uses>7</tool_uses><duration_ms>126489</duration_ms></usage>
 </task-notification>
+
+---
+
+2
+
+---
+
+OK, that's squashed onto main.
+
+---
+
+Can you commit the CLAUDE.md, .claude and .entire folders?
