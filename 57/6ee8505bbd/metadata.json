@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "576ee8505bbd",
+  "strategy": "manual-commit",
+  "branch": "chore/js-vanilla-rewrite-phase2",
+  "checkpoints_count": 2,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/57/6ee8505bbd/0/metadata.json",
+      "transcript": "/57/6ee8505bbd/0/full.jsonl",
+      "compact_transcript": "/57/6ee8505bbd/0/transcript.jsonl",
+      "content_hash": "/57/6ee8505bbd/0/content_hash.txt",
+      "prompt": "/57/6ee8505bbd/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 72817,
+    "cache_creation_tokens": 1563247,
+    "cache_read_tokens": 85549575,
+    "output_tokens": 290744,
+    "api_call_count": 393
+  }
+}
