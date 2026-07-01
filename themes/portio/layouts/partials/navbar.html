@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <a href="{{ .Site.BaseURL }}" class="navbar-brand">
-      <!-- <img src="{{ .Site.Params.logo | absURL }}" alt="site-logo"> -->
+    <a href="{{ "" | absURL }}" class="navbar-brand">
+      <!-- <img src="{{ site.Params.logo | absURL }}" alt="site-logo"> -->
       Rod Begbie
     </a>
     <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarCollapse">
@@ -12,16 +12,15 @@
 
     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
       <ul class="nav navbar-nav main-navigation my-0 mx-auto">
-        {{ $menu := .Site.Menus.main }}
-        {{ range $index, $element := $menu }}
+        {{ range $index, $element := site.Menus.main }}
         <li class="nav-item">
-          <a href="{{ $.Site.BaseURL }}{{ .URL }}"
+          <a href="{{ .URL | absURL }}"
             class="nav-link text-dark text-sm-center p-2 {{ if $.IsHome }}scroll{{ end }}">{{ .Name }}</a>
         </li>
         {{ end }}
       </ul>
       <div class="navbar-nav">
-        <a href="{{ $.Site.BaseURL }}#contact" class="btn btn-primary btn-zoom hire_button">Work With Me</a>
+        <a href="{{ "#contact" | absURL }}" class="btn btn-primary btn-zoom hire_button">Work With Me</a>
       </div>
     </div>
   </div>
