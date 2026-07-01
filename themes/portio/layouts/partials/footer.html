@@ -93,8 +93,6 @@
 		</div>
 	</div>
 </section>
-<script src="{{ "plugins/jQuery/jquery.min.js" | absURL }}"></script>
-<script src="{{ "plugins/tweenmax/TweenMax.min.js" | absURL }}"></script>
 {{ $navbarjs := resources.Get "js/navbar.js" | minify }}
 <script src="{{ $navbarjs.Permalink }}"></script>
 {{ $testimonialjs := resources.Get "js/testimonial-carousel.js" | minify }}
@@ -103,5 +101,3 @@
 <script src="{{ $videopopupjs.Permalink }}"></script>
 {{ $formhandler := resources.Get "js/form-handler.js" | minify }}
 <script src="{{ $formhandler.Permalink }}"></script>
-{{ $script := resources.Get "js/script.js" | minify }}
-<script src="{{ $script.Permalink }}"></script>
