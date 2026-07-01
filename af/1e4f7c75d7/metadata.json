@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "af1e4f7c75d7",
+  "strategy": "manual-commit",
+  "branch": "chore/css-modernize-phase1",
+  "checkpoints_count": 3,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/af/1e4f7c75d7/0/metadata.json",
+      "transcript": "/af/1e4f7c75d7/0/full.jsonl",
+      "compact_transcript": "/af/1e4f7c75d7/0/transcript.jsonl",
+      "content_hash": "/af/1e4f7c75d7/0/content_hash.txt",
+      "prompt": "/af/1e4f7c75d7/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 18835,
+    "cache_creation_tokens": 408376,
+    "cache_read_tokens": 23057426,
+    "output_tokens": 100566,
+    "api_call_count": 154
+  }
+}
