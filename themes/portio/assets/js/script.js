@@ -1,33 +1,5 @@
 $(document).ready(function () {
 
-  // change-navigation-color
-  $(window).scroll(function () {
-    if ($(document).scrollTop() > 200) {
-      $(".navbar").addClass("nav__color__change");
-    } else {
-      $(".navbar").removeClass("nav__color__change");
-    }
-  });
-
-  // Smooth scrolling
-  var scrollLink = $(".scroll");
-  scrollLink.click(function (e) {
-    let elem = $(this.hash);
-    if (elem.length) {
-      e.preventDefault();
-      $("body,html").animate(
-        {
-          scrollTop: elem.offset().top,
-        },
-        1000
-      );
-    }
-  });
-
-  $(".navbar-nav>li>a").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-  });
-
   // service slider
   $(".service__slider").slick({
     infinite: false,
