@@ -92,16 +92,13 @@
             {{ $url := printf "%s" .Permalink | absLangURL }}
             <ul class="unstyle-list big">
               <li>
-                <a href=" https://www.facebook.com/sharer/sharer.php?u={{ $url }}"><i
-                    class="fa fa-facebook-official btn-zoom"></i></a>
+                <a href=" https://www.facebook.com/sharer/sharer.php?u={{ $url }}">{{ partial "icon.html" (dict "name" "fa-facebook-official" "class" "btn-zoom") }}</a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}"><i
-                    class="fa fa-linkedin-square btn-zoom"></i></a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}">{{ partial "icon.html" (dict "name" "fa-linkedin-square" "class" "btn-zoom") }}</a>
               </li>
               <li>
-                <a href="https://twitter.com/intent/tweet?&url={{ $url }}"><i
-                    class="fa fa-twitter-square btn-zoom"></i></a>
+                <a href="https://twitter.com/intent/tweet?&url={{ $url }}">{{ partial "icon.html" (dict "name" "fa-twitter-square" "class" "btn-zoom") }}</a>
               </li>
             </ul>
           </div>
