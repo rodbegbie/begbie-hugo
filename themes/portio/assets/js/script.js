@@ -1,54 +1,5 @@
 $(document).ready(function () {
 
-  // service slider
-  $(".service__slider").slick({
-    infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    dots: false,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  // Testimonial slider
-  $(".testimonial__slider").slick({
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    dots: true,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-    ],
-  });
-
   // Modal Popup
   $(".popup-button").magnificPopup({
     disableOn: 700,
