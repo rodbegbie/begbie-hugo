@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "b2d5c2477217",
+  "strategy": "manual-commit",
+  "branch": "fix/rocket-loader-and-bluesky",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "themes/portio/layouts/partials/footer.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/b2/d5c2477217/0/metadata.json",
+      "transcript": "/b2/d5c2477217/0/full.jsonl",
+      "compact_transcript": "/b2/d5c2477217/0/transcript.jsonl",
+      "content_hash": "/b2/d5c2477217/0/content_hash.txt",
+      "prompt": "/b2/d5c2477217/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 134343,
+    "cache_creation_tokens": 5568585,
+    "cache_read_tokens": 264451907,
+    "output_tokens": 584568,
+    "api_call_count": 894
+  }
+}
