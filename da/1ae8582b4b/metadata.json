@@ -4,7 +4,7 @@
   "checkpoint_id": "da1ae8582b4b",
   "strategy": "manual-commit",
   "branch": "chore/css-purge-unused-utilities",
-  "checkpoints_count": 2,
+  "checkpoints_count": 7,
   "files_touched": [
     "themes/portio/assets/scss/style.scss"
   ],
@@ -15,13 +15,20 @@
       "compact_transcript": "/da/1ae8582b4b/0/transcript.jsonl",
       "content_hash": "/da/1ae8582b4b/0/content_hash.txt",
       "prompt": "/da/1ae8582b4b/0/prompt.txt"
+    },
+    {
+      "metadata": "/da/1ae8582b4b/1/metadata.json",
+      "transcript": "/da/1ae8582b4b/1/full.jsonl",
+      "compact_transcript": "/da/1ae8582b4b/1/transcript.jsonl",
+      "content_hash": "/da/1ae8582b4b/1/content_hash.txt",
+      "prompt": "/da/1ae8582b4b/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 40711,
-    "cache_creation_tokens": 2640071,
-    "cache_read_tokens": 158650618,
-    "output_tokens": 255380,
-    "api_call_count": 469
+    "input_tokens": 41372,
+    "cache_creation_tokens": 2767114,
+    "cache_read_tokens": 162954907,
+    "output_tokens": 269257,
+    "api_call_count": 501
   }
 }

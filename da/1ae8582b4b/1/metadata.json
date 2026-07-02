@@ -1,0 +1,166 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_id": "da1ae8582b4b",
+  "session_id": "eaa7d39a-9b57-455d-a923-8d2cf1ae5ab4",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-02T21:42:40.883244Z",
+  "branch": "chore/css-purge-unused-utilities",
+  "checkpoints_count": 5,
+  "save_step_count": 3,
+  "files_touched": [
+    "themes/portio/assets/scss/style.scss"
+  ],
+  "agent": "Claude Code",
+  "model": "",
+  "turn_id": "90cf47b8d9a3",
+  "checkpoint_transcript_start": 275,
+  "transcript_lines_at_start": 275,
+  "token_usage": {
+    "input_tokens": 661,
+    "cache_creation_tokens": 127043,
+    "cache_read_tokens": 4304289,
+    "output_tokens": 13877,
+    "api_call_count": 32
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "claude-skill-toolu_01QerBfazGkpQX3Y7r4HfSax",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:brainstorming"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "90cf47b8d9a3",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 24,
+        "end": 25,
+        "entry_ids": [
+          "7158fa94-ea92-4a66-b77a-58791130a95c"
+        ],
+        "tool_use_id": "toolu_01QerBfazGkpQX3Y7r4HfSax"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01QerBfazGkpQX3Y7r4HfSax"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:brainstorming",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01VbpkJ742LH8bpUPozULyxQ",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:writing-plans"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "90cf47b8d9a3",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 176,
+        "end": 177,
+        "entry_ids": [
+          "76b1b564-f2ec-4c21-9493-060be3c0eeef"
+        ],
+        "tool_use_id": "toolu_01VbpkJ742LH8bpUPozULyxQ"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01VbpkJ742LH8bpUPozULyxQ"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:writing-plans",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_019pH8Cq23JLMAUdu3PCxnzh",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:subagent-driven-development"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "90cf47b8d9a3",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 282,
+        "end": 283,
+        "entry_ids": [
+          "fa8a210b-481d-4ca9-8333-f73f9c17bab9"
+        ],
+        "tool_use_id": "toolu_019pH8Cq23JLMAUdu3PCxnzh"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_019pH8Cq23JLMAUdu3PCxnzh"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:subagent-driven-development",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 7
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-02T21:42:40.858991Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 90,
+    "human_modified": 2,
+    "human_removed": 0,
+    "total_committed": 90,
+    "total_lines_changed": 92,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 89,
+      "user_lines_removed": 2,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "themes/portio/assets/scss/_utilities-trim.scss": 88,
+        "themes/portio/assets/scss/style.scss": 1
+      },
+      "user_removed_per_file": {
+        "themes/portio/assets/scss/style.scss": 2
+      }
+    }
+  ]
+}
