@@ -3,6 +3,7 @@ languageCode = "en-gb"
 paginate = 6
 theme = "portio"
 title = "Rod Begbie"
+enableRobotsTXT = true
 
 # Main Menu
 [[menu.main]]
