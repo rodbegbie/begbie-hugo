@@ -1,50 +1,26 @@
 <section class="footer" id="contact">
-	<div class="footer__background_shape">
-		<svg viewBox="0 0 1920 79">
-			<path d="M0 0h1920v79L0 0z" data-name="Path 1450" />
-		</svg>
-	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="footer__cta">
-					<div class="shape-1">
-						<svg xmlns="http://www.w3.org/2000/svg" width="357" height="315.029" viewBox="0 0 357 315.029">
-							<path data-name="Path 1449"
-								d="M76.1-157.222C91.746-135.8 87.2-94.273 99.993-61.945c12.7 32.328 42.661 55.459 39.248 73.282-3.318 17.823-40.007 30.337-65.6 43.325-25.5 12.988-39.912 26.545-60.01 42.566-20.1 16.116-46.074 34.6-63.328 27.682-17.349-6.921-25.976-39.153-59.915-59.82s-93.1-29.768-105.325-51.478 22.373-56.028 43.609-93.949c21.331-37.921 29.2-79.35 53.563-96.793 24.459-17.444 65.414-10.9 103.9-6.921 38.396 3.982 74.326 5.404 89.965 26.829z"
-								transform="translate(217.489 188.626)" />
-						</svg>
-					</div>
-					<div class="shape-2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="357" height="315.029" viewBox="0 0 357 315.029">
-							<path data-name="Path 1449"
-								d="M76.1-157.222C91.746-135.8 87.2-94.273 99.993-61.945c12.7 32.328 42.661 55.459 39.248 73.282-3.318 17.823-40.007 30.337-65.6 43.325-25.5 12.988-39.912 26.545-60.01 42.566-20.1 16.116-46.074 34.6-63.328 27.682-17.349-6.921-25.976-39.153-59.915-59.82s-93.1-29.768-105.325-51.478 22.373-56.028 43.609-93.949c21.331-37.921 29.2-79.35 53.563-96.793 24.459-17.444 65.414-10.9 103.9-6.921 38.396 3.982 74.326 5.404 89.965 26.829z"
-								transform="translate(217.489 188.626)" />
-						</svg>
-					</div>
-					<div class="text-light footer__cta_content">
-						<h2 class="mb-0">Want to work with me?</h2>
-						<h3 class="mb-0">Coaching</h3>
-						<p>I combine my experience as an engineer, manager and startup co-founder with co-active life coaching techniques to guide my clients through the challenges and choices faced in the tech industry today.</p>
-						<p>If you'd like to find out more about booking me for a coaching engagement, drop me a line.</p>
-					</div>
-					<div class="footer__cta_action">
-						<a class="btn btn-light btn-zoom" href="{{ site.Params.contactLink | absURL }}">Get in touch</a>
-					</div>
-
-					<div class="text-light footer__cta_content">
-						<h3 class="mb-0">Email</h3>
-						<p>For any other matters (consulting, writing, comparing Marvel Snap strategies), you can drop me an email at rod@begbie.com.</p>
-					</div>
-					<div class="footer__cta_action">
-						<a class="btn btn-light btn-zoom" href="{{ site.Params.contactLink | absURL }}">Email me</a>
-					</div>
+		<div class="row footer__cta">
+			<div class="col-lg-6">
+				<div class="footer__cta_col">
+					<h3 class="footer__cta_heading">Coaching</h3>
+					<p class="footer__cta_body">I combine my experience as an engineer, manager and startup co-founder with co-active life coaching techniques to guide my clients through the challenges and choices faced in the tech industry today. If you'd like to find out more about booking me for a coaching engagement, drop me a line.</p>
+					<a class="btn footer__cta_action footer__cta_action--filled btn-zoom"
+						href="{{ site.Params.contactLink | absURL }}">Get in touch</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="footer__cta_col">
+					<h3 class="footer__cta_heading">Email</h3>
+					<p class="footer__cta_body">For any other matters (consulting, writing, comparing Marvel Snap strategies), you can drop me an email at rod@begbie.com.</p>
+					<a class="btn footer__cta_action footer__cta_action--outline btn-zoom"
+						href="{{ site.Params.contactLink | absURL }}">Email me</a>
 				</div>
 			</div>
 		</div>
 		<div class="row footer__footer">
 			<div class="col-lg-6">
-				<div class="footer__footer_copy text-light">
+				<div class="footer__footer_copy">
 					<p>{{ site.Params.copyright }}</p>
 				</div>
 			</div>
@@ -53,7 +29,8 @@
 					<ul class="unstyle-list">
 						{{ $social := site.Params.social }}
 						{{ range $social }}
-						<li class="d-inline-block mx-2"><a class="text-light" target="_blank" href="{{ .url }}">{{ partial "icon.html" (dict "name" .icon) }}</a>
+						<li class="d-inline-block mx-2"><a target="_blank"
+								href="{{ .url }}">{{ partial "icon.html" (dict "name" .icon) }}</a>
 						</li>
 						{{ end }}
 					</ul>
@@ -63,9 +40,8 @@
 	</div>
 </section>
 {{ $navbarjs := resources.Get "js/navbar.js" }}
-{{ $testimonialjs := resources.Get "js/testimonial-carousel.js" }}
 {{ $videopopupjs := resources.Get "js/video-popup.js" }}
-{{ $bundle := slice $navbarjs $testimonialjs $videopopupjs
+{{ $bundle := slice $navbarjs $videopopupjs
   | resources.Concat "js/bundle.js" | minify | fingerprint }}
 <script defer data-cfasync="false" src="{{ $bundle.RelPermalink }}"
   integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>
