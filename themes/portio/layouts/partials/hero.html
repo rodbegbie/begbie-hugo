@@ -48,7 +48,7 @@
               srcset="{{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
             <img src="{{ $hero750.RelPermalink }}" sizes="{{ $sizes }}"
               srcset="{{ $hero500.RelPermalink }} 500w, {{ $hero750.RelPermalink }} 750w, {{ $hero1000.RelPermalink }} 1000w, {{ $hero1400.RelPermalink }} 1400w"
-              width="{{ $hero750.Width }}" height="{{ $hero750.Height }}"
+              width="{{ $hero750.Width }}" height="{{ $hero750.Height }}" fetchpriority="high"
               alt="{{ site.Title }}, {{ site.Params.subtitle }}" style='
                 -webkit-mask: url({{ "images/hero/hero-mask-svg.svg" | absURL }});
                 -webkit-mask-repeat: no-repeat;
