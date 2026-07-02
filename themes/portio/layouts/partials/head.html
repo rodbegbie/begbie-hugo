@@ -1,16 +1,45 @@
 <head>
   <meta charset="utf-8" />
-  <title>{{ .Title }}</title>
-  
-  <meta name="og:title" content="{{ .Title }}" />
-  <meta name="og:type" content="article" />
-  <meta name="og:url" content="{{ .Permalink | absURL }}" />
-  {{- with .Description | default .Params.subtitle | default site.Params.subtitle | default .Summary }}
+  <title>{{ if .IsHome }}{{ site.Title }} | {{ site.Params.subtitle }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <link rel="canonical" href="{{ .Permalink }}" />
+
+  {{ $desc := .Description | default .Params.subtitle | default site.Params.subtitle | default .Summary }}
+  {{ with $desc }}
+  <meta name="description" content="{{ . }}">
+  {{ end }}
+
+  {{ $ogImage := "" }}
+  {{ $anchor := .Params.featureImageAnchor | default "smart" }}
+  {{ if .Params.featureImage }}
+  {{ with resources.Get .Params.featureImage }}
+  {{ $ogImage = (.Fill (printf "1200x630 %s jpg q82" $anchor)).Permalink }}
+  {{ end }}
+  {{ else }}
+  {{ with resources.Get "images/hero/hero-portrait.jpg" }}
+  {{ $ogImage = (.Fill "1200x630 smart jpg q82").Permalink }}
+  {{ end }}
+  {{ end }}
+
+  <meta property="og:site_name" content="{{ site.Title }}" />
+  <meta property="og:title" content="{{ .Title }}" />
+  <meta property="og:type" content="{{ if eq .Kind "page" }}article{{ else }}website{{ end }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  {{ with $desc }}
   <meta property="og:description" content="{{ . }}">
-  {{- end }}
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@RodBegbie" />
-  
+  {{ end }}
+  {{ with $ogImage }}
+  <meta property="og:image" content="{{ . }}" />
+  {{ end }}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  {{ with $desc }}
+  <meta name="twitter:description" content="{{ . }}">
+  {{ end }}
+  {{ with $ogImage }}
+  <meta name="twitter:image" content="{{ . }}" />
+  {{ end }}
+
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -29,4 +58,6 @@
   {{ "<!--Favicon-->" | safeHTML }}
   <link rel="shortcut icon" href="{{ "images/favicon.ico" | absURL }}" type="image/x-icon" />
   <link rel="icon" href="{{ "images/favicon.png" | absURL }}" type="image/x-icon" />
+
+  {{ partial "structured-data.html" . }}
 </head>

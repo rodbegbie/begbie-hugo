@@ -33,7 +33,7 @@
                                     srcset="{{ $about500Webp.RelPermalink }} 500w, {{ $about750Webp.RelPermalink }} 750w, {{ $about1000Webp.RelPermalink }} 1000w, {{ $about1400Webp.RelPermalink }} 1400w">
                                 <img src="{{ $about750.RelPermalink }}" sizes="{{ $sizes }}"
                                     srcset="{{ $about500.RelPermalink }} 500w, {{ $about750.RelPermalink }} 750w, {{ $about1000.RelPermalink }} 1000w, {{ $about1400.RelPermalink }} 1400w"
-                                    width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="about-img"
+                                    width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="{{ site.Title }}"
                                     style='-webkit-mask: url({{"images/about/about-mask-svg.svg" | absURL}}); -webkit-mask-size: contain;'>
                             </picture>
                             {{ end }}
