@@ -3,20 +3,8 @@
   padding: $section-padding-y 0;
 
   &_content {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-    flex-wrap: wrap;
-    @include desktop {
-      gap: 30px;
-    }
-
     &-thumb {
-      width: 30%;
       position: relative;
-      @include desktop {
-        width: 100%;
-      }
 
       &-blob {
         position: absolute;
@@ -43,13 +31,6 @@
         height: 100%;
         object-fit: cover;
         border-radius: $radius-about-image;
-      }
-    }
-
-    &-inner {
-      width: 70%;
-      @include desktop {
-        width: 100%;
       }
     }
   }
