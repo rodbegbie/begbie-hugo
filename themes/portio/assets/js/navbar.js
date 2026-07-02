@@ -8,18 +8,24 @@ window.addEventListener("DOMContentLoaded", function () {
     // 350ms matches $transition-collapse in
     // themes/portio/assets/bootstrap-5.3.8/scss/_variables.scss
     var COLLAPSE_DURATION = 350;
+    // Shared handle for the pending open/close timeout. Cleared at the top
+    // of both openCollapse() and closeCollapse() so a re-click mid-transition
+    // can never let a stale timeout fire after a newer one has taken over
+    // (mirrors Bootstrap Collapse's _isTransitioning guard).
+    var pendingTimeout = null;
 
     function isOpen() {
       return collapseEl.classList.contains("show");
     }
 
     function openCollapse() {
+      window.clearTimeout(pendingTimeout);
       collapseEl.classList.remove("collapse");
       collapseEl.classList.add("collapsing");
       collapseEl.style.height = "0px";
       collapseEl.offsetHeight; // force reflow before transitioning
       collapseEl.style.height = collapseEl.scrollHeight + "px";
-      window.setTimeout(function () {
+      pendingTimeout = window.setTimeout(function () {
         collapseEl.classList.remove("collapsing");
         collapseEl.classList.add("collapse", "show");
         collapseEl.style.height = "";
@@ -29,12 +35,13 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     function closeCollapse() {
+      window.clearTimeout(pendingTimeout);
       collapseEl.style.height = collapseEl.scrollHeight + "px";
       collapseEl.classList.remove("collapse", "show");
       collapseEl.classList.add("collapsing");
       collapseEl.offsetHeight; // force reflow before transitioning
       collapseEl.style.height = "0px";
-      window.setTimeout(function () {
+      pendingTimeout = window.setTimeout(function () {
         collapseEl.classList.remove("collapsing");
         collapseEl.classList.add("collapse");
         collapseEl.style.height = "";
