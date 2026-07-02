@@ -1,0 +1,35 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "96cdd7908714",
+  "strategy": "manual-commit",
+  "branch": "feature/homepage-redesign",
+  "checkpoints_count": 8,
+  "files_touched": [
+    "config.toml",
+    "data/aboutSection.yml",
+    "data/resumeSection.yml",
+    "themes/portio/layouts/blog/list.html",
+    "themes/portio/layouts/blog/single.html",
+    "themes/portio/layouts/partials/aboutSection.html",
+    "themes/portio/layouts/partials/blogSection.html",
+    "themes/portio/layouts/partials/footer.html",
+    "themes/portio/layouts/partials/hero.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/96/cdd7908714/0/metadata.json",
+      "transcript": "/96/cdd7908714/0/full.jsonl",
+      "compact_transcript": "/96/cdd7908714/0/transcript.jsonl",
+      "content_hash": "/96/cdd7908714/0/content_hash.txt",
+      "prompt": "/96/cdd7908714/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 40189,
+    "cache_creation_tokens": 2623333,
+    "cache_read_tokens": 142745860,
+    "output_tokens": 244788,
+    "api_call_count": 443
+  }
+}
