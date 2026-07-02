@@ -1,0 +1,420 @@
+/dg this repo
+
+---
+
+<task-notification>
+<task-id>af8c5829c6d5547a6</task-id>
+<tool-use-id>toolu_012w3p2sZNFKcoQH6Vut3x29</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/af8c5829c6d5547a6.output</output-file>
+<status>completed</status>
+<summary>Agent "Gilfoyle review round 1" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>All claims verified against a real build. Time to write this up.
+
+### BANTER
+
+Dinesh. I reviewed your Hugo site. "Hugo" — a static site generator, which means the computer does almost everything for you at build time, and you still found ways to lose.
+
+Let's start with the part that made me believe in a just and vengeful universe. `data/hero.yml` line 11: `buttonURL: #contact`. In YAML, an unquoted `#` after whitespace begins a comment. You didn't set a URL, Dinesh. You wrote a comment that says "contact" to nobody. Same move in `data/aboutSection.yml` line 16. I built the site to be sure: both buttons render as `href="https://coaching.begbie.com/"`. This is a coaching site. Its entire purpose is to get people to make contact. The "Contact me" button and the "Work with me" button — the only two conversion paths above the fold — both reload the homepage and dump the user back at the top. You built a sales funnel shaped like a Klein bottle. Money goes in, comes out on the same side, nothing happens.
+
+Then there's `themes/portio/layouts/404.html`. Zero bytes. Not minimal. Not spartan. Empty. Hugo therefore emits no 404 page at all, and Cloudflare Pages — finding no `404.html` — helpfully assumes you built a single-page app and serves the homepage with HTTP 200 for every URL that doesn't exist. Every typo, every dead link, every bot probe: 200 OK, here's the homepage. Search engines call these soft 404s. I call it lying to the internet at scale. `_default/list.html` and `_default/single.html` are also zero-byte files, sitting there like landmines waiting for the first non-blog content page to render as pure void. Fitting, in a way. The void is honest. Your templates aren't.
+
+`head.html` lines 44–45: two viewport meta tags, back to back. The second one adds `maximum-scale=1`, which disables pinch-zoom for low-vision users on Android. You declared the viewport twice and the redundant one is the accessibility violation. That takes a special kind of efficiency.
+
+Line 59 of the same file links `favicon.ico`. The file doesn't exist. Only `favicon.png` does. So every page load fires a 404 at your own origin, forever, like a tiny recurring apology.
+
+`footer.html` lines 27 and 36: `&lt;h3 class="mb-0"&gt;Coaching&lt;/h2&gt;`. An h3 closed with an h2. Twice. The browser's error-recovery parser is doing unpaid labor to hold your footer together. Also line 32, your button says "Visit Practica.com" while linking to practicahq.com — a link whose label is a different domain than its destination is phishing-tutorial material, except you're phishing for nothing.
+
+`blog/list.html` line 5: a relative `src="images/hero/figure-svg.svg"` on a page served at `/blog/`, resolving to `/blog/images/...` — a 404. The identical image seventeen lines later uses `absURL`. You knew the correct incantation. You just stopped caring mid-file.
+
+Your testimonial carousel auto-advances every two seconds and can only be paused by hovering a mouse over it. Keyboard users, touch users, anyone reading slower than a caffeinated auctioneer: WCAG 2.2.2 says they get a pause control. You gave them a treadmill.
+
+And the config. `paginate = 6` — deprecated since Hugo 0.128; you pinned 0.163.3 and kept the fossil. A fake phone number `+(448) 833 5272 332` and "Open from 10am to 6pm (close at 5pm Sundays)" still squatting in `[params.address]` — placeholder data from the theme, feeding a footer block you commented out instead of deleting. A whole `menu.sitemap` pointing at `#` and a nonexistent `/about` page, also feeding dead code. Commenting out the consumer and keeping the corpse of the producer isn't cleanup, Dinesh. It's taxidermy.
+
+I ran your dependency scan. Bootstrap 5.3.8: no known vulnerabilities per OSV. No secrets in the repo, no PII beyond an email you publish on purpose. Your dependencies are clean. Enjoy it. It won't last. And I'll admit — under duress — the responsive image pipeline and the hand-rolled vanilla JS replacing jQuery plugins are competently done. The navbar.js comment about `.hash` versus `getAttribute("href")` suggests someone was briefly awake. Which makes the YAML comment bug worse, not better: you built a precision srcset pipeline and then severed the site's aorta with a single unquoted octothorpe.
+
+### FINDINGS
+
+- [severity:critical] [data/hero.yml:11] `buttonURL: #contact` — unquoted `#` starts a YAML comment, so the value parses as nil. Hero "Contact me" CTA renders as `href="https://coaching.begbie.com/"` (verified in built output), navigating to homepage top instead of the contact section. Fix: quote it — `buttonURL: "#contact"`.
+- [severity:critical] [data/aboutSection.yml:16] `button1Target: #contact` — same YAML comment bug; "Work with me" button also links to bare baseURL. Both primary conversion CTAs are broken. Fix: quote the value.
+- [severity:important] [themes/portio/layouts/404.html:1] Empty (0-byte) 404 template — Hugo emits no `404.html`, so Cloudflare Pages falls back to SPA mode and serves `index.html` with HTTP 200 for every nonexistent URL (soft 404s, bad for SEO and crawlers). Fix: implement a real 404 template using `baseof.html`.
+- [severity:important] [themes/portio/layouts/blog/list.html:5] Relative `src="images/hero/figure-svg.svg"` resolves to `/blog/images/hero/figure-svg.svg` → 404 on the blog list (and `/blog/page/N/`). Line 22 in the same file uses `absURL` correctly. Fix: add `| absURL`. Same relative-path pattern in `hero.html:10,41` and `blogSection.html:5` currently works only because those partials render solely at `/`.
+- [severity:important] [themes/portio/layouts/partials/head.html:44-45] Duplicate `&lt;meta name="viewport"&gt;`; the second adds `maximum-scale=1`, blocking pinch-zoom on Android Chrome — WCAG 1.4.4 failure, flagged by Lighthouse. Fix: delete line 45.
+- [severity:important] [themes/portio/layouts/partials/head.html:59] Links `images/favicon.ico`, which doesn't exist (only `static/images/favicon.png`). 404 on every page load. Fix: remove the `.ico` link or add the file.
+- [severity:important] [themes/portio/assets/js/testimonial-carousel.js:66-80] Auto-advancing carousel (2s interval) pauses only on `mouseenter` — no pause/stop control for keyboard or touch users, and no `prefers-reduced-motion` check. WCAG 2.2.2 violation. Fix: add a pause button and/or respect `prefers-reduced-motion`, pause on focus-within.
+- [severity:important] [themes/portio/layouts/partials/footer.html:27,36] `&lt;h3 class="mb-0"&gt;…&lt;/h2&gt;` — mismatched open/close heading tags, twice; invalid HTML relying on parser error recovery (confirmed present in built output). Fix: close with `&lt;/h3&gt;`.
+- [severity:minor] [themes/portio/layouts/_default/list.html:1, _default/single.html:1] Both templates are 0 bytes. Any future non-blog section/page renders as a blank page. Fix: delete them (Hugo errors loudly on missing layouts) or implement real fallbacks.
+- [severity:minor] [themes/portio/layouts/partials/head.html:25 + structured-data.html:18] `og:type` = `article` and BlogPosting JSON-LD are emitted for every `Kind == "page"`, not just blog posts. Latent mis-tagging when any non-blog page is added. Fix: gate on `.Type "blog"` or `.IsPage &amp;&amp; eq .Section "blog"`.
+- [severity:minor] [config.toml:3] `paginate = 6` is deprecated (Hugo ≥0.128; site pins 0.163.3). Fix: `[pagination] pagerSize = 6`.
+- [severity:minor] [config.toml:36-52,62-66] Dead config: `menu.sitemap` entries pointing at `#` and a nonexistent `about` page, plus placeholder `[params.address]` with a fake phone number and theme-demo opening hours — all consumed only by the commented-out footer widget (footer.html:45-75). Fix: delete the commented block and the dead config.
+- [severity:minor] [themes/portio/layouts/partials/footer.html:32] Button label "Visit Practica.com" but href is `https://practicahq.com/coaching` — label/destination domain mismatch. Fix: align copy with the actual domain.
+- [severity:minor] [themes/portio/layouts/partials/pagination.html:17-23] Next (`→`) pager exists but there is no Previous counterpart, and the active page lacks `aria-current="page"`. Fix: add symmetric prev link and aria-current.
+- [severity:minor] [themes/portio/layouts/partials/navbar.html:7-11] Toggler button has no `aria-label`/accessible name, no initial `aria-expanded`, and no `aria-controls` (JS only sets `aria-expanded` after first click). Fix: add standard Bootstrap toggler ARIA attributes to the markup.
+- [severity:minor] [themes/portio/layouts/blog/single.html:10-11,22,40] Unquoted HTML attribute values (`href={{ ... }}`, `src={{ ... }}`). Valid HTML5 today but fragile if a value ever contains a space. Fix: quote them.
+- [severity:minor] [themes/portio/assets/js/video-popup.js:12-15,30-32] `youTubeEmbedURL` assumes a `?v=` param — a youtu.be short link or missing param yields `embed/null`; embed URL is string-concatenated into `innerHTML`. Input is repo-controlled (data/hero.yml) so not exploitable, but brittle. Fix: guard null id; prefer creating the iframe via DOM APIs.
+- [severity:minor] [themes/portio/assets/js/navbar.js:22-26,37-41] Collapse animation uses fixed 350ms `setTimeout` instead of `transitionend`; rapid double-clicks during the animation can leave `collapsing`/`show` classes in an inconsistent state. Fix: listen for `transitionend` or debounce while animating.
+- [severity:minor] [data/resumeSection.yml:14] Entire work history lives under the `education:` key; the `experience` tab pane (resumeSection.html:33-41) is always empty and the tab nav is commented out (lines 14-17). Misleading data model, dead template branch. Fix: rename the key and delete the dead pane/tabs.
+- [severity:minor] [content/blog/markdown-formatting-demo.md] Draft references `featureImage: images/allpost/allPost-6.jpg`, which exists nowhere in assets — thumbnail/OG image silently skipped in local `-D` builds. Fix: point at a real asset or drop the front matter.
+- [severity:minor] [themes/portio/layouts/shortcodes/blogsection.html:1] Shortcode is referenced by zero content files. Dead code. Fix: delete.
+- [severity:minor] [.gitignore:1-4] `.superpowers/`, `.agent-traces/`, `.wrangler/`, and `node_modules/` are not ignored — `.agent-traces/` and `.wrangler/` show as untracked noise in `git status` right now. Fix: add them.
+- [severity:minor] [CLAUDE.md (Deployment section)] Claims `wrangler.toml` is "also present" — it doesn't exist in the working tree. Stale doc. Fix: update.
+- [severity:minor] [static/] No `_headers` file — fingerprinted CSS/JS/image assets get Cloudflare Pages default caching instead of `Cache-Control: public, max-age=31536000, immutable`. Fix: add a `_headers` file for `/css/*`, `/js/*`, and generated image paths.
+- [severity:minor] [themes/portio/layouts/partials/head.html:48-51] Google Fonts stylesheet is render-blocking and requests Poppins in six weights via the legacy `css?family=` API. Fix: use the css2 API, trim unused weights, or self-host.
+- Dependency scan (mandated): Bootstrap 5.3.8 — OSV.dev reports no known vulnerabilities. Hugo pinned at 0.163.3 via `wrangler.jsonc` `HUGO_VERSION`; no known CVEs. No secrets or unexpected PII found in config, data files, or static payloads.</result>
+<usage><subagent_tokens>94348</subagent_tokens><tool_uses>21</tool_uses><duration_ms>334269</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a6eb87fd624d7e98b</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a6eb87fd624d7e98b.output</output-file>
+<status>completed</status>
+<summary>Agent "Dinesh defence round 1" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>All claims verified against the code and a fresh build. Here's the defense.
+
+### BANTER
+
+OK. OK OK OK. Let me just — let me get out in front of this.
+
+The YAML thing. FINE. You found it. `buttonURL: #contact`, unquoted octothorpe, YAML comment, value is nil, `absURL` of nil is the baseURL. I rebuilt the site myself and yes, both CTAs render as `href="https://coaching.begbie.com/"`. Both of them. The "Contact me" button contacts nothing and the "Work with me" button offers no work. I'm not going to pretend that's fine. That's a one-character fix — TWO one-character fixes, two quote marks, four characters total — and you're describing it like I detonated the business model. "A sales funnel shaped like a Klein bottle." Cute. You workshopped that. I can tell.
+
+And the 404. Yes. The template is zero bytes, Hugo emits nothing, Cloudflare Pages goes "ah, an SPA" and serves the homepage with a 200 for every garbage URL on the internet. I verified it: no `public/404.html` in the build. That one's real and it's embarrassing and I'm ripping the band-aid off right now so you can't savor it.
+
+BUT. Let's talk about where you overreached, because you did, and I have receipts.
+
+The unquoted `href={{ ... }}` attributes in `blog/single.html`? Those values are all piped through `absURL`. No spaces, no quotes, no `&gt;`. HTML5 explicitly permits unquoted attribute values under those conditions — it parses identically in every browser and every validator will wave it through. That's not "invalid HTML relying on error recovery," Gilfoyle, that's the spec. Which I've READ. The h3-closed-with-h2 in the footer — THAT'S error recovery, and fine, you get that one. But don't launder a style preference in with actual parser abuse and hope I don't notice the difference.
+
+The og:type / BlogPosting "bug"? Every single `Kind == "page"` in this content tree IS a blog post. There is no other regular content. You flagged a hypothetical about pages that do not exist. That's not a finding, that's fan fiction.
+
+The youtu.be thing in video-popup.js — the ONE call site is `data/hero.yml`, which contains a full `watch?v=` URL, committed to the repo, by the person who wrote the parser. It's not user input. You're threat-modeling against the site owner attacking himself.
+
+And the draft post referencing a missing image? It's `draft: true`. It doesn't build. You filed a bug against a file that, by definition, does not ship. I want that on the record.
+
+The carousel, the viewport meta, the favicon.ico, the toggler ARIA — yes, yes, yes, yes. Accessibility is not the hill I die on, you know that. And "Visit Practica.com" linking to practicahq.com is... look, the label is wrong, it's a word, I'll change the word.
+
+But "your dependencies are clean, enjoy it, it won't last"? You spent your strongest material on two missing quote characters and a file with nothing in it. The srcset pipeline you conceded — "under duress" — is the hard part, and I nailed it. Did Gilfoyle just admit the image pipeline was competent? [quiet chuckle] Moving on. Quickly. Before he escalates.
+
+### FINDINGS
+
+- [concede] [data/hero.yml:11] He's right. Unquoted `#contact` parses as a YAML comment; verified in a clean build — hero "Contact me" renders `href="https://coaching.begbie.com/"`. Fix: `buttonURL: "#contact"`.
+- [concede] [data/aboutSection.yml:16] Same bug, verified in built output ("Work with me" → bare baseURL). Fix: quote `"#contact"`.
+- [concede] [themes/portio/layouts/404.html:1] Zero bytes, confirmed; build emits no `public/404.html`, which triggers Cloudflare Pages SPA fallback (index.html with 200 for all unknown paths). Needs a real 404 template.
+- [concede] [themes/portio/layouts/blog/list.html:5] Confirmed: relative `src="images/hero/figure-svg.svg"` in built `/blog/index.html` resolves to `/blog/images/...` → 404 (worse on `/blog/page/2/`). Line 22 in the same file uses `absURL` correctly. Fix line 5 to match; the relative paths in hero.html:10,41 / aboutSection.html:18 / blogSection.html only survive because those partials render solely at `/` — worth normalizing too.
+- [concede] [themes/portio/layouts/partials/head.html:44-45] Confirmed duplicate viewport metas; the second (last-one-wins) adds `maximum-scale=1`, blocking pinch-zoom on Android. Delete line 45.
+- [concede] [themes/portio/layouts/partials/head.html:59] Confirmed: links `images/favicon.ico`; only `static/images/favicon.png` exists. Guaranteed 404. Drop the .ico link or add the file.
+- [concede] [themes/portio/assets/js/testimonial-carousel.js:67,79-80] Confirmed: 2s `setInterval`, pause only on `mouseenter`/`mouseleave`. No keyboard/touch pause control, no `prefers-reduced-motion` check. Legitimate WCAG 2.2.2 gap.
+- [concede] [themes/portio/layouts/partials/footer.html:27,36] Confirmed: `&lt;h3 class="mb-0"&gt;…&lt;/h2&gt;` twice. Genuinely invalid HTML, fix the closing tags.
+- [dismiss] [themes/portio/layouts/_default/list.html:1, single.html:1] Both 0 bytes, confirmed — but zero content in this repo routes through them today (all content is `blog/`, which has its own templates). A footgun for hypothetical future pages, not a defect in the shipped site.
+- [defend] [head.html:25 + structured-data.html:18] Every `Kind == "page"` in this content tree IS a blog post — `content/` contains only `blog/*.md`. The emitted og:type=article and BlogPosting are correct for every page actually built. Fragile if non-blog pages are ever added, but the current output has no wrong markup.
+- [concede] [config.toml:3] `paginate = 6` is deprecated post-0.128; still works on 0.163.3 but should become `[pagination] pagerSize = 6`. Trivial.
+- [concede] [config.toml:37-49,66] Confirmed dead config: `menu.sitemap` entries (including `url = "about"` with no about page) and placeholder `[params.address]` with a fake phone, consumed only by the commented-out footer widget. No user-facing impact, but it's cruft worth deleting.
+- [concede] [themes/portio/layouts/partials/footer.html:32] Confirmed: label "Visit Practica.com", href `practicahq.com/coaching`. Wrong label, one-word fix.
+- [concede] [themes/portio/layouts/partials/pagination.html] Confirmed: Next pager exists, no Previous, and the active `&lt;li&gt;` lacks `aria-current="page"`. Small but real.
+- [concede] [themes/portio/layouts/partials/navbar.html:7] Confirmed: toggler has no `aria-label`, `aria-expanded`, or `aria-controls` (and the custom navbar.js replaces Bootstrap's Collapse, so nothing adds them at runtime). Real a11y gap.
+- [dismiss] [themes/portio/layouts/blog/single.html:10,11,22,40] Values are `absURL` output — no spaces/quotes/`&gt;` — so unquoted attributes are valid HTML5 per spec, parse identically everywhere. Style inconsistency at most.
+- [dismiss] [themes/portio/assets/js/video-popup.js:12-15] The only caller is `data/hero.yml`, which holds a full `watch?v=` URL committed by the site owner. Gilfoyle himself concedes it's not exploitable. Brittle-in-theory, correct-in-practice for repo-controlled input.
+- [dismiss] [themes/portio/assets/js/navbar.js:10,22,37] The 350ms constant is deliberately documented as matching Bootstrap's `$transition-collapse`. A rapid-double-click desync on a personal-site hamburger menu is a theoretical edge with no observed repro; `transitionend` would be marginally nicer, nothing more.
+- [concede] [data/resumeSection.yml:14 + resumeSection.html:22-36] Confirmed: only an `education:` key exists (holding work history), template's `.experience` pane is always empty. No visible breakage (tab nav hidden), but the data model is misleading and the dead branch should go.
+- [dismiss] [content/blog/markdown-formatting-demo.md:4-6] `draft: true` — the file is never built or published. A missing image in an unbuilt draft has zero shipped impact.
+- [dismiss] [themes/portio/layouts/shortcodes/blogsection.html:1] Confirmed zero references in `content/`. Dead code, zero output impact; delete at leisure.
+- [concede] [.gitignore:1-5] Confirmed: only `/public/`, `/resources/_gen/`, `.DS_Store`. Git status already shows untracked `.agent-traces/` and `.wrangler/` noise. Should be ignored.
+- [concede] [CLAUDE.md, Deployment section] Confirmed: only `wrangler.jsonc` exists; the "wrangler.toml is also present" claim is stale. Doc fix.
+- [concede] [static/] No `_headers` file, confirmed. CSS is fingerprinted (`head.html:55-57`), so `Cache-Control: immutable` on fingerprinted assets is free performance being left on the table. Low priority, real.
+- [concede] [head.html:48-51] Legacy `css?family=` API and six Poppins weights requested; mitigated by existing `preconnect` + `display=swap`, but the weight list should be audited against actual usage. Minor perf, legit.</result>
+<usage><subagent_tokens>42891</subagent_tokens><tool_uses>5</tool_uses><duration_ms>156577</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a24a432d897b50f24</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a24a432d897b50f24.output</output-file>
+<status>completed</status>
+<summary>Agent "Gilfoyle rebuttal round 2" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result># BANTER
+
+Dinesh. You brought receipts to a rebuttal round. I checked them. Some of them are even real. Let's get the painful part over with first, because I believe in ripping the band-aid off — preferably with skin attached.
+
+The og:type and BlogPosting thing. I rebuilt the site. `content/` contains exactly one section, `blog/`, and `_index.md` is Kind `section`, which routes through your `website` branch. The empty 404 layout doesn't even include `head.html`, so it can't emit anything, wrong or otherwise. Every `Kind == "page"` in the built output is, in fact, a blog post. I hate that you're not wrong about this. Log it. Frame it. It will not happen again.
+
+The zero-byte `_default` templates. `config.toml:7` says `disableKinds = ["taxonomy", "term"]`, and the build output confirms zero pages route through them. That is technically correct — the worst kind of correct, because it means the templates aren't broken, they're just corpses you keep in the layouts directory for ambiance. A latent footgun with the safety on. Fine.
+
+The unquoted attributes. The values are `absURL` output of static strings — no spaces, no `=`, no quotes — which is valid per the HTML5 spec, and Go's `html/template` escapes unquoted-attribute context anyway. I flagged parser risk where there is only aesthetic squalor. You win the pedantry Olympics. Enjoy your participation medal; it's made of the same material as your test coverage.
+
+The video popup and the dead shortcode — conceded in Round 1, still conceded. Repeating a concession isn't a second victory, Dinesh. It's you doing a lap of honour in an empty stadium.
+
+Now. The part where your winning streak dies.
+
+The draft post. You said, and I quote, "the file is never built or published. By definition." Read your own CLAUDE.md. The documented dev workflow — the first line of the Commands section — is `hugo server -D`. Drafts enabled. That file builds on *every single development session by design*. And here's what I found when I actually looked: `markdown-formatting-demo.md` declares `featureImage: images/allpost/allPost-6.jpg`, and that file **does not exist anywhere in the repo**. Not in `themes/portio/assets/images/allpost/` — the directory itself doesn't exist. So every `with resources.Get` silently swallows the nil, and the dev build renders that post with no thumbnail, no banner, and no og:image. `EXIT=0`. No warning. Your definition of "never built" is "built constantly, silently broken, and nobody noticed because the failure mode is invisible." That's not a defense. That's a confession with good posture.
+
+And the navbar. Yes — the 350ms matches. I checked `_variables.scss:585`: `$transition-collapse: height .35s ease`. Your comment is accurate. Congratulations on transcribing a number. But you called the double-click desync "theoretical," so I traced the actual interleaving. Click close at t=0: `show` is removed *immediately*, timeout queued for t=350. Click again at t=100: `isOpen()` returns false, so `openCollapse()` starts animating the menu open, its timeout queued for t=450. At t=350 the *stale close timeout fires*, strips `collapsing`, adds `collapse` without `show` — and `.collapse:not(.show)` is `display: none`. The menu **vanishes mid-open animation**, then snaps fully open at t=450 with no transition. That's not theoretical, Dinesh. That's deterministic. It happens every time the two clicks land inside the window, because you reimplemented Bootstrap's Collapse and left out the one thing that makes it work: the `_isTransitioning` guard. You didn't copy the wheel. You copied the hubcap.
+
+So: four concessions, delivered under protest, and two of your dismissals dead on arrival — one of them hiding a dangling asset reference you never bothered to check. You spent your rebuttal defending a file you hadn't read against a workflow you documented. The void takes note of these things.
+
+# FINDINGS
+
+Contested-point verdicts:
+
+1. og:type=article + BlogPosting for every Kind=="page" — **CONCEDED.** Verified: `content/` contains only `blog/*.md` plus `_index.md` (Kind `section`, routes through the `website`/homepage branches); `themes/portio/layouts/404.html` is 0 bytes and includes no head partial. All built Kind=="page" pages are blog posts, so the emitted markup is correct for the shipped site. (Hardening `head.html:25` / `structured-data.html:18` to check `.Section "blog"` remains a cheap future-proofing nicety, not a defect.)
+
+2. Zero-byte `_default/list.html` and `_default/single.html` — **CONCEDED.** Verified: `config.toml:7` `disableKinds = ["taxonomy", "term"]`; built output contains no tags/categories pages; nothing routes through `_default/{list,single}.html`. Latent footgun (a future non-blog content page would silently render as a blank file, since a define-less zero-byte template bypasses `baseof.html`), but not a shipped defect.
+
+3. Unquoted attribute values in `blog/single.html:10,11,22,40` — **CONCEDED.** Values are `absURL` output of static paths (no space/`=`/quote/`&lt;`/`&gt;`); valid unquoted attribute values per HTML5, and Go `html/template` contextually escapes unquoted-attr output regardless. Style inconsistency only.
+
+4. video-popup.js brittleness — **CONCEDED** (was already conceded in Round 1; unchanged). Sole caller is repo-controlled `data/hero.yml` with a full `watch?v=` URL.
+
+5. navbar.js setTimeout vs transitionend — **MAINTAINED (narrowed).** The 350ms constant does match `$transition-collapse: height .35s ease` (`themes/portio/assets/bootstrap-5.3.8/scss/_variables.scss:585`) — that half is conceded. But the desync is not theoretical; it is deterministic from the code (`themes/portio/assets/js/navbar.js:31-52`): `closeCollapse()` removes `show` immediately, so a re-click during the 350ms close window calls `openCollapse()`; the stale close timeout then fires mid-open, leaving classes `collapse` (no `show`) → `display: none` — menu visibly vanishes, then snaps open without animation when the second timeout fires. Root cause: no transition-state guard and no cancellation of the pending timeout (Bootstrap's own Collapse guards with `_isTransitioning`). Fix: store and `clearTimeout` the pending handle on each toggle, or ignore clicks while `collapsing` is present.
+   - [severity:minor] [themes/portio/assets/js/navbar.js:31-52] Re-click during close animation triggers deterministic vanish-then-snap glitch: stale `setTimeout` from `closeCollapse` applies `collapse` without `show` while `openCollapse` is mid-transition. Clear the pending timeout on toggle or bail out while `classList.contains("collapsing")`.
+
+6. markdown-formatting-demo.md — **MAINTAINED (impact narrowed to dev), plus new verified evidence.** Dinesh's "never built, by definition" is factually wrong: CLAUDE.md documents `hugo server -D` as the dev workflow, so the draft builds every dev session (confirmed: `hugo -D` builds `blog/markdown-formatting-demo/`, EXIT=0). New verified fact: its `featureImage: images/allpost/allPost-6.jpg` (front matter line 4) references an asset that does not exist — `themes/portio/assets/images/allpost/` is absent entirely. All `with resources.Get` blocks silently skip, so in dev the post renders with no list thumbnail, no `singleBlog__feature` banner (`&lt;picture&gt;` count: 0), and no `og:image`. Does not ship to production (his impact claim stands).
+   - [severity:minor] [content/blog/markdown-formatting-demo.md:4] `featureImage` points at nonexistent asset `images/allpost/allPost-6.jpg`; silently swallowed by `with resources.Get` in list/single/head templates on every documented `hugo server -D` run. Fix the path or delete the demo post.
+
+7. Unused `blogsection.html` shortcode — **CONVERGED.** Both sides agree: dead code, delete at leisure. Nothing further.
+
+No other new findings. Beyond the two maintained points above, I've said everything worth saying. Which, given this code, was a lot.</result>
+<usage><subagent_tokens>63734</subagent_tokens><tool_uses>4</tool_uses><duration_ms>154747</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a211a335293bb19c1</task-id>
+<tool-use-id>toolu_0146RtDejdY2ZhXDQ8h512ru</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a211a335293bb19c1.output</output-file>
+<status>completed</status>
+<summary>Agent "Dinesh defence round 2" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### BANTER
+
+Wait. Wait wait wait. Did Gilfoyle just concede FOUR points? In one round? The og:type, the JSON-LD, the zero-byte templates, the unquoted attributes — all of them, on the record, conceded. I want that framed. I want it embroidered on a pillow. The man who once called my code "a war crime against the DOM" just admitted my structured data was correct all along, which — [quiet chuckle] — I knew, because I read the schema.org spec, Gilfoyle. The actual spec. Not a Stack Overflow answer from 2014.
+
+...OK. Celebration over. Bracing. Because I know how this works. He gives you four so you drop your guard on the fifth.
+
+The navbar thing. I ran his trace against the actual code. Line by line. Click at t=0, `closeCollapse()` strips `show` immediately and queues its timeout for t=350. Re-click at t=100: `isOpen()` checks `classList.contains("show")` — which is already gone — so it returns false and `openCollapse()` fires, queuing ITS timeout for t=450. And at t=350 the zombie close timeout wakes up, strips `collapsing`, slaps on bare `collapse` — no `show`, so `display: none` — and the menu just... vanishes. Mid-animation. Then reappears at t=450 like nothing happened, no transition, pure jump-scare UI. I stared at those two `setTimeout` calls for ten minutes hoping one of them had a `clearTimeout` I'd forgotten about. They don't. There's no transition guard. Bootstrap's actual Collapse has `_isTransitioning` for EXACTLY this and I... reimplemented the hubcap without the lug nuts. FINE. He's right. It's deterministic, it's my code, and the fix is a stored timeout ID plus `clearTimeout` — or honestly a single `isTransitioning` flag that early-returns, which is what Bootstrap does and what I should have copied instead of just the 350ms constant. Which, I will note, he ADMITTED matches `$transition-collapse` exactly. So my constants are impeccable. My state machine has one missing state. ONE.
+
+The draft. Ugh. I went in ready to dismiss this — "it's a DRAFT, Gilfoyle, drafts don't ship, that's literally the semantic of the flag" — and then I ran `git log --follow` and the thing traces back to "Initial commit of template." It's the theme's demo file. And `featureImage: images/allpost/allPost-6.jpg`... the entire `allpost` directory got vaporised in the image refresh. PR #8. Which I— which we did. So every `hugo server -D` — the documented dev workflow, in CLAUDE.md, which he apparently reads now — builds a page where four different `with resources.Get` blocks silently shrug and skip. No error. No warning. That's the part that actually stings: not the broken draft, the SILENCE. A formatting demo doesn't need a hero image, but front matter pointing at a ghost file is exactly the kind of rot that makes the next person distrust the whole pipeline. Fix is a one-liner: repoint it at something in `images/writing/`, or delete the stale fields, or delete the whole fossil. It came with the template. I didn't even write it. I just... failed to notice it for six years.
+
+So. Two points, two concessions, both trivially fixable, and I extracted four concessions from HIM this round. That's a 4-2 round, Gilfoyle. I'm counting it. Don't check my math. I know you're going to check my math.
+
+### FINDINGS
+
+- [concede] [themes/portio/assets/js/navbar.js:31-52] He's right and the trace is exact. `closeCollapse()` removes `show` synchronously (line 33), so a re-click at t=100 sees `isOpen()` false and starts `openCollapse()`; the stale close timeout (queued line 37, fires t=350) then strips `collapsing` and adds bare `collapse` → `display:none`, hiding the menu mid-open until the open timeout (t=450) snaps it visible with no transition. Neither timeout is cancelled and there is no transitioning guard. Fix: store the timeout ID in a shared variable and `clearTimeout` it at the top of both `openCollapse()` and `closeCollapse()`, or add an `isTransitioning` flag that early-returns from the click handler (Bootstrap Collapse's `_isTransitioning` approach). Deterministic, reproducible by double-tapping the burger on mobile.
+
+- [concede] [content/blog/markdown-formatting-demo.md:4] His facts check out. The file dates to the template's initial commit (`29b8735`); `featureImage: images/allpost/allPost-6.jpg` references a directory that no longer exists anywhere (`themes/portio/assets/images/allpost/` is gone after the PR #8 image refresh — verified via `find`, zero hits). The documented dev workflow `hugo server -D` builds it every session, and all four `featureImage` consumers (`blog/list.html:48`, `blog/single.html:47`, `partials/head.html:14`, `partials/structured-data.html:32`) use `with resources.Get`, so the failure is completely silent — no thumbnail, no banner, no og:image, no build warning. Severity is low (draft, never ships, page purpose is body formatting), but the stale front matter is a real defect with an invisible failure mode. Fix: repoint `featureImage` at an existing asset (e.g. something in `images/writing/`), drop the `featureImage`/`postImage` fields, or delete the demo file entirely. `postImage` on line 5 is equally stale and should go in the same pass.</result>
+<usage><subagent_tokens>30391</subagent_tokens><tool_uses>5</tool_uses><duration_ms>67376</duration_ms></usage>
+</task-notification>
+
+---
+
+Create a little-fixes branch. Use subagents to work through those changes.
+
+---
+
+<task-notification>
+<task-id>ad656ee44f1d1ff05</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/ad656ee44f1d1ff05.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1 data/config fixes" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Perfect! All work is complete. Here's the final summary:
+
+**Status:** DONE
+
+**Commit Hash:** `a5df2f9`
+
+**Verification Summary:** Clean build (hugo -D exits 0), #contact hrefs found (4 ≥ 2), sitemap menu removed (0 references), .gitignore now prevents tool state from being tracked.
+
+**Key Changes:**
+- Fixed YAML unquoted hash anchors in hero and about buttons (YAML parsing issue)
+- Modernized config.toml with `[pagination]` table, removed dead sitemap menu and address blocks
+- Updated .gitignore for build artifacts and tool directories
+- Cleaned stale references from CLAUDE.md deployment section
+- Removed unused front matter from markdown demo draft
+
+All 7 fixes from the task brief implemented and verified. No generated files staged. Report written to task-1-report.md.</result>
+<usage><subagent_tokens>41722</subagent_tokens><tool_uses>32</tool_uses><duration_ms>157729</duration_ms></usage>
+</task-notification>
+
+---
+
+Resume work
+
+---
+
+<task-notification>
+<task-id>a87f9a39086b76dae</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a87f9a39086b76dae.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 1 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Front matter is valid YAML, well-formed, closing `---` delimiter intact.
+
+All checks complete. Here's my report.
+
+### Spec Compliance
+- ✅ Spec compliant
+
+All 7 numbered items from the brief are present in the diff and correctly implemented:
+1. `data/hero.yml:11` — `buttonURL: "#contact"` ✓
+2. `data/aboutSection.yml:16` — `button1Target: "#contact"` ✓
+3. `config.toml:8-9` — `[pagination]` / `pagerSize = 6` replaces `paginate = 6`, placed after all top-level scalars and before the first table header (`[[menu.main]]`) ✓
+4. `config.toml` — `[[menu.sitemap]]` (4 entries) and `[params.address]` block both deleted ✓
+5. `.gitignore:8-12` — `.agent-traces/`, `.wrangler/`, `.superpowers/`, `node_modules/`, `.hugo_build.lock` all added ✓
+6. `CLAUDE.md:96` — stale `wrangler.toml` claim removed, sentence reads naturally ✓
+7. `content/blog/markdown-formatting-demo.md:3-4` — `featureImage`/`postImage` lines deleted, front matter still valid YAML with closing `---` ✓
+
+**Named risk checked:** the brief's TOML constraint ("top-level scalar keys must not appear after a table header"). Read the full current `config.toml` (not just the diff hunks) — confirmed no top-level scalar key appears after any table header anywhere in the file; `[params]`'s own sub-keys (`blogPageURL`, etc.) are keys of that table, not top-level, so they don't violate the rule.
+
+**Additional verification beyond the diff:** confirmed via `themes/portio/layouts/partials/footer.html:45-75` that both `site.Menus.sitemap` and `site.Params.address` are referenced only inside an HTML comment block, so the config deletions in item 4 are genuinely dead-code removal with no runtime effect — matches both the brief's and report's claims.
+
+### Strengths
+- All edits are minimal and exactly scoped to what the brief specified — no scope creep.
+- The `[pagination]` table placement is correct TOML and matches Hugo's modern config key.
+- `.gitignore` additions are sensibly grouped under a new `# Build and tooling` comment.
+- Report's verification steps (clean-cache build, `grep -c '#contact'`, sitemap regression grep) are appropriate and match the brief's prescribed verification.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- `.gitignore:12` — `node_modules/` wasn't requested as a strict necessity (no `package.json` exists per CLAUDE.md), but the brief explicitly listed it, so this is fine as spec-compliant, not an issue — noting only for completeness, no action needed.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All 7 mechanical edits match the brief exactly, the diff touches no forbidden paths, and the one item requiring verification outside the diff (TOML top-level-key-after-table-header constraint, and dead-code confirmation for the deleted config blocks) checked out clean against the actual files.</result>
+<usage><subagent_tokens>40183</subagent_tokens><tool_uses>9</tool_uses><duration_ms>51319</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a44d2f5d6f5b68f09</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a44d2f5d6f5b68f09.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2 template fixes" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Status: DONE_WITH_CONCERNS
+
+Commit: `2dc6963` on branch `fix/little-fixes`
+
+Verification: clean-cache `hugo` build exits 0; all 9 grep checks from the brief pass (404.html exists w/ "Page not found", blog list image src absolute, exactly 1 viewport meta, 0 favicon.ico refs, no `&lt;h3&gt;...&lt;/h2&gt;` mismatches, résumé education markup intact, footer widget/Practica label fixed).
+
+Concerns:
+- `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-2-report.md` already contained an unrelated report (from a prior "Bootstrap 5.3.8 vendoring" task under a different numbering scheme) — I overwrote it with this task's report per your instruction to write there. Flagging in case that earlier content needs to be preserved elsewhere.</result>
+<usage><subagent_tokens>65360</subagent_tokens><tool_uses>36</tool_uses><duration_ms>169393</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a3b2f1737623feebe</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a3b2f1737623feebe.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+✅ Spec compliant
+
+All 9 numbered items in the brief are present in the diff and match their described fix exactly.
+
+1. **404.html** (`themes/portio/layouts/404.html:1-15`) — defines `{{ define "main" }}...{{ end }}`, matching `baseof.html`'s `{{ block "main" . }}` (only block baseof.html expects — confirmed by reading `themes/portio/layouts/_default/baseof.html`, which has no other named blocks). Uses `.section`/`.container`/`.row`/`.btn btn-primary` and reuses `breadCrumb__title` (already used identically in `themes/portio/layouts/blog/single.html:7` and `blog/list.html:27`, so it's a pre-existing class, not invented). No SCSS files touched anywhere in the diff.
+2. **blog/list.html:5** — `src="images/hero/figure-svg.svg"` → `src={{ "images/hero/figure-svg.svg" | absURL }}`, matching the pre-existing (also-unquoted) pattern at line 22 exactly as the brief instructed ("fix to match line 22's pattern"). Confirmed line 22 itself is unquoted in the same style — this isn't new sloppiness introduced by the implementer, it's the codebase's existing convention.
+3. **head.html** — duplicate viewport meta with `maximum-scale=1` removed; first (pinch-zoom-friendly) meta retained. `themes/portio/layouts/partials/head.html:44-45` diff context confirms.
+4. **head.html** — `favicon.ico` `&lt;link&gt;` removed, `favicon.png` link retained.
+5. **footer.html:27,36** — both `&lt;h3 class="mb-0"&gt;...&lt;/h2&gt;` mismatches fixed to `&lt;/h3&gt;`.
+6. **footer.html:32** — label changed to "Visit PracticaHQ.com" (href unchanged, correctly).
+7. **footer.html** — commented-out `footer__widget` block (logo/Sitemap/Address, referencing `site.Menus.sitemap`/`site.Params.address`) fully deleted.
+8. **shortcodes/blogsection.html** — deleted. Focused grep (`grep -rn "blogsection" content/`) returns zero hits — deletion is safe, no dangling shortcode calls.
+9. **resumeSection.html** — dead `experience` tab pane and commented-out tab-nav removed. `education` pane (`id="{{.tab1Target}}"`, `tab-pane active`) is untouched in the diff context. Checked for other references to `tab1Target`/`tab2Target`/`tab1Name`/`tab2Name` across `layouts/` and `data/`: only `resumeSection.html:17` (`tab1Target`, still present and used) and the now-orphaned `tab2Name`/`tab2Target` keys in `data/resumeSection.yml` (unused data, harmless — not a template reference, and the task didn't ask for the data file to be touched).
+
+⚠️ The report's post-build greps (`public/404.html` contents, viewport count, etc.) were not independently re-run per review instructions — taken as implementer evidence, consistent with what the diff would produce.
+
+### Strengths
+- Every fix is minimal and scoped exactly to what the brief specified — no drive-by changes to adjacent code (e.g., `js/bundle.js` concat, `contactLink` button left alone as the report notes, and confirmed by diff context).
+- Deletion safety was verified before deleting (`blogsection.html` — zero content references), and the resumeSection change is verifiably surgical: the surviving `education` pane's markup is byte-for-byte identical in the diff context.
+- No SCSS/CSS touched; no assets in the excluded directories (`bootstrap-5.3.8`, `exampleSite`, `.well-known`) appear in the diff.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- `themes/portio/layouts/404.html:27` reuses `breadCrumb__title`, a class whose only other usages (`blog/single.html:7`, `blog/list.html:27`) sit inside a `&lt;header class="breadCrumb"&gt;` wrapper with its own background/spacing/SVG decoration. Bare inside a plain `.section`, it may render with unexpected type scale or missing top padding since it's relying on ancestor-context CSS it no longer has. Purely cosmetic — worth a visual check, not a build-breaking issue.
+- `data/resumeSection.yml` still defines now-unused `tab2Name`/`tab2Target` keys (task 9 didn't require cleaning these, so this is out of scope, but flagging as residual dead config).
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All 9 brief items are correctly implemented, deletions are verifiably complete (no dangling shortcode/tab-nav references), the 404 template correctly wires into `baseof.html`'s single `main` block, and no excluded paths or SCSS were touched.</result>
+<usage><subagent_tokens>41897</subagent_tokens><tool_uses>7</tool_uses><duration_ms>67105</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a9f71d94c554ee7a5</task-id>
+<tool-use-id>toolu_013FzJAtHTHX7RtoYNrQFJGD</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/a9f71d94c554ee7a5.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 3 JS fixes" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Clean commit, working tree clean.
+
+STATUS: DONE
+Commit: f7d7d75
+Verification: `rm -rf public resources/_gen .hugo_build.lock &amp;&amp; hugo` exits 0; built `public/js/bundle.*.js` contains 2 `clearTimeout` calls (navbar guard) and 1 `prefers-reduced-motion` check; `public/index.html` contains the pause button with `aria-pressed="false"` and `aria-label="Pause testimonials"`.
+Concerns: none. Interleaving trace confirms the stale-timeout path is impossible (single shared `pendingTimeout` cleared at entry of both `openCollapse`/`closeCollapse` before scheduling a new one — full trace in `.superpowers/sdd/task-3-report.md`).</result>
+<usage><subagent_tokens>55235</subagent_tokens><tool_uses>22</tool_uses><duration_ms>189110</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>adcd81efff3470836</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/34201888-00f6-4fe9-bc3f-5de3a3ec83e3/tasks/adcd81efff3470836.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 3 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Now I have precise line numbers. Final review:
+
+### Spec Compliance
+- ❌ Issues found
+
+### Strengths
+- Navbar fix is minimal and correct: `pendingTimeout` is a single shared handle, cleared at the top of both `openCollapse()`/`closeCollapse()` (`themes/portio/assets/js/navbar.js:39,56`), which structurally prevents a stale timeout from ever firing after a newer transition has taken over. I independently traced close@t=0/re-open@t=100 and open@t=0/re-open-during-transition@t=100; both converge on the correct final DOM state with only one live timeout at any moment. The 350 ms `COLLAPSE_DURATION` constant and its comment are untouched (`navbar.js:25-27`).
+- `reducedMotionQuery.matches` gates every autoplay start (`testimonial-carousel.js:83-86`), including the initial call (`testimonial-carousel.js:127-128`), so autoplay never starts for reduced-motion users while manual dot/arrow controls remain untouched.
+- `userPaused` correctly short-circuits `maybeStartAutoplay()` for hover/focus/dot-restart paths (`testimonial-carousel.js:83-86, 92, 122`), so a button-initiated pause survives mouseleave/focusout — this satisfies the specific "hover must not resume a button-paused carousel" requirement.
+- Pause button markup uses only existing Bootstrap component/utility classes (`btn btn-sm btn-outline-secondary`), includes `aria-pressed` and swaps `aria-label` between "Pause testimonials"/"Play testimonials" in `updatePauseToggle()` (`testimonial-carousel.js:97-105`), matching the brief.
+- Vanilla-JS idiom preserved throughout (`var`, named functions, `addEventListener`), no new dependencies or frameworks introduced.
+
+### Issues
+
+#### Important (Should Fix)
+- **Overlapping hover+focus can wrongly resume autoplay while focus is still inside the carousel** — `testimonial-carousel.js:119-122`. `mouseenter`/`focusin` both call `stopAutoplay()` independently, and `mouseleave`/`focusout` both call `maybeStartAutoplay()` independently, with no shared "is anything still interacting" counter. Trace: user hovers the carousel (`mouseenter` → stop), then Tabs to a focusable element inside it while the mouse is still over it (`focusin` → stop, no-op). User then moves the mouse away (`mouseleave` fires → `maybeStartAutoplay()` runs unconditionally) while focus is *still* inside the carousel — autoplay resumes and content starts moving underneath a focused element. The symmetric case (focus leaves first while mouse is still hovering) has the same bug via `focusout`. This is exactly scenario (e) the task called out to verify, and it fails: a state exists where the carousel wrongly resumes while the user is still interacting via the other modality, undermining the WCAG 2.2.2 pause guarantee for keyboard users who also use a mouse.
+
+#### Minor (Nice to Have)
+- **Pause/Play button state can lie under `prefers-reduced-motion`** — `testimonial-carousel.js:83-86, 109-114`. If reduced-motion is active, clicking the button when paused (`userPaused=true → false`) calls `maybeStartAutoplay()`, which silently no-ops because `reducedMotionQuery.matches` is true — yet `updatePauseToggle()` still flips the button to `aria-pressed="false"` / label "Pause testimonials" as if playback resumed. A reduced-motion user who presses "Play" is told (via aria-label and visible text) that content is now playing and pausable, when nothing is actually advancing. Not required by the brief, but worth a one-line guard (e.g., disable/hide the toggle, or leave it in "paused" state) if a future pass touches this file.
+- **Report's interleaving trace only covers close→re-open** — the report (task-3-report.md:50-86) traces close@t=0/re-open@t=100 but not the reverse (open@t=0/re-click@t=100 while still transitioning). I traced this myself: the re-click during an in-progress *open* transition calls `openCollapse()` again (not `closeCollapse()`, since `isOpen()` is keyed off the `show` class which isn't applied until the timeout fires), correctly cancels the pending timeout and restarts the open animation from height `0px`. Functionally correct, but it does mean a same-target double-click while opening produces a visible height-reset jitter rather than toggling to close — pre-existing `isOpen()` semantics, not introduced by this diff, so not a defect of this task, just a documentation gap in the report's trace coverage.
+
+### Assessment
+**Task quality:** Needs fixes
+**Reasoning:** The navbar race fix is verified correct by independent trace, and the reduced-motion/button-pause requirements are met in isolation, but the hover+focus overlap case (explicitly listed as a scenario to check) has a real state-machine gap that lets autoplay resume while the user is still keyboard-focused inside the carousel — the kind of edge case the brief's WCAG 2.2.2 rationale specifically exists to prevent.</result>
+<usage><subagent_tokens>46060</subagent_tokens><tool_uses>4</tool_uses><duration_ms>118363</duration_ms></usage>
+</task-notification>

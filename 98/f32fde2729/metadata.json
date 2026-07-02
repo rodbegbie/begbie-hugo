@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "98f32fde2729",
+  "strategy": "manual-commit",
+  "branch": "fix/little-fixes",
+  "checkpoints_count": 12,
+  "files_touched": [
+    "themes/portio/assets/js/testimonial-carousel.js"
+  ],
+  "sessions": [
+    {
+      "metadata": "/98/f32fde2729/0/metadata.json",
+      "transcript": "/98/f32fde2729/0/full.jsonl",
+      "compact_transcript": "/98/f32fde2729/0/transcript.jsonl",
+      "content_hash": "/98/f32fde2729/0/content_hash.txt",
+      "prompt": "/98/f32fde2729/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 14988,
+    "cache_creation_tokens": 329113,
+    "cache_read_tokens": 2945157,
+    "output_tokens": 36930,
+    "api_call_count": 36
+  }
+}

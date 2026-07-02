@@ -1,0 +1,103 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_id": "98f32fde2729",
+  "session_id": "34201888-00f6-4fe9-bc3f-5de3a3ec83e3",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-02T07:44:23.432016Z",
+  "branch": "fix/little-fixes",
+  "checkpoints_count": 12,
+  "save_step_count": 1,
+  "files_touched": [
+    "themes/portio/assets/js/testimonial-carousel.js"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5",
+  "turn_id": "ca8484e329c5",
+  "token_usage": {
+    "input_tokens": 14988,
+    "cache_creation_tokens": 329113,
+    "cache_read_tokens": 2945157,
+    "output_tokens": 36930,
+    "api_call_count": 36
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-dg-2026-07-02T04:45:12.107019Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "dg"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "4616b7847314",
+      "timestamp": "2026-07-02T04:45:12.107019Z",
+      "native": {
+        "command": "/dg"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/dg",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01GRTX43HbD3bENjz6VNijkG",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "superpowers:subagent-driven-development"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "ca8484e329c5",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 159,
+        "end": 160,
+        "entry_ids": [
+          "c51a94ea-08bf-42f1-91a9-560bd8c024ae"
+        ],
+        "tool_use_id": "toolu_01GRTX43HbD3bENjz6VNijkG"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01GRTX43HbD3bENjz6VNijkG"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: superpowers:subagent-driven-development",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 12
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-02T07:44:23.373932Z",
+    "agent_lines": 47,
+    "agent_removed": 3,
+    "human_added": 12,
+    "human_modified": 5,
+    "human_removed": 0,
+    "total_committed": 64,
+    "total_lines_changed": 67,
+    "agent_percentage": 74.6268656716418,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    }
+  ]
+}
