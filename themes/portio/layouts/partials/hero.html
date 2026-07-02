@@ -41,15 +41,21 @@
             <img src="images/hero/figure-svg.svg" alt="figure-svg" />
           </div>
           {{ with resources.Get .image }}
-          {{ $hero1x := .Resize "600x800 jpg q82" }}
-          {{ $hero2x := .Resize "1200x1600 jpg q82" }}
-          {{ $hero1xWebp := .Resize "600x800 webp q75" }}
-          {{ $hero2xWebp := .Resize "1200x1600 webp q75" }}
+          {{ $hero500 := .Resize "500x667 jpg q82" }}
+          {{ $hero750 := .Resize "750x1000 jpg q82" }}
+          {{ $hero1000 := .Resize "1000x1333 jpg q82" }}
+          {{ $hero1400 := .Resize "1400x1867 jpg q82" }}
+          {{ $hero500Webp := .Resize "500x667 webp q75 picture" }}
+          {{ $hero750Webp := .Resize "750x1000 webp q75 picture" }}
+          {{ $hero1000Webp := .Resize "1000x1333 webp q75 picture" }}
+          {{ $hero1400Webp := .Resize "1400x1867 webp q75 picture" }}
+          {{ $sizes := "(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
           <picture>
-            <source type="image/webp" srcset="{{ $hero1xWebp.RelPermalink }} 1x, {{ $hero2xWebp.RelPermalink }} 2x">
-            <img src="{{ $hero1x.RelPermalink }}" srcset="{{ $hero1x.RelPermalink }} 1x, {{ $hero2x.RelPermalink }} 2x"
-              width="{{ $hero1x.Width }}" height="{{ $hero1x.Height }}" alt="hero-image" style='
-                  -webkit-mask: url({{"images/hero/hero-mask-svg.png" | absURL }});
+            <source type="image/webp" sizes="{{ $sizes }}" srcset="{{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
+            <img src="{{ $hero750.RelPermalink }}" sizes="{{ $sizes }}"
+              srcset="{{ $hero500.RelPermalink }} 500w, {{ $hero750.RelPermalink }} 750w, {{ $hero1000.RelPermalink }} 1000w, {{ $hero1400.RelPermalink }} 1400w"
+              width="{{ $hero750.Width }}" height="{{ $hero750.Height }}" alt="hero-image" style='
+                  -webkit-mask: url({{"images/hero/hero-mask-svg.svg" | absURL }});
                   -webkit-mask-repeat: no-repeat;
                   -webkit-mask-size: contain;
                   -webkit-mask-position: center center;
@@ -60,7 +66,21 @@
           {{ if .videoURL }}
           <div class="hero_figure-popup">
             <div class="thumb">
-              <img src="{{ .videoThumb }}" alt="popup" />
+              {{ with resources.Get .videoThumb }}
+              {{ $thumb1x := .Fill "250x160 smart jpg q82" }}
+              {{ $thumb2x := .Fill "500x320 smart jpg q82" }}
+              {{ $thumb3x := .Fill "750x480 smart jpg q82" }}
+              {{ $thumb1xWebp := .Fill "250x160 smart webp q75" }}
+              {{ $thumb2xWebp := .Fill "500x320 smart webp q75" }}
+              {{ $thumb3xWebp := .Fill "750x480 smart webp q75" }}
+              <picture>
+                <source type="image/webp"
+                  srcset="{{ $thumb1xWebp.RelPermalink }} 1x, {{ $thumb2xWebp.RelPermalink }} 2x, {{ $thumb3xWebp.RelPermalink }} 3x">
+                <img src="{{ $thumb1x.RelPermalink }}"
+                  srcset="{{ $thumb1x.RelPermalink }} 1x, {{ $thumb2x.RelPermalink }} 2x, {{ $thumb3x.RelPermalink }} 3x"
+                  width="{{ $thumb1x.Width }}" height="{{ $thumb1x.Height }}" alt="popup">
+              </picture>
+              {{ end }}
             </div>
 
             <a href="{{ .videoURL }}" type="button" class="popup-button text-center big">
