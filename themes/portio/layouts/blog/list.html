@@ -45,16 +45,21 @@
 					<a class="blog-page__item-thumb" href="{{ .RelPermalink }}">
 						{{ $anchor := .Params.featureImageAnchor | default "smart" }}
 						{{ with resources.Get .Params.featureImage }}
-						{{ $thumb1x := .Fill (printf "480x554 %s jpg q82" $anchor) }}
-						{{ $thumb2x := .Fill (printf "960x1108 %s jpg q82" $anchor) }}
-						{{ $thumb1xWebp := .Fill (printf "480x554 %s webp q75" $anchor) }}
-						{{ $thumb2xWebp := .Fill (printf "960x1108 %s webp q75" $anchor) }}
+						{{ $thumb400 := .Fill (printf "400x462 %s jpg q82" $anchor) }}
+						{{ $thumb600 := .Fill (printf "600x692 %s jpg q82" $anchor) }}
+						{{ $thumb900 := .Fill (printf "900x1039 %s jpg q82" $anchor) }}
+						{{ $thumb1200 := .Fill (printf "1200x1385 %s jpg q82" $anchor) }}
+						{{ $thumb400Webp := .Fill (printf "400x462 %s webp q75" $anchor) }}
+						{{ $thumb600Webp := .Fill (printf "600x692 %s webp q75" $anchor) }}
+						{{ $thumb900Webp := .Fill (printf "900x1039 %s webp q75" $anchor) }}
+						{{ $thumb1200Webp := .Fill (printf "1200x1385 %s webp q75" $anchor) }}
+						{{ $sizes := "(min-width: 1400px) 374px, (min-width: 1200px) 320px, (min-width: 992px) 266px, (min-width: 768px) 576px, (min-width: 576px) 432px, 78vw" }}
 						<picture>
-							<source type="image/webp"
-								srcset="{{ $thumb1xWebp.RelPermalink }} 1x, {{ $thumb2xWebp.RelPermalink }} 2x">
-							<img src="{{ $thumb1x.RelPermalink }}"
-								srcset="{{ $thumb1x.RelPermalink }} 1x, {{ $thumb2x.RelPermalink }} 2x"
-								width="{{ $thumb1x.Width }}" height="{{ $thumb1x.Height }}" alt="post-image">
+							<source type="image/webp" sizes="{{ $sizes }}"
+								srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w, {{ $thumb1200Webp.RelPermalink }} 1200w">
+							<img src="{{ $thumb600.RelPermalink }}" sizes="{{ $sizes }}"
+								srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w, {{ $thumb1200.RelPermalink }} 1200w"
+								width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="post-image">
 						</picture>
 						{{ end }}
 					</a>

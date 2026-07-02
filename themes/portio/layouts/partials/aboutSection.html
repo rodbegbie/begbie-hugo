@@ -19,16 +19,21 @@
                         </div>
                         <div class="about_content-thumb-image">
                             {{ with resources.Get .image }}
-                            {{ $about1x := .Resize "600x800 jpg q82" }}
-                            {{ $about2x := .Resize "1200x1600 jpg q82" }}
-                            {{ $about1xWebp := .Resize "600x800 webp q75" }}
-                            {{ $about2xWebp := .Resize "1200x1600 webp q75" }}
+                            {{ $about500 := .Resize "500x667 jpg q82" }}
+                            {{ $about750 := .Resize "750x1000 jpg q82" }}
+                            {{ $about1000 := .Resize "1000x1333 jpg q82" }}
+                            {{ $about1400 := .Resize "1400x1867 jpg q82" }}
+                            {{ $about500Webp := .Resize "500x667 webp q75" }}
+                            {{ $about750Webp := .Resize "750x1000 webp q75" }}
+                            {{ $about1000Webp := .Resize "1000x1333 webp q75" }}
+                            {{ $about1400Webp := .Resize "1400x1867 webp q75" }}
+                            {{ $sizes := "(min-width: 1400px) 583px, (min-width: 1200px) 502px, (min-width: 992px) 421px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
                             <picture>
-                                <source type="image/webp"
-                                    srcset="{{ $about1xWebp.RelPermalink }} 1x, {{ $about2xWebp.RelPermalink }} 2x">
-                                <img src="{{ $about1x.RelPermalink }}"
-                                    srcset="{{ $about1x.RelPermalink }} 1x, {{ $about2x.RelPermalink }} 2x"
-                                    width="{{ $about1x.Width }}" height="{{ $about1x.Height }}" alt="about-img"
+                                <source type="image/webp" sizes="{{ $sizes }}"
+                                    srcset="{{ $about500Webp.RelPermalink }} 500w, {{ $about750Webp.RelPermalink }} 750w, {{ $about1000Webp.RelPermalink }} 1000w, {{ $about1400Webp.RelPermalink }} 1400w">
+                                <img src="{{ $about750.RelPermalink }}" sizes="{{ $sizes }}"
+                                    srcset="{{ $about500.RelPermalink }} 500w, {{ $about750.RelPermalink }} 750w, {{ $about1000.RelPermalink }} 1000w, {{ $about1400.RelPermalink }} 1400w"
+                                    width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="about-img"
                                     style='-webkit-mask: url({{"images/about/about-mask-svg.svg" | absURL}}); -webkit-mask-size: contain;'>
                             </picture>
                             {{ end }}
