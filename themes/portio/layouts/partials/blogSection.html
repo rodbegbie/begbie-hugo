@@ -1,66 +1,70 @@
 {{ with hugo.Data.blogSection }}
 {{ if .enable }}
 <section class="section blog-preview" id="blog">
-	<div class="blog-preview__shape">
-		<img src="images/blog/blog-shape.svg" alt="blog shape" />
+	<div class="blog-preview__blob blob-wrap">
+		<svg viewBox="0 0 550 550">
+			<defs>
+				<linearGradient id="writing-blob-gradient" x1=".069" x2=".753" y1=".116" y2=".858"
+					gradientUnits="objectBoundingBox">
+					<stop offset="0" style="stop-color: var(--accent);" />
+					<stop offset="1" style="stop-color: var(--accent); stop-opacity: .08;" />
+				</linearGradient>
+			</defs>
+			<g data-name="blob-shape (3)">
+				<path class="blob" fill="url(#writing-blob-gradient)"
+					d="M455.4 151.1c43.1 36.7 73.4 92.8 60.8 136.3-12.7 43.5-68.1 74.4-111.3 119.4-43.1 45-74 104.1-109.8 109-35.9 5-76.7-44.2-111.8-89.2-35.2-45-64.7-85.8-70.8-132.6-6-46.8 11.6-99.6 46.7-136.3 35.2-36.6 88-57.2 142.4-58.8 54.5-1.7 110.6 15.6 153.8 52.2z" />
+			</g>
+		</svg>
 	</div>
 	<div class="container">
 		<div class="row mb-5">
-			<div class="col-lg-6">
-				<div class="blog-preview__header">
-					<span class="top-title pre-line">{{ .topTitle }}</span>
-					{{ .title | markdownify }}
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<div class="blog-preview__header_button desktop">
-					<a class="btn btn-outline-secondary  btn-zoom m-3" href="{{ .buttonTarget | absURL }}">See all posts</a>
-				</div>
+			<div class="col-lg-8">
+				<span class="blog-preview__eyebrow">{{ .topTitle }}</span>
+				{{ .title | markdownify }}
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row blog-preview__grid">
 			{{ range first 3 (where site.RegularPages "Type" "!=" "portfolio") }}
-			<div class="col-lg-4">
-				<div class="blog-preview__item">
-					<a class="blog-preview__item-thumb" href="{{ .RelPermalink }}">
+			<div class="col-md-4">
+				<div class="blog-preview__card">
+					<a class="blog-preview__card_thumb" href="{{ .RelPermalink }}">
 						{{ $post := . }}
 						{{ $anchor := .Params.featureImageAnchor | default "smart" }}
 						{{ with resources.Get .Params.featureImage }}
-						{{ $thumb400 := .Fill (printf "400x462 %s jpg q82" $anchor) }}
-						{{ $thumb600 := .Fill (printf "600x692 %s jpg q82" $anchor) }}
-						{{ $thumb900 := .Fill (printf "900x1039 %s jpg q82" $anchor) }}
-						{{ $thumb1200 := .Fill (printf "1200x1385 %s jpg q82" $anchor) }}
-						{{ $thumb400Webp := .Fill (printf "400x462 %s webp q75 drawing" $anchor) }}
-						{{ $thumb600Webp := .Fill (printf "600x692 %s webp q75 drawing" $anchor) }}
-						{{ $thumb900Webp := .Fill (printf "900x1039 %s webp q75 drawing" $anchor) }}
-						{{ $thumb1200Webp := .Fill (printf "1200x1385 %s webp q75 drawing" $anchor) }}
-						{{ $sizes := "(min-width: 1400px) 374px, (min-width: 1200px) 320px, (min-width: 992px) 266px, (min-width: 768px) 576px, (min-width: 576px) 432px, 78vw" }}
+						{{ $thumb400 := .Fill (printf "400x250 %s jpg q82" $anchor) }}
+						{{ $thumb600 := .Fill (printf "600x375 %s jpg q82" $anchor) }}
+						{{ $thumb900 := .Fill (printf "900x562 %s jpg q82" $anchor) }}
+						{{ $thumb400Webp := .Fill (printf "400x250 %s webp q75 drawing" $anchor) }}
+						{{ $thumb600Webp := .Fill (printf "600x375 %s webp q75 drawing" $anchor) }}
+						{{ $thumb900Webp := .Fill (printf "900x562 %s webp q75 drawing" $anchor) }}
+						{{ $sizes := "(min-width: 1200px) 373px, (min-width: 768px) 226px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
 						<picture>
 							<source type="image/webp" sizes="{{ $sizes }}"
-								srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w, {{ $thumb1200Webp.RelPermalink }} 1200w">
+								srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w">
 							<img src="{{ $thumb600.RelPermalink }}" sizes="{{ $sizes }}"
-								srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w, {{ $thumb1200.RelPermalink }} 1200w"
+								srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w"
 								width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="{{ $post.Title }}">
 						</picture>
 						{{ end }}
 					</a>
-					<div class="blog-preview__item-content bg-white">
-						<span class="small">{{ .PublishDate.Format "January 2, 2006" }}</span>
-						<h5 class="mb-0">
-							<a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
-						</h5>
+					<div class="blog-preview__card_content">
+						<span class="blog-preview__card_date">{{ .PublishDate.Format "January 2, 2006" }}</span>
+						<h3 class="blog-preview__card_title">
+							<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+						</h3>
+						{{ with .Params.subtitle }}
+						<p class="blog-preview__card_teaser">{{ . }}</p>
+						{{ end }}
 					</div>
 				</div>
 			</div>
 			{{ end }}
-
 		</div>
+
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="blog-preview__header_button mobile">
-					<a class="btn btn-outline-secondary btn-zoom" href="{{ .buttonTarget | absURL }}">See all posts</a>
-				</div>
+			<div class="col-lg-12 text-center">
+				<a class="blog-preview__more" href="{{ .buttonTarget | absURL }}">See more essays →</a>
 			</div>
 		</div>
 	</div>
