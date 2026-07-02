@@ -1,0 +1,695 @@
+ok, go go go
+
+---
+
+<task-notification>
+<task-id>af0e406936a8b9474</task-id>
+<tool-use-id>toolu_01P4W8dUDBUJo2rE8qw1veR8</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/af0e406936a8b9474.output</output-file>
+<status>completed</status>
+<summary>Agent "Write homepage redesign implementation plan" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Fork launched in the background — writing the full task-by-task implementation plan now. I'll let you know when it's back with the plan file and any open questions.</result>
+<usage><subagent_tokens>116644</subagent_tokens><tool_uses>0</tool_uses><duration_ms>2645</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>af0e406936a8b9474</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/af0e406936a8b9474.output</output-file>
+<status>completed</status>
+<summary>Agent "Write homepage redesign implementation plan" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>You've hit your session limit · resets 5:30am (America/Los_Angeles)</result>
+<usage><subagent_tokens>70</subagent_tokens><tool_uses>15</tool_uses><duration_ms>40652</duration_ms></usage>
+</task-notification>
+
+---
+
+OK, resume operations now.  Run as subagents whenever possible
+
+---
+
+<task-notification>
+<task-id>a05030db961765cc4</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a05030db961765cc4.output</output-file>
+<status>completed</status>
+<summary>Agent "Write homepage redesign implementation plan" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>The plan is written and left uncommitted, as instructed. On branch `feature/homepage-redesign`.
+
+**File:** `/Users/rod/build/begbie-hugo/docs/superpowers/plans/2026-07-02-homepage-redesign.md`
+
+**10 tasks:**
+1. Design tokens/typography — new `_tokens.scss` (CSS custom properties + Sass layout/type-scale vars), Google Fonts swap in `head.html`, global `.container`/`body` rules, shared `blob-drift` keyframe added to existing `_blob.scss`.
+2. Nav restyle — token-driven padding/logo/links/pill CTA in `_navbar.scss`, no markup changes.
+3. Hero restyle — `hero.yml`/`hero.html`/`_hero-section.scss`: eyebrow chip, accent-word headline, second CTA, new dot+label video badge (reuses existing `popup-button` JS contract), blob behind photo, `fadeUp` animation.
+4. About restyle — 30/70 split, eyebrow, tightened heading (drafted, flagged), blob behind photo.
+5. Experience restyle — 4-card grid with real year/title/company/description pulled from the 4 most recent roles, "Earlier: ..." line + LinkedIn link.
+6. Testimonials restyle — static 3-card grid, alternating inverted middle card, drops the now-dead carousel JS's target markup.
+7. Writing restyle — 3-card grid using each post's real `subtitle` front matter as teaser (verified all 3 live posts already have one — no drafted copy needed).
+8. Contact + Footer restyle — dark band, pill CTAs, removes the now-dead `testimonial-carousel.js` from the JS bundle.
+9. Responsive QA pass — verification-only; breakpoint CSS was folded into tasks 2–8 (reasoning stated in the plan's Architecture section) rather than a separate implementation task.
+10. Final verification — clean build, full link walkthrough, JSON-LD sanity check.
+
+**Open items for Rod before execution:**
+- Two drafted copy choices need sign-off: the About section's tightened heading ("Two decades of shipping software, and helping others do the same.") and using "Begbie" as the hero's single accent-colored word.
+- Confirm the task-9 granularity decision (fold responsive into 2–8, dedicated QA-only task 9) is the right call rather than a separate implementation task.
+- Confirm dropping the video-thumbnail image from the hero badge (new design uses a dot+text pill, not a thumbnail) matches intent — this was inferred from the design handoff, not explicit in the spec text.</result>
+<usage><subagent_tokens>171219</subagent_tokens><tool_uses>51</tool_uses><duration_ms>962253</duration_ms></usage>
+</task-notification>
+
+---
+
+1
+
+---
+
+<task-notification>
+<task-id>a38cd7e72c05efbe6</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a38cd7e72c05efbe6.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 1: design tokens" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>---
+
+**DONE**
+
+Implemented Task 1: Design tokens &amp; typography foundation. All six files created/modified per brief, build succeeds cleanly, all tokens present in compiled output. Report written to `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-1-report.md`.
+
+**Commit:** `2578d75` — "Task 1: Add design tokens &amp; typography for homepage redesign"
+
+**Notable detail:** The `$fs-hero: unquote("min(6vw, 74px)")` syntax preserves the CSS `min()` function through Dart Sass compilation. This is a known Sass limitation with incompatible-unit arithmetic; the workaround is transparent and correct (the compiled CSS contains literal `min(6vw, 74px)`). All subsequent tasks can reference these tokens freely.</result>
+<usage><subagent_tokens>49208</subagent_tokens><tool_uses>31</tool_uses><duration_ms>400647</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ae7878ca106535c47</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/ae7878ca106535c47.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 1 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>All build claims verified independently — Hugo build succeeds cleanly, `--accent:#0e8a8f`, `color-mix(in oklch`, and `Bricolage` all confirmed present in compiled output. `$fs-hero` correctly does not appear (unused until later tasks). I also independently confirmed the `unquote()` workaround for `$fs-hero` is genuinely necessary: I reproduced the brief's literal `$fs-hero: min(6vw, 74px);` in an isolated scratch Hugo site and it failed to compile with `Incompatible units: 'px' and 'vw'.` — Hugo's embedded Dart Sass really does reject that literal. The implementer's `unquote("min(6vw, 74px)")` compiles cleanly to `min(6vw,74px)` in the output CSS, confirmed byte-for-byte equivalent to the intended value.
+
+### Spec Compliance
+
+✅ All six files in the brief's file list were touched, and no extra files were created.
+✅ `_tokens.scss` reproduces the brief's `:root` block and Sass variables verbatim, including the full CSS-custom-property list (`--bg`, `--bgAlt`, `--ink`, `--inkSoft`, `--accent`, `--accentSoft`, `--accentInk`, `--line`) and all 20 Sass variables named in the "Produces" interface (`themes/portio/assets/scss/_tokens.scss:63-103`).
+✅ `--accent: #0e8a8f;` (`_tokens.scss:68`) is the only hardcoded hex in the diff, and it's the canonical definition site for the accent token itself — not a competing/duplicate hex. `--accentSoft` correctly derives via `color-mix(in oklch, var(--accent) 12%, white)` rather than a second hardcoded value (`_tokens.scss:72`).
+✅ Import order in `style.scss:7-11` matches the brief exactly (`variables` → `tokens` → bootstrap `functions`), and `_common.scss`'s append (`_common.scss:31-46`) lands after `grid.scss` in the compile chain, so the `.container` override legitimately wins the cascade as claimed.
+✅ `_variables.scss:119-122` font swap matches brief exactly; `head.html:207-208` font `&lt;link&gt;` swap matches exactly.
+✅ `_blob.scss:148-166` adds `blob-drift` keyframe + `.blob-wrap` as a second animation layer on the existing `.blob`/`blob-morph` system — no new blob mechanism introduced, satisfying the "exactly one blob animation system" global constraint.
+✅ Spot-checked the "every homepage partial wraps in `.container`" claim underlying the global `.container` override (a plan-level assertion, not itself in the diff): confirmed via grep that `aboutSection.html`, `resumeSection.html`, `blogSection.html`, `hero.html`, `portfolioSection.html`, `serviceSection.html`, `skillSection.html`, `testimonialSection.html`, plus `navbar.html`/`footer.html`, all use plain `.container` (not `.container-fluid`).
+⚠️ `$fs-hero: unquote("min(6vw, 74px)")` (`_tokens.scss:96`) deviates from the brief's literal `$fs-hero: min(6vw, 74px);`. Verified this deviation is necessary (Hugo's embedded Dart Sass rejects the literal with `Incompatible units: 'px' and 'vw'`) and behaviorally transparent (compiles to identical `min(6vw,74px)` CSS). Flagged here per the "plan-mandated deviations are Important, human decides" calibration rule — but this is a correctness fix for something that would otherwise not build, not a shortcut, so I'd call it justified rather than a defect.
+
+### Strengths
+
+- The `unquote()` fix for `$fs-hero` is genuine, verified engineering: the brief's literal code would fail to build under this repo's actual Sass toolchain, the implementer caught it, fixed it with the minimal necessary change, and disclosed it clearly in both a code comment and the report's "Known Limitations" section rather than silently diverging.
+- Token/variable naming exactly matches the interface contract in the brief — critical for a foundational task since Tasks 2-8 will reference these names directly.
+- Correctly reused the theme's existing import-order pattern (tokens before Bootstrap, `_common.scss` after `grid.scss`) instead of inventing a new mechanism.
+- No hardcoded hex colors introduced outside the single canonical `--accent` definition; `--accentSoft` is properly derived, closing out the "went stale" bug called out in the brief.
+- Diff is minimal and surgical — no unrelated files touched, no `-v2` files, in-place edits only.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None. (The `$fs-hero` deviation, evaluated under the "plan-mandated → Important" calibration rule, is noted above but judged justified since it's a verified build-breaking fix, not a scope/quality shortcut — flagging for Rod's awareness rather than recommending a change.)
+
+#### Minor (Nice to Have)
+- The `unquote()` workaround is a landmine for later tasks: if any Task 2-8 partial tries `calc($fs-hero * 1.2)` or similar arithmetic on `$fs-hero`, it will fail at compile time with a confusing error, since `unquote()` returns an opaque string, not a numeric type. The implementer's report flags this, but nothing in `_tokens.scss` itself documents it beyond the general file-header comment — a one-line comment directly above the `$fs-hero` declaration (not just in the report) would save whoever implements the hero section a debugging detour.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** Every element of the brief's interface contract is present with correct names and values, the one deviation (`unquote()` for `$fs-hero`) is a verified necessary fix rather than a shortcut, and independent build verification (Hugo build + grep checks + isolated Sass reproduction) confirms all of the implementer's claims.</result>
+<usage><subagent_tokens>53330</subagent_tokens><tool_uses>13</tool_uses><duration_ms>208135</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a0a4c0093d3cb58d9</task-id>
+<tool-use-id>toolu_01Q6oPUg1pEeSWb1s1PUBMjm</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a0a4c0093d3cb58d9.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 2: nav restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE
+
+**Commit SHA:** `d7391f9`
+
+**Summary:** Replaced navbar SCSS with design token styling—teal pill CTA button (`var(--accent)`), Bricolage Grotesque logo (`$font-display`), Instrument Sans nav links (`$font-body`), hamburger icon in `var(--ink)`. Build verified (exit 0), CSS variables in minified output confirmed, dev server renders correctly.</result>
+<usage><subagent_tokens>39996</subagent_tokens><tool_uses>23</tool_uses><duration_ms>297532</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a1ded396edce00ac0</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a1ded396edce00ac0.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 2 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Diff and tokens confirmed consistent with the brief. No need to re-run the build; the diff is a small, verbatim, mechanical transcription.
+
+### Spec Compliance
+
+- ✅ Diff touches exactly one file (`themes/portio/assets/scss/components/_navbar.scss`), matches the brief's exact SCSS byte-for-byte (verified by diffing brief's code block against the diff hunks — padding `40px 0`→`26px 0`, `$white`→`var(--bg)` (×2), `$primary`→`var(--ink)`, and the four new blocks `.navbar-brand`, `.nav-link`, `.hire_button` font/color rules, plus unmodified `.navbar-toggler` hamburger logic).
+- ✅ No HTML markup changed — confirmed by "Files changed" stat block showing only the one SCSS file.
+- ✅ All tokens referenced actually exist, checked against `themes/portio/assets/scss/_tokens.scss`: `--accent` (`#0e8a8f`, matches the mandated `#0E8A8F`), `--accentInk`, `--ink`, `--bg` are all defined `:root` custom properties; `$radius-pill` (`999px`), `$font-display` (`"Bricolage Grotesque", sans-serif`), `$font-body` (`"Instrument Sans", sans-serif`) are all defined Sass variables.
+- ✅ No new hardcoded hex colors introduced — every color value in the diff is `var(--bg)`, `var(--ink)`, `var(--accent)`, or `var(--accentInk)`; the only literal color left in the file (`rgba(50, 65, 141, 0.1)` box-shadow on `.nav__color__change`) is pre-existing/untouched, not part of this diff.
+- ✅ Breakpoint mixin usage is unchanged from the existing file — the `@include desktop { }` blocks touched only swap color values inside pre-existing mixin blocks; no new responsive rules were added, so there's no risk of the inverted-breakpoint-naming footgun being triggered incorrectly here.
+- ⚠️ The diff itself doesn't prove the build was actually run (no build artifacts in a diff), but the report claims `hugo --quiet` succeeded and `grep -c "0e8a8f" public/scss/style.min.*.css` returned 1 — plausible given `--accent` is only consumed once in this file (`.hire_button` background), and the SCSS is syntactically simple enough that a build failure is unlikely. Not independently re-verified in this review (repo checkout is read-only per instructions), but no evidence contradicts the claim.
+
+### Strengths
+
+- Transcription from brief to file is exact — no scope creep, no invented values, no drive-by "improvements."
+- Correctly reused `var(--accent)` for both the CTA background and border rather than introducing a separate hardcoded border color.
+- Left the hamburger-toggle animation logic completely untouched, preserving existing JS-driven collapse behavior as the brief required.
+- Commit is scoped to the single file the task specifies, matching the "one branch, one PR, in-place edits" constraint.
+
+### Issues
+
+#### Critical (Must Fix)
+
+None.
+
+#### Important (Should Fix)
+
+None.
+
+#### Minor (Nice to Have)
+
+- `.hire_button:hover` sets `background: var(--accent); border-color: var(--accent);` identically to the non-hover state, differing only by `opacity: 0.9` — the two `background`/`border-color` lines are redundant duplication that `opacity` alone would achieve without repeating the values. This is exactly what the brief specified verbatim, though, so it's plan-mandated redundancy, not something the implementer introduced independently — flagging as polish only, not a defect to hold up the task on.
+
+### Assessment
+
+**Task quality:** Approved
+**Reasoning:** The diff is a verbatim, correctly-scoped implementation of the brief with no HTML changes, no stray hex colors, and all consumed tokens verified to exist in `_tokens.scss`; the one redundancy noted is inherited directly from the brief's own prescribed code, not an implementer error.</result>
+<usage><subagent_tokens>36219</subagent_tokens><tool_uses>5</tool_uses><duration_ms>54988</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aa7d9703f4e7e3080</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/aa7d9703f4e7e3080.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 3: hero restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE — commit `1f0835e`. Hero restyled per brief (eyebrow pill, three-part accent headline, dual CTAs, blob-wrap background, dot+label video badge keeping `popup-button` for `video-popup.js`); `hugo --quiet` build clean, rendered markup and compiled CSS verified. Note: `.superpowers/sdd/task-3-report.md` held a stale report from an earlier plan revision (JS navbar/carousel fixes) — I overwrote it with this task's report as instructed, flagging the discrepancy in the report itself in case that numbering mismatch matters to you.</result>
+<usage><subagent_tokens>60335</subagent_tokens><tool_uses>22</tool_uses><duration_ms>228382</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>adccce68767e088d6</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/adccce68767e088d6.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 3 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>All tokens confirmed pre-existing (from Task 1) — no undefined-variable risk. I have enough to write the review.
+
+### Spec Compliance
+
+✅ **`data/hero.yml` fields** — `headlinePrefix: Level up your`, `headlineAccent: engineering`, `headlineSuffix: leadership.`, `videoLabel: Being Right is Only Half the Battle (30 min)`, `button2URL`/`videoURL` both `https://www.youtube.com/watch?v=xnZAMk-xIGk` all match the mandated copy exactly (diff.md:26-39). `subhead` text is byte-identical to the old `content` paragraph. `videoThumb` correctly removed with no dangling reference.
+
+✅ **Accent `&lt;span&gt;` scope** — `hero.html:390` (diff) wraps only `{{ .headlineAccent }}`, not the whole headline: `{{ .headlinePrefix }} &lt;span class="accent"&gt;{{ .headlineAccent }}&lt;/span&gt; {{ .headlineSuffix }}`.
+
+✅ **`popup-button` class / `video-popup.js` untouched** — the video badge `&lt;a&gt;` keeps `class="hero_video-badge popup-button"` (diff.md:498) with `href="{{ .videoURL }}"`. `video-popup.js` does not appear anywhere in the diff's file list (only `data/hero.yml`, `_hero-section.scss`, `hero.html` changed) — untouched as required.
+
+✅ **Blob reuse** — `hero.html:402` wraps the SVG in `&lt;div class="hero_figure-blob blob-wrap"&gt;` (Task 1's wrapper class) around the pre-existing `&lt;path class="blob" ...&gt;` (unchanged element, same `d` attribute as the old file). No new `@keyframes` for morph/drift are added in `_hero-section.scss` — confirmed only `.blob`/`blob-morph` and `.blob-wrap`/`blob-drift` exist in `themes/portio/assets/scss/components/_blob.scss`, and this task's SCSS diff adds none of its own. One system, correctly reused.
+
+✅ **No thumbnail in video badge** — old `.thumb`/`&lt;picture&gt;` thumbnail markup and its `Fill` calls are fully removed (diff.md:472-497); new badge is dot + text label only (`hero.html:498-501`).
+
+⚠️ **Global "no new hardcoded hex" constraint** — `hero.html` (diff.md:410-411) sets `stop-color="#0e8a8f"` twice (SVG gradient stops) instead of `var(--accent)`. This is a literal, new hardcoded instance of the accent color, contradicting "Always via `var(--accent)` — never a new hardcoded hex." However, this exact code — including the literal hex — is prescribed verbatim in the task brief itself (task-3-brief.md:92-93), so the implementer faithfully transcribed the plan rather than introducing a deviation. Per calibration: reporting as **Important, plan-mandated** — the human decides whether to accept it (SVG presentation attributes like `stop-color` do not resolve `var()`; a `style="stop-color: var(--accent)"` attribute would have worked and avoided the literal hex, so a compliant alternative exists) or waive the global constraint for this SVG corner case.
+
+### Strengths
+
+- Exact, verifiable transcription of the brief's three files — headline copy, video badge copy/URL, and field names all match token-for-token.
+- Breakpoint mixins used correctly per this theme's inverted semantics: `@include desktop` (≤991px) for the stacked-row `margin-top` fix, `@include tablet` (≤767px) for the video badge's absolute→static reflow, `@include mobile` (≤575px) for blob size reduction (`_hero-section.scss` diff.md:53-56, 234-238, 265-268).
+- All SCSS tokens used (`$radius-hero-image`, `$fs-hero`, `$fs-mono-label`, `$fs-lead`, `$font-mono`, `$font-display`, `$radius-pill`, `--accent`, `--accentSoft`, `--accentInk`, `--ink`, `--inkSoft`, `--line`, `--bgAlt`) are confirmed pre-existing in `themes/portio/assets/scss/_tokens.scss` (verified directly, not just trusted from the report) — no undefined-variable build risk.
+- Old dead decorative markup (`hero_background-svg`, `hero_footer-svg`, `figure-svg`, `move_left`/`move_top` keyframes, old `.figure-popup`/`.thumb`/circular play-button styles) is fully and cleanly removed rather than left dangling.
+- `fadeUp` animation (`heroFadeUp`) is scoped locally to this file per the brief's stated interface contract (hero-only, not promoted to shared tokens) and staggered sensibly across eyebrow/headline/subhead/CTAs/figure with increasing delays — a coherent, non-arbitrary sequence.
+- Photo `.Fill "...smart..."` swap (4:5 ratio) with `sizes` recalculated for the new `col-lg-5` (down from `col-lg-6`) column width is consistent with this repo's documented responsive-image gotcha in `CLAUDE.md`.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+- **[Plan-mandated] Hardcoded accent hex in SVG gradient** — `hero.html` (diff.md:410-411): `stop-color="#0e8a8f"` used twice instead of `var(--accent)`, violating the global "never a new hardcoded hex" constraint. Sourced verbatim from `task-3-brief.md:92-93`; not an implementer deviation. Flagging per instructions for Rod to decide — a `style="stop-color: var(--accent)"` attribute is a viable compliant alternative if this is not accepted as an intentional exception.
+
+#### Minor (Nice to Have)
+- `hero.html:500` (diff.md) — the `▶` character is embedded directly in the visible label text (`▶ Watch: {{ .videoLabel }}`) rather than marked `aria-hidden="true"` as a decorative glyph; screen readers will announce "black right-pointing triangle" before the label. Not required by the brief, purely a11y polish.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All brief-mandated content, markup, class contracts, and blob/breakpoint reuse rules are met exactly and verifiably against the diff; the one Important finding is a plan-mandated hex value carried faithfully from the brief itself, not an implementer error, and is flagged for Rod's judgment rather than blocking the task.</result>
+<usage><subagent_tokens>57343</subagent_tokens><tool_uses>7</tool_uses><duration_ms>144974</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a2aed985bde990fe2</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a2aed985bde990fe2.output</output-file>
+<status>completed</status>
+<summary>Agent "Fix Task 3 SVG hardcoded hex finding" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE
+
+Commit: `3658334`
+
+Fixed hero blob gradient to use `style="stop-color: var(--accent);"` instead of hardcoded `#0e8a8f` hex in SVG stop elements. Build verified, no errors, hardcoded color removed from compiled output.</result>
+<usage><subagent_tokens>27762</subagent_tokens><tool_uses>10</tool_uses><duration_ms>103603</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a8cfffe78c358a696</task-id>
+<tool-use-id>toolu_014JjG4CuMn2Cjxp1UVC4HJA</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a8cfffe78c358a696.output</output-file>
+<status>completed</status>
+<summary>Agent "Re-review Task 3 after hex fix" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+
+- ✅ **Gradient fix resolves the finding.** No literal `#0e8a8f` (or any other new hardcoded accent hex) remains anywhere in the final state of `hero.html` or `_hero-section.scss`. Both `&lt;stop&gt;` elements now use `style="stop-color: var(--accent);"` / `style="stop-color: var(--accent); stop-opacity: .08;"`, which is syntactically valid SVG/CSS — `style` attributes on `&lt;stop&gt;` do resolve custom properties (unlike the `stop-color=` presentation attribute), and this is the standard escape hatch for this exact SVG limitation.
+- ✅ **`stop-opacity` preserved.** The second stop's `.08` opacity is folded into the same `style` string (`stop-opacity: .08;`) rather than dropped or left as a separate now-orphaned attribute — correct, since a presentation attribute and a `style` property for the same CSS property would conflict/be redundant if both were present.
+- ✅ **Fix commit scope is isolated to the gradient.** The report's documented "before" state (`stop-color="#0e8a8f"` / `stop-color="#0e8a8f" stop-opacity=".08"`) matches exactly what the combined diff shows as replaced — confirms the fix touched only those two `&lt;stop&gt;` lines, nothing else in `hero.html`, `_hero-section.scss`, or `data/hero.yml` changed between the original commit and the fix.
+- ✅ **Headline copy/fields unchanged by fix.** `headlinePrefix`/`headlineAccent`/`headlineSuffix` still render as `Level up your &lt;span class="accent"&gt;engineering&lt;/span&gt; leadership.` — accent span wraps only `headlineAccent`, matches `data/hero.yml`.
+- ✅ **Video badge unchanged by fix.** `class="hero_video-badge popup-button"` retained, `href="{{ .videoURL }}"` intact, `videoLabel: Being Right is Only Half the Battle (30 min)` and the YouTube URL both present and unchanged. `video-popup.js` not present in this diff (untouched).
+- ✅ **Blob reuse unchanged by fix.** `hero_figure-blob blob-wrap` wrapper and `class="blob"` on the `&lt;path&gt;` are exactly as in the original commit — same technique from Task 1's `_blob.scss`, no new animation system introduced.
+- ⚠️ Minor, not a violation: `_hero-section.scss` introduces `box-shadow: 0 12px 30px rgba(30, 20, 60, 0.15)` on `.hero_video-badge` — a new hardcoded RGBA. This isn't the accent color (the constraint this task/fix is scoped to), it's a shadow tint, so it's outside the focused check and not something the fix needed to touch.
+
+### Strengths
+
+- The fix is minimal and surgical — exactly the two lines needed, nothing else disturbed, which makes it easy to verify against the report's own before/after.
+- `style="..."` is the technically correct fix (not a workaround): SVG presentation attributes never resolve CSS custom properties, but the `style` attribute goes through the same cascade as regular CSS, so this genuinely satisfies the "always `var(--accent)`" constraint rather than just relocating the hex.
+- The `id="hero-blob-gradient"` (unique, non-colliding gradient ID) and `stop-opacity` preservation were carried through correctly.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None. The originally flagged finding is fully resolved.
+
+#### Minor (Nice to Have)
+- The `rgba(30, 20, 60, 0.15)` box-shadow color on `.hero_video-badge` is a new hardcoded value outside the accent-color constraint's scope, but if the project intends "no new hardcoded colors, period" longer-term, it could be worth tokenizing later — not blocking, and not something raised in the original review or fix scope.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The fix commit is scoped exactly to the two flagged `&lt;stop&gt;` elements, is syntactically valid, preserves `stop-opacity` behavior, and eliminates every hardcoded accent hex from the diff. All previously-verified spec items (headline, video badge, blob reuse) are untouched by the fix and still hold.</result>
+<usage><subagent_tokens>43604</subagent_tokens><tool_uses>2</tool_uses><duration_ms>52037</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a1db7914fa88a9943</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a1db7914fa88a9943.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 4: about restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE — About section restyled (30/70 split, eyebrow, tightened heading, blob background), build/dev-server verified, no stray hex. Commit: `8056f40`.</result>
+<usage><subagent_tokens>54701</subagent_tokens><tool_uses>21</tool_uses><duration_ms>235197</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a5bd575348f99b628</task-id>
+<tool-use-id>toolu_019aajUSFMeirjX9Qad9QnF8</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a5bd575348f99b628.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 4 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Build confirms everything renders correctly. Now I have enough to write the report.
+
+### Spec Compliance
+
+- ✅ **30/70 split implemented** — `themes/portio/assets/scss/components/_about-section.scss:56` (`&amp;-thumb { width: 30%; ... }`) and `:121` (`&amp;-inner { width: 70%; ... }`), matching the brief exactly.
+- ⚠️ **Not via Bootstrap column classes** — the split is done with flexbox width percentages (`display: flex` at `_about-section.scss:44-52`), not `col-lg-*`. The outer `.row`/`.col-lg-12` wrapper is retained (`aboutSection.html:212-213`), but the actual 30/70 ratio is CSS-flex, not Bootstrap grid. This is exactly what the task brief specified verbatim (brief lines 137-192), so the implementer transcribed it faithfully — but it sits in tension with the plan's global constraint "Bootstrap grid classes stay in use for structure." Flagging as **plan-mandated**, not an implementer defect.
+- ✅ **"About" eyebrow present** — `data/aboutSection.yml:3` uncomments `topTitle: About`; rendered as `&lt;span class="about_eyebrow"&gt;{{ .topTitle }}&lt;/span&gt;` (`aboutSection.html:281`), confirmed in build output (`public/index.html:255`, renders `About`).
+- ✅ **Heading copy verbatim** — `data/aboutSection.yml:4` is exactly `## Two decades of shipping software, and helping others do the same.`, matching the confirmed copy character-for-character. No re-drafting.
+- ✅ **SVG gradient uses correct `style="stop-color: var(--accent)..."` pattern** — `aboutSection.html:223-224`, both `&lt;stop&gt;` elements use `style="stop-color: var(--accent);"` / `style="stop-color: var(--accent); stop-opacity: .08;"`, not a `stop-color="..."` attribute and not a hardcoded hex. This deviates from the brief's literal Step 2 code block (which had `stop-color="#0e8a8f"`), but correctly applies the Task 3 fix pattern the review brief itself calls out as required — a deliberate, justified departure from the brief text, not a miss.
+- ✅ **Blob reuses Task 1 system, no new animation code** — `.blob` (path, `aboutSection.html:228`) and `.blob-wrap` (wrapper div, `aboutSection.html:218`) are the exact class names from `themes/portio/assets/scss/components/_blob.scss:25-46` (unmodified in this diff), which already wires `blob-morph`/`blob-drift` keyframes directly to those class names — no `-morph`/`-drift` modifier classes were needed, and none were invented.
+
+### Strengths
+
+- Correctly caught and fixed the SVG `stop-color` presentation-attribute bug that the plan explicitly warned about, matching the established Task 3 remediation pattern precisely, including folding `stop-opacity` into the same `style` string.
+- Removed the old `about-svg`/mask-image machinery cleanly — no orphaned references to `about-mask-svg.svg` or `figure-svg.svg` remain (verified via grep).
+- All new SCSS tokens (`$radius-about-image`, `$fs-h2-section`, `$fs-mono-label`, `$font-mono`, `$font-display`, `$font-body`, `$radius-pill`, `$section-padding-y`, `--accentSoft`, `--accentInk`, `--ink`, `--inkSoft`) exist in `themes/portio/assets/scss/_tokens.scss` — confirmed by direct grep, no phantom references.
+- Correct breakpoint mixin usage: `@include desktop` (991px) for the 30/70→stacked collapse (`_about-section.scss:58-60, 122-123`), `@include tablet` (767px) for the blob overhang fix (`_about-section.scss:89-92`) — matches the plan's inverted-breakpoint semantics.
+- `hugo --quiet` builds clean with exit 0; rendered HTML confirms eyebrow, heading, blob markup, and `style="stop-color: var(--accent)..."` all present as expected.
+
+### Issues
+
+#### Critical (Must Fix)
+
+None.
+
+#### Important (Should Fix)
+
+- **Plan-mandated tension: 30/70 split uses flex widths, not Bootstrap column classes**, conflicting with the plan's global constraint "Bootstrap grid classes stay in use for structure" (`_about-section.scss:44-52, 56, 121`). This is inherited verbatim from the task brief, not introduced by the implementer, so it's the human's call whether the brief's own approach overrides the global constraint here.
+
+#### Minor (Nice to Have)
+
+- Heading copy sign-off: the task brief text (brief lines 42-43) frames the tightened heading as "drafted copy... needs Rod's sign-off before merge," but the task instructions provided to this review explicitly state the copy is already confirmed and should appear verbatim — the implementer's report correctly notes this and doesn't re-flag it. No action needed, just noting the brief's internal wording is stale relative to the actual instruction set.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All spec requirements are met with evidence in the diff and a clean build; the one deviation from the brief's literal SVG code was a deliberate, correctly-applied fix mandated by the plan itself, and the only outstanding item (Bootstrap-column-vs-flex for the 30/70 split) is a brief-inherited tension rather than an implementer error.</result>
+<usage><subagent_tokens>47913</subagent_tokens><tool_uses>7</tool_uses><duration_ms>104367</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>ac88e54880985df61</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/ac88e54880985df61.output</output-file>
+<status>completed</status>
+<summary>Agent "Fix Task 4: use Bootstrap columns for split" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE — commit 84be0ea: converted About section split from flexbox width percentages to Bootstrap `col-lg-4`/`col-lg-8` grid columns (with `align-items-center`/`g-5` utilities replacing the flex centering/gap), removed the now-redundant width/flex CSS in `_about-section.scss`.</result>
+<usage><subagent_tokens>46277</subagent_tokens><tool_uses>19</tool_uses><duration_ms>231580</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aae13c69179ae2985</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/aae13c69179ae2985.output</output-file>
+<status>completed</status>
+<summary>Agent "Re-review Task 4 after grid fix" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Working tree confirmed clean, no residue left behind.
+
+### Spec Compliance
+
+- ✅ **Bootstrap grid columns** — `col-lg-4` and `col-lg-8` are real classes directly inside `.row.align-items-center.g-5`, verified present in build output at lines 215/254 of `public/index.html`, wrapping `about_content-thumb` and `about_content-inner` respectively (photo-then-content order preserved).
+- ✅ **No leftover flex/width CSS fighting the grid** — compiled CSS for `.about_content-thumb`/`-inner` shows only `position: relative` plus the (unrelated, correctly retained) blob positioning rules. No `display: flex`, `width: 30%`, `width: 70%`, or `gap: 60px` anywhere in `_about-section.scss` or the compiled output.
+- ✅ **Gutter utility (`g-5`) is real Bootstrap**, not invented — `g-5` is a valid Bootstrap 5 gutter-spacing utility (0–5 scale), paired with `align-items-center` for the old vertical-centering behaviour. Reasonable substitute for the removed custom `gap: 60px`/`30px`.
+- ✅ **Blob markup/SVG gradient unchanged by the fix** — `style="stop-color: var(--accent);"` / `style="stop-color: var(--accent); stop-opacity: .08;"` present in build output, matches global constraint (no attribute-form `stop-color`, no hardcoded hex). Per the report, this fix was actually applied in the *original* Task 4 commit (8056f40), not the grid-fix commit — the grid-fix commit (84be0ea) touched only structural HTML/SCSS, consistent with the report's claim that "internals... left byte-for-byte unchanged."
+- ✅ **Heading copy** — "Two decades of shipping software, and helping others do the same." renders exactly as specified, untouched by the fix.
+- ✅ **Single blob system** — still `.blob`/`blob-morph` + `.blob-wrap`/`blob-drift`, not duplicated or altered by the fix.
+- ✅ **Build clean** — `rm -rf public resources/_gen .hugo_build.lock &amp;&amp; hugo --quiet` exits 0, no errors/warnings.
+
+### Strengths
+
+- The fix is surgical: it removes exactly the flex/width rules the first review flagged and nothing else, leaving typography, blob, and CTA styling untouched — easy to verify in isolation.
+- `col-lg-4`/`col-lg-8` is a genuinely clean 33/67 Bootstrap ratio (not a contrived split), and `align-items-center g-5` correctly replaces the old manual `align-items`/`gap` behavior using idiomatic Bootstrap utilities rather than more custom CSS.
+- Working tree/build artifacts were left clean after verification (repo state unaffected).
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None. The plan-mandated finding from the first pass is resolved.
+
+#### Minor (Nice to Have)
+- The 33/67 split (`col-lg-4`/`col-lg-8`) is a slightly wider content column than the original 30/70 design intent — already flagged and explicitly accepted by Rod, so not actionable, just noting it's a real (if small) visual delta from the original mock.
+
+### Assessment
+
+**Task quality:** Approved
+**Reasoning:** The fix correctly replaces the flex-based split with real Bootstrap grid columns, removes all the conflicting width/flex/gap CSS, and leaves every other part of Task 4 (blob, copy, tokens, CTA) verifiably untouched — confirmed both in the diff and in a fresh clean build.</result>
+<usage><subagent_tokens>50786</subagent_tokens><tool_uses>8</tool_uses><duration_ms>137946</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a2f766f978a1a0658</task-id>
+<tool-use-id>toolu_01BP37xB1kKeLBSu4RmhVNr1</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a2f766f978a1a0658.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 5: experience restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE — commit `3517bed`. Restyled the Experience section into a 4-card `col-lg-3 col-md-6` grid with discrete year/title/company/description fields and the "Earlier: ..." + LinkedIn line below it; `hugo --quiet` built clean and compiled HTML/CSS verification confirmed all requirements met.</result>
+<usage><subagent_tokens>53884</subagent_tokens><tool_uses>21</tool_uses><duration_ms>290184</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a765706be94e44d02</task-id>
+<tool-use-id>toolu_01Uns4W6BwzCPvjmoR4QLB4Q</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a765706be94e44d02.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 5 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>### Spec Compliance
+
+✅ **Data file changes** — `data/resumeSection.yml:28-93` (diff) adds top-level `earlier`/`earlierLinkedIn` and `year`/`title`/`company`/`description` fields to exactly the first 4 `education` entries (Splice 2025–Present, Volley Games 2024–2025, Discord 2022–2023, Dropbox 2016–2020), matching real role data and year ranges. Old `content`/`time` fields kept in place on those same 4 entries. Entries 5–8 (Anova Culinary onward, diff line 94+) are untouched — confirmed via build (`hugo --quiet`, EXIT:0) and by inspection of the diff context.
+
+✅ **Template renders only first 4 as cards** — `themes/portio/layouts/partials/resumeSection.html:271` uses `{{ range first 4 .education }}` with `col-lg-3 col-md-6` (line 272), matching the brief's mandated grid class exactly. Verified in compiled output: `grep -c 'resume__card"' public/index.html` → 4, `col-lg-3 col-md-6` count → 4.
+
+✅ **"Earlier:" line and LinkedIn link verbatim** — Confirmed in rendered `public/index.html:351`: `"Earlier: VP Eng at Anova Culinary, Co-Founder/CTO at Sosh, EM at Slide."` and `href="https://linkedin.com/in/rodbegbie"` — exact match to brief text, distinct from the two pre-existing unrelated LinkedIn references elsewhere on the page (lines 299, 611).
+
+✅ **No hardcoded accent hex** — `_resume-section.scss` (diff lines 156-246) uses `var(--accent)` for all accent usages (card year, earlier-link). Compiled CSS spot-check shows only `#fff` (the `$white` base token for card background, not accent) — no accent-related hex. No SVG `&lt;stop&gt;` elements were touched by this diff; pre-existing `&lt;stop&gt;` elements elsewhere in the page already correctly use `style="stop-color: var(--accent);"`.
+
+⚠️ Not independently verifiable from the diff alone: the Sass variables referenced (`$section-padding-y`, `$radius-card`, `$font-display`, `$font-body`, `$font-mono`, `$fs-h2-section`, `$fs-mono-label`) aren't defined in this diff (they're Task 1's tokens, out of scope here). I confirmed the build succeeds end-to-end (`hugo --quiet`, exit 0), which is sufficient proof they resolve correctly.
+
+### Strengths
+
+- Faithful, literal transcription of the brief with no unauthorized deviations — verified line-by-line against the diff.
+- Build passes clean; report's grep-based verification claims were independently re-run and confirmed accurate (card count, grid classes, earlier text/link, absence of old `resume__background`/`tab-pane` markup).
+- Correct Hugo template scoping: inside `{{ range first 4 .education }}`, `.title`/`.company`/etc. correctly resolve to the per-entry fields rather than colliding with the outer `resumeSection.title` field — no bug here despite the field-name reuse.
+- Correct use of this repo's inverted breakpoint mixins (`@include desktop` for ≤991px section padding, `@include tablet` for ≤767px earlier-row stacking), matching CLAUDE.md's documented convention.
+- Dead `.tab-content`/`.tab-pane` wrapper and unused dark-navy skewed `resume__background` band correctly removed, as directed.
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- `data/resumeSection.yml`'s first 4 `education` entries now carry both the new `year`/`title`/`company`/`description` fields and the old `content`/`time` fields, which are unused by the new template — genuine duplication, but **plan-mandated** (brief explicitly calls for non-destructive retention, task-5-brief.md:12-16). Implementer flagged this correctly in the self-review rather than silently leaving it unexplained. No action needed unless a future task wants to prune it.
+- HTML file diff ends without a trailing newline (`\ No newline at end of file`, diff line 308) — pre-existing condition, not introduced by this change, purely cosmetic.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** Implementation matches the brief verbatim, all four spec-compliance checks pass with direct evidence from the diff and a live build/grep verification, and the one duplication noted is explicitly plan-mandated rather than a quality lapse.</result>
+<usage><subagent_tokens>46287</subagent_tokens><tool_uses>8</tool_uses><duration_ms>112006</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a744f0fcbbcab27fb</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a744f0fcbbcab27fb.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 6: testimonials restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>**DONE** — Restyled testimonials section from carousel to 3-card static grid with inverted middle card (commit a923fde)
+
+Report written to `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-6-report.md`. Verified: 3 cards render with `col-md-4`, middle card has `testimonial__card--inverted` modifier, no star or slider markup remains, all hardcoded colors replaced with design tokens (`var(--bg)`, `var(--accent)`, etc.), build exits 0 with no errors.</result>
+<usage><subagent_tokens>37323</subagent_tokens><tool_uses>17</tool_uses><duration_ms>247342</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a295efde0b02e7857</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a295efde0b02e7857.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 6 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>No hardcoded hex introduced in this diff — all colors use `var(--...)` tokens defined centrally. Everything checks out.
+
+### Spec Compliance
+
+- ✅ Exactly 3 testimonial cards render via `{{ range $index, $item := .testimonial }}` over the unchanged 3-item `data/testimonialSection.yml` list, each wrapped in `col-md-4` (diff lines 250–259, `themes/portio/layouts/partials/testimonialSection.html:252`).
+- ✅ Middle card gets a distinct modifier: `{{ if eq (mod $index 2) 1 }} testimonial__card--inverted{{ end }}` (line 253) fires only for index 1 of 3, matching `.testimonial__card--inverted` SCSS rule (`_testimonial-section.scss:118-142`) that swaps to `background: var(--accent)` with `var(--accentInk)` text.
+- ✅ No `star`-field markup or styling remains — the entire `{{ if .star }}` rating `&lt;ul&gt;`/`fa-star` block and the SCSS `&amp;-rating` block are deleted (diff removes lines 230-241 in HTML and the `&amp;-rating` rule with `#ffc219`/`#c2c8cc` in SCSS).
+- ✅ No new hardcoded accent hex — every color in the new SCSS is a `var(--...)` token (`var(--bg)`, `var(--bgAlt)`, `var(--accent)`, `var(--accentSoft)`, `var(--accentInk)`, `var(--ink)`, `var(--inkSoft)`); `--accent: #0e8a8f` is defined once, centrally, in `_tokens.scss` (untouched by this diff). No `&lt;stop&gt;`/SVG gradient exists in this section at all.
+- ✅ Carousel markup fully removed: `.testimonial__slider`, `_track`, `_dots`, `_dot`, `_pause` button, and the `.testimonial__background_shape` SVG wrapper are gone from both the HTML and SCSS.
+- ⚠️ Named focused-risk check: confirmed `themes/portio/assets/js/testimonial-carousel.js:2-4` does `var slider = document.querySelector(".testimonial__slider"); if (!slider) { return; }` before touching `track`/`dotsContainer`/`pauseToggle`. Since `.testimonial__slider` is now absent from the DOM, the script becomes a harmless no-op, exactly as the brief and report both predict. Not a defect — correctly deferred to Task 8 per the plan.
+
+### Strengths
+
+- Implementation is a line-for-line match to the brief's prescribed markup and SCSS (verified independently against the diff, not just the report's claim).
+- Clean token migration: every hardcoded color (`#f1f6f9`, `#7e7e8a`, `#282f49`, `#ffc219`, `#c2c8cc`) is replaced with a semantic CSS custom property — no regressions to the accent-token discipline established elsewhere in the repo.
+- BEM naming is consistent and the `&amp;--inverted` modifier is scoped tightly (only overrides quote/content/author colors), avoiding duplicated base rules — good DRY without over-abstracting.
+- `@include desktop { padding: 60px 0; }` correctly follows this theme's inverted breakpoint convention (desktop mixin = ≤991px, so this is the "shrink padding at tablet-and-below" pattern already established elsewhere).
+
+### Issues
+
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+- `id="testimonials"` was added to the `&lt;section&gt;` (`testimonialSection.html:210`) and wasn't called out in the brief's replacement snippet as a deliberate scope note — it matches the brief's literal code block exactly though (brief line 30), so this is brief-mandated, not implementer scope creep. No action needed, just noting it's intentional per the brief text itself.
+- Report's file-line diffstat claims "60 → deletions" style counts that roughly match the diff stat header (166/50 lines vs 74 insertions/142 deletions) — consistent, no discrepancy found.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** The diff matches the brief's prescribed markup and SCSS exactly, all four spec-compliance checks pass, hardcoded accent-hex/star/carousel markup are all correctly removed, and the named cross-task JS risk was independently verified as non-breaking (the carousel script has a proper early-return null guard).</result>
+<usage><subagent_tokens>42039</subagent_tokens><tool_uses>5</tool_uses><duration_ms>74129</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>aaa0b3d7dadfd5e79</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/aaa0b3d7dadfd5e79.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 7: writing restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE_WITH_CONCERNS: Task 7 complete and committed (7dffa74); minor deviation from brief — used `style="stop-color: var(--accent);"` instead of the brief's hardcoded `stop-color="#0e8a8f"` attribute to comply with the plan's binding accent-color constraint and match Tasks 2/3's existing blob pattern. Full details in `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-7-report.md`.</result>
+<usage><subagent_tokens>47904</subagent_tokens><tool_uses>16</tool_uses><duration_ms>195235</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a06281503c82b512b</task-id>
+<tool-use-id>toolu_0164Ya84XcCyKzAs4yEanD6B</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a06281503c82b512b.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 7 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>Build succeeds cleanly. All checks pass.
+
+### Spec Compliance
+- ✅ Exactly 3 writing cards render with `col-md-4` — diff line 251 (`themes/portio/layouts/partials/blogSection.html:251`), inside `{{ range first 3 (where site.RegularPages "Type" "!=" "portfolio") }}`, unchanged range logic from original.
+- ✅ Teaser text pulled from real front matter — `{{ with .Params.subtitle }}&lt;p class="blog-preview__card_teaser"&gt;{{ . }}&lt;/p&gt;{{ end }}` (`blogSection.html:294-296`). Confirmed via `content/blog/filtering-your-language.md:5`, `job-success-profiles.md:5`, `estimating-your-way-to-success.md:5` all have non-empty `subtitle:` front matter, no drafted copy.
+- ✅ "See more essays →" links to `/blog` — `&lt;a class="blog-preview__more" href="{{ .buttonTarget | absURL }}"&gt;See more essays →&lt;/a&gt;` (`blogSection.html:310`); `.buttonTarget` is the existing site-data-driven blog index route, unchanged mechanism from the prior "See all posts" button.
+- ✅ Blob markup reuses `.blob`/`.blob-wrap` from Task 1 correctly — `blogSection.html:212-225` uses `&lt;div class="blog-preview__blob blob-wrap"&gt;` and `&lt;path class="blob" ...&gt;`, matching the exact structural pattern in `aboutSection.html` and `hero.html`. `&lt;stop&gt;` elements use `style="stop-color: var(--accent);"` / `style="stop-color: var(--accent); stop-opacity: .08;"` (`blogSection.html:217-218`) — no `stop-color="..."` attribute, no hardcoded hex anywhere in the diff (verified via grep for `0e8a8f`/`stop-color="` — zero matches).
+
+⚠️ Minor note: the implementer's deviation from the brief's literal `stop-color="#0e8a8f"` markup is confirmed correct and complete — this matches the reviewer brief's own guidance to not treat it as a defect.
+
+### Strengths
+- Deviation from the brief's literal (non-compliant) SVG markup was handled exactly right: syntactically correct `style="stop-color: var(--accent); ...")` form, matches Task 1/2/3/6 precedent verbatim, and the report documents the deviation transparently rather than silently diverging.
+- Breakpoint mixins used correctly per the plan's inverted convention: `@include desktop` (≤991px) tightens section padding to 60px (`_blog-section.scss:23-25`), `@include tablet` (≤767px) hides the decorative blob (`_blog-section.scss:47-49`) — both match the brief's step 2 exactly.
+- All new SCSS tokens (`$section-padding-y`, `$radius-pill`, `$radius-image`, `$font-mono`, `$fs-mono-label`) are pre-existing Task 1 tokens (verified in `themes/portio/assets/scss/_tokens.scss:28,31,34,41,51`), not new hardcoded values — no premature abstraction, no duplication.
+- Thumbnail aspect ratio correctly changed from 4:5-ish (`400x462`) to 16:10 (`400x250`/`600x375`/`900x562`), consistent with brief's design spec; `sizes` attribute recomputed for the new `col-md-4` breakpoint math rather than left stale from the old `col-lg-4` layout.
+- Old dead code fully removed (rotating `blog-shape.svg` import, duplicate desktop/mobile button markup, unused `@keyframes rotate`) — clean, no leftover cruft.
+- `hugo --quiet` builds with exit code 0 after a full cache clear, confirming no template/SCSS errors.
+
+### Issues
+#### Critical (Must Fix)
+None.
+
+#### Important (Should Fix)
+None.
+
+#### Minor (Nice to Have)
+None of note — the diff is a clean, faithful implementation of the brief with one well-justified, well-documented deviation.
+
+### Assessment
+**Task quality:** Approved
+**Reasoning:** All brief requirements are met exactly (3-card `col-md-4` grid, real `subtitle` teasers, `/blog` link, reused blob system, correct breakpoint mixin usage), the one deviation from the brief's literal code is the mandated correct fix for the accent-color global constraint and matches established precedent byte-for-byte, and the build verifies clean.</result>
+<usage><subagent_tokens>46199</subagent_tokens><tool_uses>6</tool_uses><duration_ms>92813</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a3afc2e2b1b436515</task-id>
+<tool-use-id>toolu_01RppGRtA9iddueTtX2TsYYb</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a3afc2e2b1b436515.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 8: contact + footer restyle" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>DONE — Task 8 complete, commit `52ccb0b` on `feature/homepage-redesign`. Restyled the contact/footer band (dark full-bleed, two pill CTAs both linking to `mailto:rod@begbie.com`), copyright/social row, and removed `testimonial-carousel.js` from the JS bundle concat. Build exits 0, bundle grep for testimonial-carousel returns 0, compiled HTML/CSS confirmed. Full report at `/Users/rod/build/begbie-hugo/.superpowers/sdd/task-8-report.md`.</result>
+<usage><subagent_tokens>42892</subagent_tokens><tool_uses>15</tool_uses><duration_ms>205391</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a471ec77b0a8d3e2a</task-id>
+<tool-use-id>toolu_01QE68thmx38VPiakM6b1r6P</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a471ec77b0a8d3e2a.output</output-file>
+<status>completed</status>
+<summary>Agent "Review Task 8 (spec + quality)" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>The file does exist on disk, still orphaned, exactly as flagged as a possible finding to note.
+
+### Spec Compliance
+
+- ✅ Dark full-bleed contact band with two `col-lg-6` pill-CTA columns (Coaching / Email). `themes/portio/layouts/partials/footer.html:309-324` shows `row footer__cta` with two `col-lg-6` columns, each containing `.footer__cta_action--filled`/`--outline` pill CTAs. `_footer-section.scss` sets `background: var(--ink)` on `.footer` (full-bleed section wrapper, no container constraint on background) and `border-radius: $radius-pill` on `.footer__cta_action`.
+- ✅ Both CTAs link to `mailto:rod@begbie.com` via `site.Params.contactLink`, unchanged mechanism. Both anchors at `footer.html:315` and `:323` use `{{ site.Params.contactLink | absURL }}` — no hardcoding, matches pre-existing pattern.
+- ✅ Copyright/social row restyled below the contact band. `footer.html:327-346` retains `row footer__footer` structure with `text-light` classes dropped (diff lines 329-330, 339-341); SCSS `&amp;__footer` block (scss diff lines 227-261) restyles via `var(--bg)`/opacity tokens instead of the old `text-light` Bootstrap utility.
+- ✅ `testimonial-carousel.js` removed from the JS bundle concat. Diff lines 350-354 confirm `$testimonialjs` resource-get line deleted and removed from the `slice` args passed to `resources.Concat`. Diff and report's `grep -c "testimonial-carousel" public/js/bundle.*.js` → 0 corroborate.
+- ✅ No new hardcoded accent hex. Grepped the diff: all colour tokens are `var(--ink)`, `var(--bg)`, `var(--accent)`, `var(--accentInk)`, or `rgba(255,255,255, …)` for translucent whites/borders — no new hex literals, no bare `stop-color` (no SVG `&lt;stop&gt;` elements touched at all in this task).
+- ⚠️ The old `#1b2031` hardcoded background and `$primary` CTA background (scss diff lines 18, 38) are removed, not just tokenized — good, but worth noting this task also cleans up a pre-existing hardcoded-hex violation that predates it, consistent with the "accent is final" constraint being honored throughout.
+
+### Strengths
+
+- Clean 1:1 transcription from brief to diff — no deviations, extraneous edits, or scope creep. Both files match the brief's Step 1/Step 2 blocks verbatim.
+- Correct breakpoint mixin usage per the repo's inverted convention: `@include desktop` (max-width 991px) is used consistently for the `lg`-and-below stacking/centering behavior on `.footer__cta`, `.footer__cta_col`, and `.footer__footer` (scss diff lines 168-170, 174-177, 229-231) — matches the brief's explicit call-out that `desktop` means "on lg and below."
+- Dead code (old `@keyframes moveLeft`, decorative shape SVGs, wavy divider SVG) fully removed alongside the markup/CSS that used them, rather than left as unused cruft (scss diff lines 154-262 old block entirely gone; footer.html diff lines 269-291 shapes gone).
+- Report's verification section shows actual command output (build exit code, grep count, rendered HTML snippet) rather than just narration — consistent with the brief's Step 3 verification instructions.
+
+### Issues
+
+#### Critical (Must Fix)
+
+None.
+
+#### Important (Should Fix)
+
+None.
+
+#### Minor (Nice to Have)
+
+- **Orphaned file left on disk**: `themes/portio/assets/js/testimonial-carousel.js` (4.2 KB, last touched in `bfd9519`) still exists on disk after this task — only the bundle *reference* to it was removed (diff lines 350-354), the file itself was not deleted. The brief's "Produces" section only describes removing it from the concat slice, not deleting the file, and the report is honest that it didn't touch the file. This is a defensible reading of the brief (brief text says "remove ... from the JS bundle," not "delete the file"), so I'm not escalating it, but flagging it as a candidate for a later cleanup pass — an unreferenced JS source lingering in `themes/portio/assets/js/` could confuse a future contributor who doesn't know it's dead.
+- Minor phrasing note in the report's self-review ("Did not touch `icon.html` or `config.toml` — not required by this task") is accurate and appropriately scoped — no action needed, just calling out that the report correctly avoided scope creep on `icon.html`, which could easily have been touched unnecessarily given the SVG `fill="currentColor"` discussion.
+
+### Assessment
+
+**Task quality:** Approved
+**Reasoning:** The diff is a verbatim, faithful implementation of the brief with no scope creep, correct breakpoint mixin usage, no hardcoded accent colors, and the one functional change (removing `testimonial-carousel.js` from the bundle concat) is correctly and verifiably done. The only open item — the orphaned source file still on disk — is explicitly ambiguous in the brief's wording and reasonably deferred by the implementer, not a defect in this task's execution.</result>
+<usage><subagent_tokens>42104</subagent_tokens><tool_uses>4</tool_uses><duration_ms>56127</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a43d91adcdccf0263</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-rod-build-begbie-hugo/5e88b397-ae25-49f8-b7cf-61799d8476cb/tasks/a43d91adcdccf0263.output</output-file>
+<status>completed</status>
+<summary>Agent "Implement Task 9: responsive QA pass" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>That's expected — `.superpowers/` is gitignored (planning artifacts). No fix needed; working tree is clean, nothing to commit.
+
+DONE — all responsive checks passed at 960px/700px/400px (nav collapse, hero/about stacking, experience 2-up→1-up, testimonial/writing grids 1-up, video badge reflow, writing blob hidden, hero blob 70%/70%), no horizontal overflow found at any width, no fix needed.</result>
+<usage><subagent_tokens>50586</subagent_tokens><tool_uses>36</tool_uses><duration_ms>400722</duration_ms></usage>
+</task-notification>
