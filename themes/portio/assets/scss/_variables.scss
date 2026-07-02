@@ -32,3 +32,22 @@ $line-height-base: 1.75;
 
 // Misc
 $link-hover-decoration: none;
+
+//
+// Grid breakpoints / container widths
+//
+// Trimmed to the breakpoints actually used across templates/data (xs/sm/md/lg).
+// xl/xxl are unused anywhere in grid columns, offsets, or utilities — see
+// docs/superpowers/specs/2026-07-02-css-purge-unused-utilities-design.md
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+);
