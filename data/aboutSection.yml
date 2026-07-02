@@ -1,8 +1,8 @@
 ---
 enable: true
-# topTitle: About
+topTitle: About
 title: >
-  ## About me
+  ## Two decades of shipping software, and helping others do the same.
 content: >
   ### An experienced engineering leader with over two decades of product engineering and leadership experience.
 
