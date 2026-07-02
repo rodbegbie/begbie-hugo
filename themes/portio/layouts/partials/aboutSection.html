@@ -23,10 +23,10 @@
                             {{ $about750 := .Resize "750x1000 jpg q82" }}
                             {{ $about1000 := .Resize "1000x1333 jpg q82" }}
                             {{ $about1400 := .Resize "1400x1867 jpg q82" }}
-                            {{ $about500Webp := .Resize "500x667 webp q75" }}
-                            {{ $about750Webp := .Resize "750x1000 webp q75" }}
-                            {{ $about1000Webp := .Resize "1000x1333 webp q75" }}
-                            {{ $about1400Webp := .Resize "1400x1867 webp q75" }}
+                            {{ $about500Webp := .Resize "500x667 webp q75 picture" }}
+                            {{ $about750Webp := .Resize "750x1000 webp q75 picture" }}
+                            {{ $about1000Webp := .Resize "1000x1333 webp q75 picture" }}
+                            {{ $about1400Webp := .Resize "1400x1867 webp q75 picture" }}
                             {{ $sizes := "(min-width: 1400px) 583px, (min-width: 1200px) 502px, (min-width: 992px) 421px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
                             <picture>
                                 <source type="image/webp" sizes="{{ $sizes }}"

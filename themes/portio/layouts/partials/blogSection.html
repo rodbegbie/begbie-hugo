@@ -30,10 +30,10 @@
 						{{ $thumb600 := .Fill (printf "600x692 %s jpg q82" $anchor) }}
 						{{ $thumb900 := .Fill (printf "900x1039 %s jpg q82" $anchor) }}
 						{{ $thumb1200 := .Fill (printf "1200x1385 %s jpg q82" $anchor) }}
-						{{ $thumb400Webp := .Fill (printf "400x462 %s webp q75" $anchor) }}
-						{{ $thumb600Webp := .Fill (printf "600x692 %s webp q75" $anchor) }}
-						{{ $thumb900Webp := .Fill (printf "900x1039 %s webp q75" $anchor) }}
-						{{ $thumb1200Webp := .Fill (printf "1200x1385 %s webp q75" $anchor) }}
+						{{ $thumb400Webp := .Fill (printf "400x462 %s webp q75 drawing" $anchor) }}
+						{{ $thumb600Webp := .Fill (printf "600x692 %s webp q75 drawing" $anchor) }}
+						{{ $thumb900Webp := .Fill (printf "900x1039 %s webp q75 drawing" $anchor) }}
+						{{ $thumb1200Webp := .Fill (printf "1200x1385 %s webp q75 drawing" $anchor) }}
 						{{ $sizes := "(min-width: 1400px) 374px, (min-width: 1200px) 320px, (min-width: 992px) 266px, (min-width: 768px) 576px, (min-width: 576px) 432px, 78vw" }}
 						<picture>
 							<source type="image/webp" sizes="{{ $sizes }}"

@@ -45,10 +45,10 @@
           {{ $hero750 := .Resize "750x1000 jpg q82" }}
           {{ $hero1000 := .Resize "1000x1333 jpg q82" }}
           {{ $hero1400 := .Resize "1400x1867 jpg q82" }}
-          {{ $hero500Webp := .Resize "500x667 webp q75" }}
-          {{ $hero750Webp := .Resize "750x1000 webp q75" }}
-          {{ $hero1000Webp := .Resize "1000x1333 webp q75" }}
-          {{ $hero1400Webp := .Resize "1400x1867 webp q75" }}
+          {{ $hero500Webp := .Resize "500x667 webp q75 picture" }}
+          {{ $hero750Webp := .Resize "750x1000 webp q75 picture" }}
+          {{ $hero1000Webp := .Resize "1000x1333 webp q75 picture" }}
+          {{ $hero1400Webp := .Resize "1400x1867 webp q75 picture" }}
           {{ $sizes := "(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
           <picture>
             <source type="image/webp" sizes="{{ $sizes }}" srcset="{{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
