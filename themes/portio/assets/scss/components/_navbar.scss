@@ -1,9 +1,9 @@
 .navbar {
-    padding: 40px 0;
+    padding: 26px 0;
     background: transparent;
     transition: all 0.3s ease;
     @include desktop {
-        background: $white;
+        background: var(--bg);
     }
     @include desktop {
         padding: 15px 20px;
@@ -11,14 +11,44 @@
         border-radius: 5px;
     }
     .navbar-brand {
+        font-family: $font-display;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: -0.01em;
+        color: var(--ink);
         img {
             @include desktop {
                 width: 80%;
             }
         }
     }
+    .nav-link {
+        font-family: $font-body;
+        font-weight: 500;
+        font-size: 14px;
+        opacity: 0.75;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .hire_button {
+        border-radius: $radius-pill;
+        padding: 11px 22px;
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accentInk);
+        font-family: $font-body;
+        font-weight: 600;
+        font-size: 14px;
+        &:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accentInk);
+            opacity: 0.9;
+        }
+    }
     &.nav__color__change {
-        background: $white;
+        background: var(--bg);
         padding: 20px 0;
         box-shadow: 0px 10px 20px 0px rgba(50, 65, 141, 0.1);
         @include desktop {
@@ -33,7 +63,7 @@
                 height: 2px;
                 width: 25px;
                 transition: all 0.2s;
-                background: $primary;
+                background: var(--ink);
                 display: block;
                 &:not(:last-child) {
                     margin-bottom: 5px;
