@@ -173,3 +173,9 @@
     transform: translateY(0);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero * {
+    animation: none !important;
+  }
+}

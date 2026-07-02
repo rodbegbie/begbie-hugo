@@ -56,7 +56,7 @@
           {{ if .videoURL }}
           <a href="{{ .videoURL }}" class="hero_video-badge popup-button">
             <span class="hero_video-badge_dot"></span>
-            <span class="hero_video-badge_label">▶ Watch: {{ .videoLabel }}</span>
+            <span class="hero_video-badge_label"><span aria-hidden="true">▶</span> Watch: {{ .videoLabel }}</span>
           </a>
           {{ end }}
         </div>

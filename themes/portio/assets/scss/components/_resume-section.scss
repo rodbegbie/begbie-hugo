@@ -16,6 +16,20 @@
     }
   }
 
+  &__eyebrow {
+    display: inline-block;
+    font-family: $font-mono;
+    font-size: $fs-mono-label;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accentSoft);
+    border-radius: $radius-pill;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+  }
+
   &__grid {
     row-gap: 20px;
   }

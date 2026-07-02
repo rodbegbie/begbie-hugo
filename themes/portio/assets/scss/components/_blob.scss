@@ -44,3 +44,12 @@
 .blob-wrap {
   animation: blob-drift 16s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+  .blob-wrap {
+    animation: none;
+  }
+}

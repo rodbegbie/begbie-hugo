@@ -1,11 +1,8 @@
 ---
 enable: true
-topTitle: My Resume
+topTitle: Experience
 title: >
-  ## My Experience
-
-  Here's a summary of places I've worked and what I've worked on.  For more details,
-  check out my [LinkedIn profile](https://linkedin.com/in/rodbegbie).
+  ## Where I've led
 tab1Name: Education
 tab2Name: Experiences
 tab1Target: education

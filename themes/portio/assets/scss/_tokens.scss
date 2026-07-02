@@ -41,6 +41,9 @@ $font-body: "Instrument Sans", sans-serif;
 $font-mono: ui-monospace, Menlo, monospace;
 
 // Type scale
+// unquote() preserves the literal CSS min() function through Dart Sass
+// compilation (Hugo's Sass rejects raw px/vw arithmetic). This makes
+// $fs-hero a non-numeric string in Sass -- do not use it in calc()/arithmetic.
 $fs-hero: unquote("min(6vw, 74px)");
 $fs-h2: 38px;
 $fs-h2-section: 34px;
