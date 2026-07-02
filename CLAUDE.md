@@ -41,6 +41,20 @@ section or touch SCSS compilation, follow these same patterns rather than older 
 examples found online (`themes/portio/exampleSite` still uses the old API and is reference-only,
 not built).
 
+**Design tokens live in `themes/portio/assets/scss/_tokens.scss`.** CSS custom properties
+(`--accent`, `--ink`, `--bg`, etc.) plus Sass variables for fonts/spacing/radii. New components
+should reference these, not hardcode hex/px values.
+
+**Decorative blob backgrounds use `layouts/partials/blob.html`**, called as
+`{{ partial "blob.html" (dict "id" "unique-gradient-id" "color" "var(--accent)" "stopOpacity" ".08") }}`
+inside a `.blob-wrap` wrapper div. One shared partial for every section's blob — don't hand-copy
+the inline SVG again.
+
+**Résumé data is split into `recent`/`earlier` lists**, not one flat list sliced by `first N`.
+`data/resumeSection.yml`'s `recent` entries render as cards; `earlier` entries generate the
+"Earlier: ..." summary line directly in the template. Add a new job by moving the oldest `recent`
+entry into `earlier`, not by editing prose by hand.
+
 **Content types:**
 - `content/blog/*.md` — blog posts (front matter: `title`, `date`, `featureImage`,
   `featureImageAnchor` (optional, overrides smart-crop anchor — see below), `subtitle`), rendered
@@ -90,6 +104,36 @@ repo/account — expected, not a bug. Skip straight to `gh pr merge --squash --d
 **`git add path1 path2 ...` aborts entirely if any path doesn't exist** (common after `git mv`/`rm`
 leaves a path already staged) — no files get staged, not just the missing one. Run `git status`
 first and pass only currently-existing paths.
+
+**SVG `<stop>` elements need `style="stop-color: var(--x)"`, not `stop-color="var(--x)"`.** The
+bare presentation attribute doesn't resolve CSS custom properties — only the `style` attribute
+goes through the CSS cascade. Applies to any gradient referencing a design token.
+
+**Passing a variable into `style="..."` in a Go template trips the CSS-context auto-escaper** —
+`style="stop-color: {{ $color }}"` silently renders literal `ZgotmplZ` instead of the value if
+`$color` isn't a compile-time string literal. Build the string with `printf` and pipe through
+`| safeCSS`: `style="{{ printf "stop-color: %s;" $color | safeCSS }}"`. Always grep the built
+`public/` output for `ZgotmplZ` after adding a partial with dynamic inline styles — it fails
+silently, no build error.
+
+**`position: relative` alone does NOT create a stacking context.** A child with `z-index: -1`
+needs its positioned ancestor to also declare `z-index` (even `z-index: 0`), or the negative
+z-index escapes to a page-wide shared layer *below every section's own background* — including
+sections with an opaque background that then paint over it, making the child invisible with no
+error. Every section that wraps a decorative blob (`.hero`, `.about_content-thumb`,
+`.blog-preview`, `.breadCrumb`, `.singleBlog__feature`, `.footer`) sets `position: relative;
+z-index: 0;` together for this reason — keep them paired in any new section.
+
+**External links get `target="_blank"` via a render hook, not `unsafe = true`.**
+`themes/portio/layouts/_default/_markup/render-link.html` compares the link's host against
+`site.BaseURL` and adds `target="_blank" rel="noopener noreferrer"` only for external links.
+Don't re-enable `markup.goldmark.renderer.unsafe` in `config.toml` — it disables HTML
+sanitization for every markdown field on the site to solve a problem this hook already covers.
+
+**Hugo's `smart` crop anchor can clip a portrait's headroom.** For hero/about-style headshots,
+`Top`-anchored `.Fill` calls are a safer default than `smart` when the subject's hair/head must
+stay fully visible — `smart` optimizes for overall visual interest, not for "don't cut off the
+top of the frame."
 
 ## Deployment
 
