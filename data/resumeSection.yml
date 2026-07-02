@@ -13,6 +13,29 @@ tab2Target: experience
 
 education:
   - content: >
+      #### Director of Engineering, Infrastructure & Engineering Velocity, _Splice_
+
+      * Leading three teams — Engineering Velocity, Data Engineering, and Site Reliability Engineering — 15 engineers and two managers, reporting to the CTO.
+
+      * Founded the Engineering Velocity team from scratch: investigated developer friction company-wide and defined four workstreams (AI Enablement, Toil & Papercuts, Ownership & Knowledge, and CI/CD) to fix it.
+
+      * Before this, led product engineering for Splice Sounds, including the release of a cross-platform VST3/AU/AAX plugin that puts Splice directly inside producers' DAWs.
+    time: 2025–Present
+  - content: >
+      #### Director of Engineering, _Volley Games_
+
+      * Led over half the company's engineering effort — five product teams, four engineering managers, 25 engineers — building voice-powered games for Roku and Fire TV.
+
+      * Turned engineering's reputation from "always late and buggy" into a team that could negotiate scope and reliably hit deadlines with quality work.
+    time: 2024–2025
+  - content: >
+      #### Senior Engineering Manager, _Discord_
+
+      * Group lead for four teams (21 engineers) shipping new in-app features for Nitro, Discord's premium subscription.
+
+      * Drove a "Progress over Perfection" culture of fast, iterative shipping — recognised with "The 80/20 Thinker" award from senior leadership.
+    time: 2022–2023
+  - content: >
       #### Senior Engineering Manager, _Dropbox_
 
       * Led teams of web, desktop and mobile engineers building _Dropbox Paper_ and _Dropbox Spaces_. Shipped tons of new functionality, hit company growth goals, and made processes like on-call manageable and less painful.
