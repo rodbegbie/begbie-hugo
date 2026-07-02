@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "f5e0635e5f5a",
+  "strategy": "manual-commit",
+  "branch": "chore/responsive-image-tiers",
+  "checkpoints_count": 2,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/f5/e0635e5f5a/0/metadata.json",
+      "transcript": "/f5/e0635e5f5a/0/full.jsonl",
+      "compact_transcript": "/f5/e0635e5f5a/0/transcript.jsonl",
+      "content_hash": "/f5/e0635e5f5a/0/content_hash.txt",
+      "prompt": "/f5/e0635e5f5a/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 185931,
+    "cache_creation_tokens": 5887936,
+    "cache_read_tokens": 280739958,
+    "output_tokens": 645709,
+    "api_call_count": 990
+  }
+}
