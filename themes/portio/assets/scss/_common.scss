@@ -23,6 +23,31 @@ body {
   color: var(--ink);
 }
 
+html {
+  scroll-padding-top: 100px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  padding: 0.75rem 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: $font-body;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-100%);
+  transition: transform 0.2s ease;
+
+  &:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
 // Every homepage section wraps its content in Bootstrap's `.container`;
 // overriding it once here gives every section the design's 1280px/40px
 // content measure without any template markup changes. Safe on narrow
