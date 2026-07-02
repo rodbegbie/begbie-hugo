@@ -43,7 +43,16 @@
       <div class="row">
           <div class="col-lg-12">
               <div class="singleBlog__feature">
-                  <img src={{ .Params.postImage | absURL }} alt="feature-image">
+                  {{ $anchor := .Params.featureImageAnchor | default "smart" }}
+                  {{ with resources.Get .Params.featureImage }}
+                  {{ $banner := .Fill (printf "970x500 %s jpg q85" $anchor) }}
+                  {{ $bannerWebp := .Fill (printf "970x500 %s webp q80" $anchor) }}
+                  <picture>
+                      <source type="image/webp" srcset="{{ $bannerWebp.RelPermalink }}">
+                      <img src="{{ $banner.RelPermalink }}" width="{{ $banner.Width }}"
+                          height="{{ $banner.Height }}" alt="feature-image">
+                  </picture>
+                  {{ end }}
               </div>
           </div>
       </div>

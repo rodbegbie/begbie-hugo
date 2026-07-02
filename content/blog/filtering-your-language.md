@@ -1,8 +1,7 @@
 ---
 title: "Filtering your language as an engineering leader"
 date: 2021-06-22
-featureImage: images/writing/filter-320.jpg
-postImage: images/writing/filter-970.jpg
+featureImage: images/writing/filter.jpg
 subtitle: The most painful lessons I’ve learned as an engineering leader have been when I have been imprecise with my language.
 ---
 

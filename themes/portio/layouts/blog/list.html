@@ -42,13 +42,26 @@
 			{{ range .Paginator.Pages }}
 			<div class="col-lg-4">
 				<div class="blog-page__item">
-					<div class="blog-page__item-thumb">
-						<img src="{{ .Params.featureImage | absURL }}" alt="post-image">
-					</div>
+					<a class="blog-page__item-thumb" href="{{ .RelPermalink }}">
+						{{ $anchor := .Params.featureImageAnchor | default "smart" }}
+						{{ with resources.Get .Params.featureImage }}
+						{{ $thumb1x := .Fill (printf "480x554 %s jpg q82" $anchor) }}
+						{{ $thumb2x := .Fill (printf "960x1108 %s jpg q82" $anchor) }}
+						{{ $thumb1xWebp := .Fill (printf "480x554 %s webp q75" $anchor) }}
+						{{ $thumb2xWebp := .Fill (printf "960x1108 %s webp q75" $anchor) }}
+						<picture>
+							<source type="image/webp"
+								srcset="{{ $thumb1xWebp.RelPermalink }} 1x, {{ $thumb2xWebp.RelPermalink }} 2x">
+							<img src="{{ $thumb1x.RelPermalink }}"
+								srcset="{{ $thumb1x.RelPermalink }} 1x, {{ $thumb2x.RelPermalink }} 2x"
+								width="{{ $thumb1x.Width }}" height="{{ $thumb1x.Height }}" alt="post-image">
+						</picture>
+						{{ end }}
+					</a>
 					<div class="blog-page__item-content bg-white">
 						<span class="small">{{ .PublishDate.Format "January 2, 2006" }}</span>
 						<h5 class="mb-0">
-							<a class="text-dark" href="{{ .Permalink }}">{{ .Title }}</a>
+							<a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
 						</h5>
 					</div>
 				</div>

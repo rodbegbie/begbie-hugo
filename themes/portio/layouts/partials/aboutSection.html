@@ -18,8 +18,20 @@
                             <img src="images/hero/figure-svg.svg" alt="figure-svg">
                         </div>
                         <div class="about_content-thumb-image">
-                            <img src="{{ .image | absURL }}" alt="about-img"
-                                style='-webkit-mask: url({{"images/about/about-mask-svg.svg" | absURL}}); -webkit-mask-size: contain;'>
+                            {{ with resources.Get .image }}
+                            {{ $about1x := .Resize "600x800 jpg q82" }}
+                            {{ $about2x := .Resize "1200x1600 jpg q82" }}
+                            {{ $about1xWebp := .Resize "600x800 webp q75" }}
+                            {{ $about2xWebp := .Resize "1200x1600 webp q75" }}
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="{{ $about1xWebp.RelPermalink }} 1x, {{ $about2xWebp.RelPermalink }} 2x">
+                                <img src="{{ $about1x.RelPermalink }}"
+                                    srcset="{{ $about1x.RelPermalink }} 1x, {{ $about2x.RelPermalink }} 2x"
+                                    width="{{ $about1x.Width }}" height="{{ $about1x.Height }}" alt="about-img"
+                                    style='-webkit-mask: url({{"images/about/about-mask-svg.svg" | absURL}}); -webkit-mask-size: contain;'>
+                            </picture>
+                            {{ end }}
                         </div>
                     </div>
                     <div class="about_content-inner">

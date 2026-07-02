@@ -1,8 +1,8 @@
 ---
 title: "Hypothesis-driven development"
 date: 2020-08-26
-featureImage: images/writing/hypothesis-320.jpg
-postImage: images/writing/hypothesis-970.jpg
+featureImage: images/writing/hypothesis.jpg
+featureImageAnchor: Left
 subtitle: If you’ve ever worked on a project for months, quarters, or years, only to see underwhelming results when it finally launches, maybe it’s time to reach into the scientific process for a new approach to problem-solving…
 ---
 
