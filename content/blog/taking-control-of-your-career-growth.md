@@ -1,8 +1,7 @@
 ---
 title: "Taking Charge of Your Career Growth"
 date: 2020-10-12
-featureImage: images/writing/growth-320.jpg
-postImage: images/writing/growth-970.jpg
+featureImage: images/writing/growth.jpg
 subtitle: Mentorship and sponsorship are important factors in growing your career, but they aren’t a substitute for setting and measuring your own goals.
 ---
 
