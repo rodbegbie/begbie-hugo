@@ -14,17 +14,6 @@
 /js/*.js
   Cache-Control: public, max-age=31536000, immutable
 
-# Hugo image-processing cache: every file gets a content hash inserted before
-# the extension (`..._hu_<hash>.<ext>`). These three directories are the only
-# ones containing Hugo-processed images; each also has a couple of
-# hand-authored, non-hashed SVGs (masks/figures) that must be excluded, so we
-# match on the `_hu_` marker rather than the whole directory.
-/images/about/:base_hu_*
-  Cache-Control: public, max-age=31536000, immutable
-
-/images/hero/:base_hu_*
-  Cache-Control: public, max-age=31536000, immutable
-
 # images/writing is 100% Hugo-processed (no hand-authored files alongside).
 /images/writing/*
   Cache-Control: public, max-age=31536000, immutable
