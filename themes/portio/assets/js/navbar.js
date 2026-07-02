@@ -1,12 +1,12 @@
 window.addEventListener("DOMContentLoaded", function () {
-  var toggler = document.querySelector('[data-toggle="collapse"]');
+  var toggler = document.querySelector('[data-bs-toggle="collapse"]');
   var navbar = document.querySelector(".navbar");
 
   if (toggler) {
-    var targetSelector = toggler.getAttribute("data-target");
+    var targetSelector = toggler.getAttribute("data-bs-target");
     var collapseEl = document.querySelector(targetSelector);
     // 350ms matches $transition-collapse in
-    // themes/portio/assets/bootstrap-4.5.2/scss/_variables.scss
+    // themes/portio/assets/bootstrap-5.3.8/scss/_variables.scss
     var COLLAPSE_DURATION = 350;
 
     function isOpen() {

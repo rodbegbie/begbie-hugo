@@ -29,8 +29,11 @@
 .contact-form {
   padding: 50px 0 100px 0;
   &-input {
-    .form-group {
-      margin-bottom: 30px;
+    .mb-3 {
+      // !important needed: Bootstrap 5's spacing utilities are
+      // generated with !important by design, so a plain override
+      // here would silently lose to Bootstrap's own .mb-3 rule.
+      margin-bottom: 30px !important;
     }
   }
   #map {

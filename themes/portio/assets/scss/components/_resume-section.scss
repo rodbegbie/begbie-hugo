@@ -32,6 +32,7 @@
     }
     &__education{
         &_item{
+            position: relative;
             background: $white;
             padding: 30px;
             border-radius: 20px;
