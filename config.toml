@@ -1,10 +1,12 @@
 baseURL = "https://coaching.begbie.com/"
 languageCode = "en-gb"
-paginate = 6
 theme = "portio"
 title = "Rod Begbie"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
+
+[pagination]
+pagerSize = 6
 
 # Main Menu
 [[menu.main]]
@@ -33,24 +35,6 @@ name = "Contact"
 url = "#contact"
 weight = 7
 
-# Sitemap Menu
-[[menu.sitemap]]
-name = "About me"
-url = "about"
-weight = 1
-[[menu.sitemap]]
-name = "Frequently Ask Question"
-url = "#"
-weight = 2
-[[menu.sitemap]]
-name = "Privacy & Policy"
-url = "#"
-weight = 3
-[[menu.sitemap]]
-name = "Latest Article"
-url = "#"
-weight = 4
-
 [params]
 blogPageURL = "blog"
 contactLink = "mailto:rod@begbie.com"
@@ -58,12 +42,6 @@ copyright = "Copyright © Rod Begbie 2026"
 footerLogo = "images/contact/widget-logo.png"
 logo = "images/site-navigation/logo.png"
 subtitle = "Software Engineering Leadership Coach"
-
-[params.address]
-address = "Barcelona, Spain"
-email = "rod@begbie.com"
-openingHours = "Open from 10am to 6pm (close at 5pm Sundays)"
-phone = "+(448) 833 5272 332"
 
 # Social icons
 

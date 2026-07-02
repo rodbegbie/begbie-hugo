@@ -93,5 +93,4 @@ first and pass only currently-existing paths.
 
 ## Deployment
 
-Cloudflare Pages, configured by `wrangler.jsonc` (the active config — `wrangler.toml` is an older
-auto-generated file, also present). `pages_build_output_dir` points at `public/`.
+Cloudflare Pages, configured by `wrangler.jsonc`. `pages_build_output_dir` points at `public/`.

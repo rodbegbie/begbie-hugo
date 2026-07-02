@@ -1,5 +1,12 @@
 # Generated files by hugo
 /public/
 /resources/_gen/
+.hugo_build.lock
 
 .DS_Store
+
+# Build and tooling
+.agent-traces/
+.wrangler/
+.superpowers/
+node_modules/
