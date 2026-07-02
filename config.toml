@@ -8,11 +8,6 @@ disableKinds = ["taxonomy", "term"]
 [pagination]
 pagerSize = 6
 
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
 # Main Menu
 [[menu.main]]
 name = "Home"

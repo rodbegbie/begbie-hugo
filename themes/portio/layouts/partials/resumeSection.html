@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row resume__grid">
-            {{ range first 4 .education }}
+            {{ range .recent }}
             <div class="col-lg-3 col-md-6">
                 <div class="resume__card">
                     <span class="resume__card_year">{{ .year }}</span>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="resume__earlier">
-                    <span class="resume__earlier_text">{{ .earlier }}</span>
+                    <span class="resume__earlier_text">Earlier: {{ range $i, $e := .earlier }}{{ if $i }}, {{ end }}{{ $e.title }} at {{ $e.company }}{{ end }}.</span>
                     <a class="resume__earlier_link" href="{{ .earlierLinkedIn }}" target="_blank"
                         rel="noopener">Full story on LinkedIn →</a>
                 </div>
