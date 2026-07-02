@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "1b1e3352cfe4",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "docs/superpowers/specs/2026-07-02-css-purge-unused-utilities-design.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/1b/1e3352cfe4/0/metadata.json",
+      "transcript": "/1b/1e3352cfe4/0/full.jsonl",
+      "compact_transcript": "/1b/1e3352cfe4/0/transcript.jsonl",
+      "content_hash": "/1b/1e3352cfe4/0/content_hash.txt",
+      "prompt": "/1b/1e3352cfe4/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 12491,
+    "cache_creation_tokens": 202027,
+    "cache_read_tokens": 2669414,
+    "output_tokens": 42261,
+    "api_call_count": 36
+  }
+}
