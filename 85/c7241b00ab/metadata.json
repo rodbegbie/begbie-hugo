@@ -1,0 +1,29 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "85c7241b00ab",
+  "strategy": "manual-commit",
+  "branch": "feature/update-bio-remove-practica",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "data/aboutSection.yml",
+    "data/resumeSection.yml",
+    "themes/portio/layouts/partials/footer.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/85/c7241b00ab/0/metadata.json",
+      "transcript": "/85/c7241b00ab/0/full.jsonl",
+      "compact_transcript": "/85/c7241b00ab/0/transcript.jsonl",
+      "content_hash": "/85/c7241b00ab/0/content_hash.txt",
+      "prompt": "/85/c7241b00ab/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 12285,
+    "cache_creation_tokens": 202389,
+    "cache_read_tokens": 1893844,
+    "output_tokens": 17304,
+    "api_call_count": 29
+  }
+}

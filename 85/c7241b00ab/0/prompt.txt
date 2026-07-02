@@ -1,0 +1,12 @@
+OK, time to work on updating the copy on the landing page and the footer.  A lot has changed since I first wrote it.
+
+1. Practica has shut down.  I no longer work with them.  Please remove all references to Practica or BestPracticer from the site.
+2. I’ve had a few more jobs.  Take a look at my LinkedIn profile at https://linkedin.com/in/rodbegbie to see what I’ve done recently.
+
+---
+
+Take a look at my resume at ~/Downloads/2026-07 Rod Begbie Resume.pdf
+
+---
+
+Yeah, and read my voice guide at ~/AUTHOR.md to get the right tone.
