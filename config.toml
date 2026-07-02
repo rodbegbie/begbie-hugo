@@ -3,6 +3,8 @@ languageCode = "en-gb"
 paginate = 6
 theme = "portio"
 title = "Rod Begbie"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 
 # Main Menu
 [[menu.main]]
@@ -54,8 +56,6 @@ blogPageURL = "blog"
 contactLink = "mailto:rod@begbie.com"
 copyright = "Copyright © Rod Begbie 2026"
 footerLogo = "images/contact/widget-logo.png"
-formspreeURL = "YOUR FORMSPREE URL"
-googleAnalytics = "YOUR GOOGLE ANALYTICS CODE"
 logo = "images/site-navigation/logo.png"
 subtitle = "Software Engineering Leadership Coach"
 

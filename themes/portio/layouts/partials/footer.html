@@ -96,8 +96,7 @@
 {{ $navbarjs := resources.Get "js/navbar.js" }}
 {{ $testimonialjs := resources.Get "js/testimonial-carousel.js" }}
 {{ $videopopupjs := resources.Get "js/video-popup.js" }}
-{{ $formhandler := resources.Get "js/form-handler.js" }}
-{{ $bundle := slice $navbarjs $testimonialjs $videopopupjs $formhandler
+{{ $bundle := slice $navbarjs $testimonialjs $videopopupjs
   | resources.Concat "js/bundle.js" | minify | fingerprint }}
 <script defer data-cfasync="false" src="{{ $bundle.RelPermalink }}"
   integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>

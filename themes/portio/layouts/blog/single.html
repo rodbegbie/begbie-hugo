@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-12 offset-lg-1 offset-md-0 text-center">
-        <h3 class="breadCrumb__title">{{ .Title }}</h3>
+        <h1 class="breadCrumb__title">{{ .Title }}</h1>
         <nav aria-label="breadcrumb" class="d-flex justify-content-center">
           <ol class="breadcrumb align-items-center">
             <li class="breadcrumb-item"><a href={{ "" | absURL }}>Home</a></li>
@@ -59,7 +59,7 @@
                           srcset="{{ $banner700Webp.RelPermalink }} 700w, {{ $banner1000Webp.RelPermalink }} 1000w, {{ $banner1400Webp.RelPermalink }} 1400w, {{ $banner2000Webp.RelPermalink }} 2000w">
                       <img src="{{ $banner1000.RelPermalink }}" sizes="{{ $sizes }}"
                           srcset="{{ $banner700.RelPermalink }} 700w, {{ $banner1000.RelPermalink }} 1000w, {{ $banner1400.RelPermalink }} 1400w, {{ $banner2000.RelPermalink }} 2000w"
-                          width="{{ $banner1000.Width }}" height="{{ $banner1000.Height }}" alt="feature-image">
+                          width="{{ $banner1000.Width }}" height="{{ $banner1000.Height }}" alt="{{ $.Title }}">
                   </picture>
                   {{ end }}
               </div>

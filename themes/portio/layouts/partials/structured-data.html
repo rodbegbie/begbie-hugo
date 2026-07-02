@@ -1,0 +1,39 @@
+{{ if .IsHome }}
+{{ $sameAs := slice }}
+{{ range site.Params.social }}
+{{ $sameAs = $sameAs | append .url }}
+{{ end }}
+{{ $person := dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" site.Title
+  "jobTitle" site.Params.subtitle
+  "url" .Permalink
+  "sameAs" $sameAs
+}}
+{{ with resources.Get "images/hero/hero-portrait.jpg" }}
+{{ $person = merge $person (dict "image" (.Fill "1200x1600 smart jpg q82").Permalink) }}
+{{ end }}
+<script type="application/ld+json">{{ $person | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{ else if eq .Kind "page" }}
+{{ $desc := .Description | default .Params.subtitle | default site.Params.subtitle | default .Summary }}
+{{ $article := dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" .Title
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "author" (dict "@type" "Person" "name" site.Title)
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+}}
+{{ with $desc }}
+{{ $article = merge $article (dict "description" .) }}
+{{ end }}
+{{ with .Params.featureImage }}
+{{ $anchor := $.Params.featureImageAnchor | default "smart" }}
+{{ with resources.Get . }}
+{{ $article = merge $article (dict "image" (.Fill (printf "1200x630 %s jpg q82" $anchor)).Permalink) }}
+{{ end }}
+{{ end }}
+<script type="application/ld+json">{{ $article | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{ end }}

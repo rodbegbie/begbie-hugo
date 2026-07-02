@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h3 class="breadCrumb__title">{{ .Title }}</h3>
+				<h1 class="breadCrumb__title">{{ .Title }}</h1>
 				<nav aria-label="breadcrumb" class="d-flex justify-content-center">
 					<ol class="breadcrumb align-items-center">
 						<li class="breadcrumb-item"><a href="{{ "" | absURL }}">Home</a></li>
@@ -43,6 +43,7 @@
 			<div class="col-lg-4">
 				<div class="blog-page__item">
 					<a class="blog-page__item-thumb" href="{{ .RelPermalink }}">
+						{{ $post := . }}
 						{{ $anchor := .Params.featureImageAnchor | default "smart" }}
 						{{ with resources.Get .Params.featureImage }}
 						{{ $thumb400 := .Fill (printf "400x462 %s jpg q82" $anchor) }}
@@ -59,7 +60,7 @@
 								srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w, {{ $thumb1200Webp.RelPermalink }} 1200w">
 							<img src="{{ $thumb600.RelPermalink }}" sizes="{{ $sizes }}"
 								srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w, {{ $thumb1200.RelPermalink }} 1200w"
-								width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="post-image">
+								width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="{{ $post.Title }}">
 						</picture>
 						{{ end }}
 					</a>
