@@ -1,4 +1,4 @@
-<section class="footer" id="contact">
+<footer class="footer" id="contact">
 	<div class="footer__blob blob-wrap">
 		{{ partial "blob.html" (dict "id" "footer-blob-gradient" "color" "var(--bg)" "stopOpacity" "0") }}
 	</div>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</footer>
 {{ $navbarjs := resources.Get "js/navbar.js" }}
 {{ $videopopupjs := resources.Get "js/video-popup.js" }}
 {{ $bundle := slice $navbarjs $videopopupjs
