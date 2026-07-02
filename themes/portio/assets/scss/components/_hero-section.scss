@@ -1,183 +1,175 @@
 .hero {
-  padding: 200px 0;
+  padding: 220px 0 100px;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   @include desktop {
-    padding: 150px 0 30px 0;
+    padding: 160px 0 60px;
   }
 
-  &_background-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 65%;
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  &_footer-svg {
-    position: absolute;
-    bottom: 20px;
-    left: -130px;
-    animation: move_top 5s infinite linear;
-    @include desktop {
-      display: none;
-    }
-  }
   &_content {
-    padding: 0 20px 0 0;
-    position: relative;
-    @include desktop {
-      text-align: center;
-      margin-bottom: 60px;
+    animation: heroFadeUp 0.7s ease both;
+  }
+
+  &_eyebrow {
+    display: inline-block;
+    font-family: $font-mono;
+    font-size: $fs-mono-label;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accentSoft);
+    border-radius: $radius-pill;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    animation: heroFadeUp 0.7s ease 0.1s both;
+  }
+
+  &_headline {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: $fs-hero;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 24px;
+    animation: heroFadeUp 0.8s ease 0.2s both;
+    .accent {
+      color: var(--accent);
     }
-    .hero_blob {
+  }
+
+  &_subhead {
+    font-family: $font-body;
+    font-size: $fs-lead;
+    line-height: 1.6;
+    color: var(--inkSoft);
+    max-width: 480px;
+    margin-bottom: 40px;
+    animation: heroFadeUp 0.8s ease 0.3s both;
+  }
+
+  &_ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: heroFadeUp 0.8s ease 0.4s both;
+  }
+
+  &_cta-primary {
+    border-radius: $radius-pill;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accentInk);
+    font-family: $font-body;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 30px;
+    &:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      opacity: 0.9;
+    }
+  }
+
+  &_cta-secondary {
+    border-radius: $radius-pill;
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--ink);
+    font-family: $font-body;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 30px;
+    &:hover {
+      background: var(--bgAlt);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+  }
+
+  &_figure {
+    position: relative;
+    animation: heroFadeUp 0.8s ease 0.3s both;
+    @include desktop {
+      margin-top: 60px;
+    }
+
+    &-blob {
       position: absolute;
       z-index: -1;
-      top: -45%;
-      left: -45%;
-      height: 440px;
-      width: 440px;
+      top: -15%;
+      right: -15%;
+      width: 90%;
+      height: 90%;
+      opacity: 0.12;
       svg {
         width: 100%;
-        position: relative;
-      }
-      @include desktop {
-        display: none;
-      }
-    }
-    span {
-      font-size: 24px;
-      position: relative;
-      display: block;
-      margin: 0 0 20px 30px;
-      @include desktop {
-        display: inline-block;
-      }
-    }
-    p {
-      font-size: $font-size-lg;
-    }
-  }
-  &_figure {
-    width: 90%;
-    margin-left: auto;
-    border-radius: 20px;
-    position: relative;
-    @include desktop {
-      width: 100%;
-    }
-    .figure-svg {
-      position: absolute;
-      top: -55px;
-      left: 50%;
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
-      z-index: -1;
-      height: 150px;
-      animation: move_left 5s infinite linear;
-      img {
         height: 100%;
+      }
+      @include mobile {
+        width: 70%;
+        height: 70%;
+      }
+    }
+
+    &-photo {
+      display: block;
+      img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: $radius-hero-image;
       }
     }
-    img {
-      height: 100%;
-      width: 100%;
-    }
-    &-popup {
-      position: absolute;
-      bottom: 80px;
-      left: 0;
-      transform: translateX(-50%);
-      transition: all 0.3s ease;
-      @include desktop {
-        bottom: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .thumb {
-        height: 160px;
-        width: 250px;
-        border: 1px solid #707070;
-        border-radius: 20px;
-        overflow: hidden;
-        position: relative;
-        &::before {
-          position: absolute;
-          content: "";
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background: rgba(0, 0, 0, 0.6);
-          z-index: 1;
-        }
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-      .popup-button {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 60px;
-        width: 60px;
-        background: #ffffff;
-        border-radius: 50%;
-        z-index: 2;
-        transition: all 0.3s ease;
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 55%;
-          transform: translate(-50%, -50%);
-          transition: all 0.3s ease;
+  }
 
-          path {
-            fill: $primary;
-          }
-        }
-        &:hover {
-          background-color: $primary;
-          svg {
-            path {
-              fill: #ffffff;
-            }
-          }
-        }
-      }
-      &:hover {
-        .popup-button {
-          transform: translate(-50%, -50%) scale(1.1);
-        }
-      }
+  &_video-badge {
+    position: absolute;
+    bottom: -22px;
+    left: -30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: $white;
+    border-radius: $radius-pill;
+    padding: 14px 22px 14px 16px;
+    box-shadow: 0 12px 30px rgba(30, 20, 60, 0.15);
+    max-width: 280px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    @include tablet {
+      position: static;
+      margin-top: 20px;
+      max-width: none;
+    }
+    &:hover {
+      transform: scale(1.03);
+    }
+    &_dot {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    &_label {
+      font-family: $font-body;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
     }
   }
 }
 
-@keyframes move_left {
+@keyframes heroFadeUp {
   0% {
-    transform: translateX(-50%);
+    opacity: 0;
+    transform: translateY(16px);
   }
-  50% {
-    transform: translateX(-57%);
-  }
-}
-
-@keyframes move_top {
-  0%,
   100% {
+    opacity: 1;
     transform: translateY(0);
-  }
-  50% {
-    transform: translateY(15px);
   }
 }
