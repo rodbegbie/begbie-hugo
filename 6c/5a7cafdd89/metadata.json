@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "6c5a7cafdd89",
+  "strategy": "manual-commit",
+  "branch": "chore/robots-sitemap",
+  "checkpoints_count": 1,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/6c/5a7cafdd89/0/metadata.json",
+      "transcript": "/6c/5a7cafdd89/0/full.jsonl",
+      "compact_transcript": "/6c/5a7cafdd89/0/transcript.jsonl",
+      "content_hash": "/6c/5a7cafdd89/0/content_hash.txt",
+      "prompt": "/6c/5a7cafdd89/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 195737,
+    "cache_creation_tokens": 6306168,
+    "cache_read_tokens": 287977340,
+    "output_tokens": 660644,
+    "api_call_count": 1026
+  }
+}
