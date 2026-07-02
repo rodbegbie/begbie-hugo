@@ -73,6 +73,6 @@ url = "https://www.linkedin.com/in/rodbegbie"
 weight = 2
 
 [[params.social]]
-icon = "fa-twitter-square"
-url = "https://twitter.com/RodBegbie"
+icon = "fa-bluesky"
+url = "https://bsky.app/profile/rod.begbie.com"
 weight = 4

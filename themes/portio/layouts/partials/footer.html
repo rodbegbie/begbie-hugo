@@ -99,5 +99,5 @@
 {{ $formhandler := resources.Get "js/form-handler.js" }}
 {{ $bundle := slice $navbarjs $testimonialjs $videopopupjs $formhandler
   | resources.Concat "js/bundle.js" | minify | fingerprint }}
-<script defer src="{{ $bundle.RelPermalink }}"
+<script defer data-cfasync="false" src="{{ $bundle.RelPermalink }}"
   integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>
