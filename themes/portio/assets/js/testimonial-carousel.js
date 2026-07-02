@@ -17,6 +17,12 @@ window.addEventListener("DOMContentLoaded", function () {
   // True once the user has explicitly paused via the toggle button; hover
   // and focus pausing must not resume autoplay while this is set.
   var userPaused = false;
+  // Track hover and focus independently so autoplay only resumes once both
+  // have cleared -- otherwise leaving with the mouse while focus is still
+  // inside (or vice versa) would resume autoplay under the still-active
+  // interaction, violating the WCAG 2.2.2 pause guarantee.
+  var isHovered = false;
+  var hasFocus = false;
 
   function slidesPerView() {
     return desktopQuery.matches ? 2 : 1;
@@ -81,7 +87,7 @@ window.addEventListener("DOMContentLoaded", function () {
   // must never start). Used by hover/focus resume and dot navigation so
   // neither can override an explicit user pause.
   function maybeStartAutoplay() {
-    if (userPaused || reducedMotionQuery.matches) {
+    if (userPaused || reducedMotionQuery.matches || isHovered || hasFocus) {
       return;
     }
     startAutoplay();
@@ -116,10 +122,22 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  slider.addEventListener("mouseenter", stopAutoplay);
-  slider.addEventListener("mouseleave", maybeStartAutoplay);
-  slider.addEventListener("focusin", stopAutoplay);
-  slider.addEventListener("focusout", maybeStartAutoplay);
+  slider.addEventListener("mouseenter", function () {
+    isHovered = true;
+    stopAutoplay();
+  });
+  slider.addEventListener("mouseleave", function () {
+    isHovered = false;
+    maybeStartAutoplay();
+  });
+  slider.addEventListener("focusin", function () {
+    hasFocus = true;
+    stopAutoplay();
+  });
+  slider.addEventListener("focusout", function () {
+    hasFocus = false;
+    maybeStartAutoplay();
+  });
   desktopQuery.addEventListener("change", render);
   window.addEventListener("resize", render);
 
