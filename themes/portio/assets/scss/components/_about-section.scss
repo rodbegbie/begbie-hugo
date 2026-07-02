@@ -5,6 +5,7 @@
   &_content {
     &-thumb {
       position: relative;
+      z-index: 0;
 
       &-blob {
         position: absolute;

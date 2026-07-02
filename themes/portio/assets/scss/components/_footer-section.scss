@@ -1,6 +1,7 @@
 .footer {
 	background: var(--ink);
 	position: relative;
+	z-index: 0;
 	overflow: hidden;
 	padding: $section-padding-y 0 0;
 	color: var(--bg);
@@ -8,17 +9,17 @@
 	&__blob {
 		position: absolute;
 		z-index: -1;
-		top: -25%;
-		right: -15%;
-		width: 45%;
-		height: 90%;
-		opacity: 0.1;
+		top: -15%;
+		right: -10%;
+		width: 55%;
+		height: 100%;
+		opacity: 0.35;
 		svg {
 			width: 100%;
 			height: 100%;
 		}
 		@include tablet {
-			width: 65%;
+			width: 75%;
 		}
 	}
 

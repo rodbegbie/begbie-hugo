@@ -1,5 +1,6 @@
 .blog-preview {
 	position: relative;
+	z-index: 0;
 	padding: $section-padding-y 0;
 	overflow: hidden;
 	@include desktop {
