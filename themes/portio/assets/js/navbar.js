@@ -32,6 +32,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }, COLLAPSE_DURATION);
       toggler.classList.remove("collapsed");
       toggler.setAttribute("aria-expanded", "true");
+      toggler.setAttribute("aria-label", "Close menu");
     }
 
     function closeCollapse() {
@@ -48,6 +49,7 @@ window.addEventListener("DOMContentLoaded", function () {
       }, COLLAPSE_DURATION);
       toggler.classList.add("collapsed");
       toggler.setAttribute("aria-expanded", "false");
+      toggler.setAttribute("aria-label", "Open menu");
     }
 
     toggler.addEventListener("click", function () {
@@ -87,7 +89,10 @@ window.addEventListener("DOMContentLoaded", function () {
       var target = document.querySelector(this.hash);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth" });
+        var scrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth";
+        target.scrollIntoView({ behavior: scrollBehavior });
       }
     });
   }

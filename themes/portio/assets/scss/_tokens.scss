@@ -13,7 +13,7 @@ directly by component partials at build time.
   --bgAlt: oklch(92% 0.015 250);
   --ink: oklch(23% 0.02 260);
   --inkSoft: oklch(46% 0.025 260);
-  --accent: #0e8a8f;
+  --accent: #0a7075;
   // Derived from --accent, not hardcoded -- this is the fix for the
   // design handoff's flagged bug (accentSoft was authored against an
   // earlier violet accent and never re-derived when it changed to teal).

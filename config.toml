@@ -47,10 +47,12 @@ subtitle = "Software Engineering Leadership Coach"
 
 [[params.social]]
 icon = "fa-linkedin-square"
+name = "LinkedIn"
 url = "https://www.linkedin.com/in/rodbegbie"
 weight = 2
 
 [[params.social]]
 icon = "fa-bluesky"
+name = "Bluesky"
 url = "https://bsky.app/profile/rod.begbie.com"
 weight = 4

@@ -15,36 +15,7 @@
 		<div class="row blog-preview__grid">
 			{{ range first 3 (where site.RegularPages "Type" "!=" "portfolio") }}
 			<div class="col-md-4">
-				<div class="blog-preview__card">
-					<a class="blog-preview__card_thumb" href="{{ .RelPermalink }}">
-						{{ $post := . }}
-						{{ $anchor := .Params.featureImageAnchor | default "smart" }}
-						{{ with resources.Get .Params.featureImage }}
-						{{ $thumb400 := .Fill (printf "400x250 %s jpg q82" $anchor) }}
-						{{ $thumb600 := .Fill (printf "600x375 %s jpg q82" $anchor) }}
-						{{ $thumb900 := .Fill (printf "900x562 %s jpg q82" $anchor) }}
-						{{ $thumb400Webp := .Fill (printf "400x250 %s webp q75 drawing" $anchor) }}
-						{{ $thumb600Webp := .Fill (printf "600x375 %s webp q75 drawing" $anchor) }}
-						{{ $thumb900Webp := .Fill (printf "900x562 %s webp q75 drawing" $anchor) }}
-						{{ $sizes := "(min-width: 1200px) 373px, (min-width: 768px) 226px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
-						<picture>
-							<source type="image/webp" sizes="{{ $sizes }}"
-								srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w">
-							<img src="{{ $thumb600.RelPermalink }}" sizes="{{ $sizes }}"
-								srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w"
-								width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="{{ $post.Title }}">
-						</picture>
-						{{ end }}
-					</a>
-					<div class="blog-preview__card_content">
-						<h3 class="blog-preview__card_title">
-							<a href="{{ .RelPermalink }}">{{ .Title }}</a>
-						</h3>
-						{{ with .Params.subtitle }}
-						<p class="blog-preview__card_teaser">{{ . }}</p>
-						{{ end }}
-					</div>
-				</div>
+				{{ partial "blogCard.html" . }}
 			</div>
 			{{ end }}
 		</div>
