@@ -2,7 +2,6 @@
 title: "Estimating your way to success in software engineering"
 date: 2021-02-15
 featureImage: images/writing/writing.jpg
-featureImageAnchor: Left
 subtitle: ‘Weeks of coding can save you hours of planning.’ – Old software engineering proverb.
 ---
 
