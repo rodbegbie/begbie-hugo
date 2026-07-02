@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "879d162e2b8a",
+  "strategy": "manual-commit",
+  "branch": "chore/robots-sitemap",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "themes/portio/assets/scss/components/_contact.scss"
+  ],
+  "sessions": [
+    {
+      "metadata": "/87/9d162e2b8a/0/metadata.json",
+      "transcript": "/87/9d162e2b8a/0/full.jsonl",
+      "compact_transcript": "/87/9d162e2b8a/0/transcript.jsonl",
+      "content_hash": "/87/9d162e2b8a/0/content_hash.txt",
+      "prompt": "/87/9d162e2b8a/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 197109,
+    "cache_creation_tokens": 6357277,
+    "cache_read_tokens": 307625897,
+    "output_tokens": 684356,
+    "api_call_count": 1100
+  }
+}
