@@ -1627,3 +1627,7 @@ rebase onto main.  Then I want you to delete the /tags/ and /categories/ direcot
 ---
 
 figure-svg.svg seems to have been deleted despite being references on other pages.
+
+---
+
+Never mind. My mistake.  Can you update the lastmod for / in the sitemap to today since I've been making edits?
