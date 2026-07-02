@@ -9,18 +9,18 @@
       &-blob {
         position: absolute;
         z-index: -1;
-        top: -20%;
-        left: -20%;
-        width: 130%;
-        height: 130%;
-        opacity: 0.12;
+        top: -30%;
+        left: -30%;
+        width: 150%;
+        height: 150%;
+        opacity: 0.2;
         svg {
           width: 100%;
           height: 100%;
         }
         @include tablet {
-          width: 100%;
-          height: 100%;
+          width: 120%;
+          height: 120%;
         }
       }
     }

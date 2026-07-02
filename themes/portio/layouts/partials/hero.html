@@ -34,14 +34,14 @@
             </svg>
           </div>
           {{ with resources.Get .image }}
-          {{ $hero500 := .Fill "500x625 smart jpg q82" }}
-          {{ $hero750 := .Fill "750x938 smart jpg q82" }}
-          {{ $hero1000 := .Fill "1000x1250 smart jpg q82" }}
-          {{ $hero1400 := .Fill "1400x1750 smart jpg q82" }}
-          {{ $hero500Webp := .Fill "500x625 smart webp q75 picture" }}
-          {{ $hero750Webp := .Fill "750x938 smart webp q75 picture" }}
-          {{ $hero1000Webp := .Fill "1000x1250 smart webp q75 picture" }}
-          {{ $hero1400Webp := .Fill "1400x1750 smart webp q75 picture" }}
+          {{ $hero500 := .Fill "500x625 Top jpg q82" }}
+          {{ $hero750 := .Fill "750x938 Top jpg q82" }}
+          {{ $hero1000 := .Fill "1000x1250 Top jpg q82" }}
+          {{ $hero1400 := .Fill "1400x1750 Top jpg q82" }}
+          {{ $hero500Webp := .Fill "500x625 Top webp q75 picture" }}
+          {{ $hero750Webp := .Fill "750x938 Top webp q75 picture" }}
+          {{ $hero1000Webp := .Fill "1000x1250 Top webp q75 picture" }}
+          {{ $hero1400Webp := .Fill "1400x1750 Top webp q75 picture" }}
           {{ $sizes := "(min-width: 1400px) 500px, (min-width: 1200px) 430px, (min-width: 992px) 360px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
           <picture class="hero_figure-photo">
             <source type="image/webp" sizes="{{ $sizes }}"
@@ -49,7 +49,16 @@
             <img src="{{ $hero750.RelPermalink }}" sizes="{{ $sizes }}"
               srcset="{{ $hero500.RelPermalink }} 500w, {{ $hero750.RelPermalink }} 750w, {{ $hero1000.RelPermalink }} 1000w, {{ $hero1400.RelPermalink }} 1400w"
               width="{{ $hero750.Width }}" height="{{ $hero750.Height }}"
-              alt="{{ site.Title }}, {{ site.Params.subtitle }}">
+              alt="{{ site.Title }}, {{ site.Params.subtitle }}" style='
+                -webkit-mask: url({{ "images/hero/hero-mask-svg.svg" | absURL }});
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-size: contain;
+                -webkit-mask-position: center center;
+                mask: url({{ "images/hero/hero-mask-svg.svg" | absURL }});
+                mask-repeat: no-repeat;
+                mask-size: contain;
+                mask-position: center center;
+              '>
           </picture>
           {{ end }}
 

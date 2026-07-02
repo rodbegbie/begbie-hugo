@@ -22,21 +22,30 @@
                     </div>
                     <div class="about_content-thumb-image">
                         {{ with resources.Get .image }}
-                        {{ $about500 := .Fill "500x625 smart jpg q82" }}
-                        {{ $about750 := .Fill "750x938 smart jpg q82" }}
-                        {{ $about1000 := .Fill "1000x1250 smart jpg q82" }}
-                        {{ $about1400 := .Fill "1400x1750 smart jpg q82" }}
-                        {{ $about500Webp := .Fill "500x625 smart webp q75 picture" }}
-                        {{ $about750Webp := .Fill "750x938 smart webp q75 picture" }}
-                        {{ $about1000Webp := .Fill "1000x1250 smart webp q75 picture" }}
-                        {{ $about1400Webp := .Fill "1400x1750 smart webp q75 picture" }}
+                        {{ $about500 := .Fill "500x625 Top jpg q82" }}
+                        {{ $about750 := .Fill "750x938 Top jpg q82" }}
+                        {{ $about1000 := .Fill "1000x1250 Top jpg q82" }}
+                        {{ $about1400 := .Fill "1400x1750 Top jpg q82" }}
+                        {{ $about500Webp := .Fill "500x625 Top webp q75 picture" }}
+                        {{ $about750Webp := .Fill "750x938 Top webp q75 picture" }}
+                        {{ $about1000Webp := .Fill "1000x1250 Top webp q75 picture" }}
+                        {{ $about1400Webp := .Fill "1400x1750 Top webp q75 picture" }}
                         {{ $sizes := "(min-width: 1400px) 350px, (min-width: 1200px) 300px, (min-width: 992px) 250px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
                         <picture>
                             <source type="image/webp" sizes="{{ $sizes }}"
                                 srcset="{{ $about500Webp.RelPermalink }} 500w, {{ $about750Webp.RelPermalink }} 750w, {{ $about1000Webp.RelPermalink }} 1000w, {{ $about1400Webp.RelPermalink }} 1400w">
                             <img src="{{ $about750.RelPermalink }}" sizes="{{ $sizes }}"
                                 srcset="{{ $about500.RelPermalink }} 500w, {{ $about750.RelPermalink }} 750w, {{ $about1000.RelPermalink }} 1000w, {{ $about1400.RelPermalink }} 1400w"
-                                width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="{{ site.Title }}">
+                                width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="{{ site.Title }}" style='
+                                  -webkit-mask: url({{ "images/about/about-mask-svg.svg" | absURL }});
+                                  -webkit-mask-repeat: no-repeat;
+                                  -webkit-mask-size: contain;
+                                  -webkit-mask-position: center center;
+                                  mask: url({{ "images/about/about-mask-svg.svg" | absURL }});
+                                  mask-repeat: no-repeat;
+                                  mask-size: contain;
+                                  mask-position: center center;
+                                '>
                         </picture>
                         {{ end }}
                     </div>
