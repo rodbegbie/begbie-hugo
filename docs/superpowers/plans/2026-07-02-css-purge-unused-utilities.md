@@ -144,7 +144,10 @@ $utilities: map-merge($utilities, (
   )),
   "margin-bottom": map-merge(map-get($utilities, "margin-bottom"), (
     responsive: false,
-    values: (5: map-get($spacers, 5)),
+    values: (
+      3: map-get($spacers, 3),
+      5: map-get($spacers, 5),
+    ),
   )),
   "margin-x": map-merge(map-get($utilities, "margin-x"), (
     responsive: false,

@@ -71,7 +71,7 @@ utility keys (see `_utilities.scss` category names):
 | `align-items`     | `align-items-center`       | `center`      | no |
 | `margin-top`      | `mt-5`                     | `5`           | no |
 | `margin-end`      | `me-3`                     | `3`           | no |
-| `margin-bottom`   | `mb-5`                     | `5`           | no |
+| `margin-bottom`   | `mb-5`, `.mb-3` via `@extend` in `_typography.scss:29` (`.top-title`) | `3`, `5` | no |
 | `margin-x`        | `mx-2`, `mx-auto`          | `2`, `auto`   | no |
 | `margin-y`        | `my-0`                     | `0`           | no |
 | `padding`         | `p-2`                      | `2`           | no |
@@ -122,6 +122,18 @@ the cause instead of being mistaken for a CSS specificity or cache issue.
 4. Grep built `public/` output for `ZgotmplZ` (per existing CLAUDE.md gotcha
    about the CSS-context auto-escaper) as a sanity check, even though this
    change doesn't touch dynamic inline styles.
+
+**Audit methodology gap found during implementation:** the class-usage audit
+script only scans rendered HTML for literal `class="..."` attributes. It
+missed `themes/portio/assets/scss/_typography.scss:29`, which pulls in a
+utility class via Sass `@extend .mb-3;` rather than a literal HTML class —
+this class never appears in any `public/**/*.html` file, so the HTML-only
+audit couldn't see it, but the build fails without it (`@extend` requires
+the target selector to exist). Confirmed via grep this is the only `@extend`
+of a utility class anywhere in the theme's SCSS. `margin-bottom` was widened
+to keep both `3` and `5`. Future re-audits of this kind should also
+`grep -rn "@extend \." themes/portio/assets/scss` for SCSS-internal utility
+dependencies the HTML scan can't see.
 
 ## Design discussion: why not PurgeCSS
 
