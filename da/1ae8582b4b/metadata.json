@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "da1ae8582b4b",
+  "strategy": "manual-commit",
+  "branch": "chore/css-purge-unused-utilities",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "themes/portio/assets/scss/style.scss"
+  ],
+  "sessions": [
+    {
+      "metadata": "/da/1ae8582b4b/0/metadata.json",
+      "transcript": "/da/1ae8582b4b/0/full.jsonl",
+      "compact_transcript": "/da/1ae8582b4b/0/transcript.jsonl",
+      "content_hash": "/da/1ae8582b4b/0/content_hash.txt",
+      "prompt": "/da/1ae8582b4b/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 40711,
+    "cache_creation_tokens": 2640071,
+    "cache_read_tokens": 158650618,
+    "output_tokens": 255380,
+    "api_call_count": 469
+  }
+}
