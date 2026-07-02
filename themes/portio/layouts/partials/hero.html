@@ -40,12 +40,22 @@
           <div class="figure-svg">
             <img src="images/hero/figure-svg.svg" alt="figure-svg" />
           </div>
-          <img src="{{ .image | absURL }}" alt="hero-image" style='
+          {{ with resources.Get .image }}
+          {{ $hero1x := .Resize "600x800 jpg q82" }}
+          {{ $hero2x := .Resize "1200x1600 jpg q82" }}
+          {{ $hero1xWebp := .Resize "600x800 webp q75" }}
+          {{ $hero2xWebp := .Resize "1200x1600 webp q75" }}
+          <picture>
+            <source type="image/webp" srcset="{{ $hero1xWebp.RelPermalink }} 1x, {{ $hero2xWebp.RelPermalink }} 2x">
+            <img src="{{ $hero1x.RelPermalink }}" srcset="{{ $hero1x.RelPermalink }} 1x, {{ $hero2x.RelPermalink }} 2x"
+              width="{{ $hero1x.Width }}" height="{{ $hero1x.Height }}" alt="hero-image" style='
                   -webkit-mask: url({{"images/hero/hero-mask-svg.png" | absURL }});
                   -webkit-mask-repeat: no-repeat;
                   -webkit-mask-size: contain;
                   -webkit-mask-position: center center;
                 ' />
+          </picture>
+          {{ end }}
 
           {{ if .videoURL }}
           <div class="hero_figure-popup">
