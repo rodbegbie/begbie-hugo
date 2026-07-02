@@ -3,10 +3,11 @@
 {{ partial "head.html" . }}
 
 <body>
+  <a class="skip-link" href="#content">Skip to main content</a>
   {{ partial "navbar.html" . }}
-  <div id="content">
+  <main id="content">
     {{ block "main" . }}{{ end }}
-  </div>
+  </main>
   {{ partial "footer.html" . }}
 </body>
 
