@@ -2,69 +2,55 @@
 {{ if .enable }}
 <section class="section about" id="about">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="about_header mb-5">
-                    <span class="top-title">{{ .topTitle }}</span>
-                    {{ .title | markdownify}}
+        <div class="row align-items-center g-5">
+            <div class="col-lg-4">
+                <div class="about_content-thumb">
+                    <div class="about_content-thumb-blob blob-wrap">
+                        {{ partial "blob.html" (dict "id" "about-blob-gradient") }}
+                    </div>
+                    <div class="about_content-thumb-image">
+                        {{ with resources.Get .image }}
+                        {{ $about500 := .Fill "500x625 Top jpg q82" }}
+                        {{ $about750 := .Fill "750x938 Top jpg q82" }}
+                        {{ $about1000 := .Fill "1000x1250 Top jpg q82" }}
+                        {{ $about1400 := .Fill "1400x1750 Top jpg q82" }}
+                        {{ $about500Webp := .Fill "500x625 Top webp q75 picture" }}
+                        {{ $about750Webp := .Fill "750x938 Top webp q75 picture" }}
+                        {{ $about1000Webp := .Fill "1000x1250 Top webp q75 picture" }}
+                        {{ $about1400Webp := .Fill "1400x1750 Top webp q75 picture" }}
+                        {{ $sizes := "(min-width: 1400px) 350px, (min-width: 1200px) 300px, (min-width: 992px) 250px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
+                        <picture>
+                            <source type="image/webp" sizes="{{ $sizes }}"
+                                srcset="{{ $about500Webp.RelPermalink }} 500w, {{ $about750Webp.RelPermalink }} 750w, {{ $about1000Webp.RelPermalink }} 1000w, {{ $about1400Webp.RelPermalink }} 1400w">
+                            <img src="{{ $about750.RelPermalink }}" sizes="{{ $sizes }}"
+                                srcset="{{ $about500.RelPermalink }} 500w, {{ $about750.RelPermalink }} 750w, {{ $about1000.RelPermalink }} 1000w, {{ $about1400.RelPermalink }} 1400w"
+                                width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="{{ site.Title }}" style='
+                                  -webkit-mask: url({{ "images/about/about-mask-svg.svg" | absURL }});
+                                  -webkit-mask-repeat: no-repeat;
+                                  -webkit-mask-size: contain;
+                                  -webkit-mask-position: center center;
+                                  mask: url({{ "images/about/about-mask-svg.svg" | absURL }});
+                                  mask-repeat: no-repeat;
+                                  mask-size: contain;
+                                  mask-position: center center;
+                                '>
+                        </picture>
+                        {{ end }}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="about_content">
-                    <div class="about_content-thumb">
-                        <div class="about-svg">
-                            <img src="images/hero/figure-svg.svg" alt="figure-svg">
-                        </div>
-                        <div class="about_content-thumb-image">
-                            {{ with resources.Get .image }}
-                            {{ $about500 := .Resize "500x667 jpg q82" }}
-                            {{ $about750 := .Resize "750x1000 jpg q82" }}
-                            {{ $about1000 := .Resize "1000x1333 jpg q82" }}
-                            {{ $about1400 := .Resize "1400x1867 jpg q82" }}
-                            {{ $about500Webp := .Resize "500x667 webp q75 picture" }}
-                            {{ $about750Webp := .Resize "750x1000 webp q75 picture" }}
-                            {{ $about1000Webp := .Resize "1000x1333 webp q75 picture" }}
-                            {{ $about1400Webp := .Resize "1400x1867 webp q75 picture" }}
-                            {{ $sizes := "(min-width: 1400px) 583px, (min-width: 1200px) 502px, (min-width: 992px) 421px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
-                            <picture>
-                                <source type="image/webp" sizes="{{ $sizes }}"
-                                    srcset="{{ $about500Webp.RelPermalink }} 500w, {{ $about750Webp.RelPermalink }} 750w, {{ $about1000Webp.RelPermalink }} 1000w, {{ $about1400Webp.RelPermalink }} 1400w">
-                                <img src="{{ $about750.RelPermalink }}" sizes="{{ $sizes }}"
-                                    srcset="{{ $about500.RelPermalink }} 500w, {{ $about750.RelPermalink }} 750w, {{ $about1000.RelPermalink }} 1000w, {{ $about1400.RelPermalink }} 1400w"
-                                    width="{{ $about750.Width }}" height="{{ $about750.Height }}" alt="{{ site.Title }}"
-                                    style='-webkit-mask: url({{"images/about/about-mask-svg.svg" | absURL}}); -webkit-mask-size: contain;'>
-                            </picture>
-                            {{ end }}
-                        </div>
+            <div class="col-lg-8">
+                <div class="about_content-inner">
+                    <span class="about_eyebrow">{{ .topTitle }}</span>
+                    <div class="about_content-inner-heading">
+                        {{ .title | markdownify }}
                     </div>
-                    <div class="about_content-inner">
-                        <div class="about_content-inner-blob">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 600 600">
-                                <defs>
-                                    <linearGradient id="c" x1="0.929" y1="0.111" x2="0.263" y2="0.935"
-                                        gradientUnits="objectBoundingBox">
-                                        <stop offset="0" stop-color="#f1f6f9" />
-                                        <stop offset="1" stop-color="#f1f6f9" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-                                <g data-name="blob-shape (3)">
-                                    <path class="blob" fill="url(#c)"
-                                        d="M455.4 151.1c43.1 36.7 73.4 92.8 60.8 136.3-12.7 43.5-68.1 74.4-111.3 119.4-43.1 45-74 104.1-109.8 109-35.9 5-76.7-44.2-111.8-89.2-35.2-45-64.7-85.8-70.8-132.6-6-46.8 11.6-99.6 46.7-136.3 35.2-36.6 88-57.2 142.4-58.8 54.5-1.7 110.6 15.6 153.8 52.2z" />
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="mb-4 text-light">
-                            {{ .content | markdownify}}
-                        </div>
-                        <div>
-                            <a class="btn btn-primary me-3 btn-zoom"
-                                href="{{ .button1Target | absURL }}">{{ .button1Name }}</a>
-                            <!-- <a class="btn btn-outline-primary btn-zoom" href="{{ .button2Target | absURL }}">
-                                {{ .button2Name }} </a> -->
-                        </div>
+                    <div class="about_content-inner-body">
+                        {{ .content | markdownify }}
+                    </div>
+                    <div>
+                        <a class="btn btn-primary me-3 btn-zoom about_cta"
+                            href="{{ .button1Target | absURL }}">{{ .button1Name }}</a>
                     </div>
                 </div>
             </div>

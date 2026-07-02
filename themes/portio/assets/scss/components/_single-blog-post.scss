@@ -2,45 +2,11 @@
     @include desktop {
         padding: 50px 0;
     }
-    .svg-img {
-        position: absolute;
-        top: 30%;
-        left: -7%;
-        animation: move_top 5s infinite linear;
-        @include desktop {
-            display: none;
-        }
-    }
-    .animate-shape {
-        position: absolute;
-        top: 29%;
-        right: 4%;
-        height: 300px;
-        width: 300px;
-        svg {
-            width: 100%;
-        }
-        @include desktop {
-            display: none;
-        }
-    }
-    .animate-pattern {
-        position: absolute;
-        top: 46%;
-        right: 12%;
-        height: 100px;
-        width: 100px;
-        animation: move_top 3s infinite linear;
-        img {
-            height: 100%;
-            width: 100%;
-        }
-        @include desktop {
-            display: none;
-        }
-    }
     .singleBlog {
+        overflow: hidden;
         &__feature {
+            position: relative;
+            z-index: 0;
             margin: 0 100px;
             @include desktop {
                 margin: 0;
@@ -49,6 +15,23 @@
                 height: 100%;
                 width: 100%;
                 border-radius: 20px;
+            }
+            &-blob {
+                position: absolute;
+                z-index: -1;
+                top: -25%;
+                right: -25%;
+                width: 55%;
+                height: 55%;
+                opacity: 0.2;
+                svg {
+                    width: 100%;
+                    height: 100%;
+                }
+                @include tablet {
+                    width: 40%;
+                    height: 40%;
+                }
             }
         }
         &__content {

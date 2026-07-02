@@ -1,14 +1,15 @@
 ---
 enable: true
-# topTitle: 
-content: >
-  # Rod Begbie
-  
-  ### Software Engineering Leadership Coach
-
+eyebrow: Software Engineering Leadership Coach
+headlinePrefix: Level up your
+headlineAccent: engineering
+headlineSuffix: leadership.
+subhead: >
   Providing coaching and mentorship to engineering leaders – from senior software engineers looking to level-up their scope of impact, to startup CTOs facing the challenges of scaling their organizations.
 buttonName: Contact me
 buttonURL: "#contact"
+button2Name: Read my recent posts
+button2URL: /blog/
+videoLabel: Being Right is Only Half the Battle (30 min)
 image: images/hero/hero-portrait.jpg
-videoThumb: images/hero/hero-video-thumb.jpg
 videoURL: https://www.youtube.com/watch?v=xnZAMk-xIGk

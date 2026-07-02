@@ -1,110 +1,90 @@
 .blog-preview {
 	position: relative;
-	margin-bottom: 30px;
-	&__shape {
-		position: absolute;
-		top: 11%;
-		right: 12%;
-		height: 300px;
-		width: 300px;
-		img {
-			animation: rotate 25s infinite linear;
-			height: 100%;
-			width: 100%;
-		}
-		@include desktop {
-			display: none;
-		}
-	}
-	&__header_button {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		a {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			display: inline-block;
-			@include desktop {
-				position: relative;
-				margin-top: 30px;
-			}
-		}
-	}
-	&__item {
-		position: relative;
-		margin-bottom: 20px;
-		@include desktop {
-			margin-bottom: 130px;
-		}
-		&-thumb {
-			display: block;
-			width: 90%;
-			height: 100%;
-			overflow: hidden;
-			border-radius: 20px;
-			@include desktop {
-				width: 80%;
-				margin: 0 auto;
-			}
-			img {
-				height: 100%;
-				width: 100%;
-				transition: all 0.3s ease;
-			}
-		}
-		&-content {
-			position: absolute;
-			bottom: -100px;
-			left: 40px;
-			padding: 30px;
-			border-radius: 20px;
-			box-shadow: 0px 20px 40px 0px rgba(50, 65, 141, 0.12);
-			@include desktop {
-				left: 0;
-			}
-			span {
-				color: $primary;
-				margin: 0 0 20px 40px;
-				position: relative;
-				display: block;
-				line-height: 1;
-				&::before {
-					position: absolute;
-					content: "";
-					top: 50%;
-					left: -40px;
-					height: 1px;
-					width: 20px;
-					background: $secondary;
-					transform: translateY(-50%);
-				}
-			}
-		}
-		&:hover {
-			.blog-preview__item-thumb img {
-				transform: scale(1.1);
-			}
-		}
-	}
-	.mobile {
-		display: none;
-	}
+	z-index: 0;
+	padding: $section-padding-y 0;
+	overflow: hidden;
 	@include desktop {
-		.desktop {
+		padding: 60px 0;
+	}
+
+	&__blob {
+		position: absolute;
+		z-index: -1;
+		top: -20%;
+		right: -20%;
+		width: 55%;
+		height: 75%;
+		opacity: 0.18;
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+		@include tablet {
 			display: none;
 		}
-		.mobile {
+	}
+
+	&__eyebrow {
+		display: inline-block;
+		font-family: $font-mono;
+		font-size: $fs-mono-label;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: var(--accent);
+		background: var(--accentSoft);
+		border-radius: $radius-pill;
+		padding: 8px 16px;
+		margin-bottom: 16px;
+	}
+
+	&__grid {
+		row-gap: 30px;
+	}
+
+	&__card {
+		&_thumb {
 			display: block;
-			text-align: center;
+			border-radius: $radius-image;
+			overflow: hidden;
+			margin-bottom: 16px;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+			&:hover img {
+				transform: scale(1.05);
+			}
+		}
+
+		&_title {
+			font-family: $font-body;
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 1.35;
+			margin-bottom: 8px;
+			a {
+				color: var(--ink);
+			}
+		}
+
+		&_teaser {
+			font-family: $font-body;
+			font-size: 14px;
+			line-height: 1.5;
+			color: var(--inkSoft);
+			margin-bottom: 0;
 		}
 	}
-}
-@keyframes rotate {
-	from {
-		-webkit-transform: rotate(0deg);
-	}
-	to {
-		-webkit-transform: rotate(360deg);
+
+	&__more {
+		display: inline-block;
+		font-family: $font-body;
+		font-size: 15px;
+		font-weight: 600;
+		color: var(--accent);
+		margin-top: 20px;
 	}
 }

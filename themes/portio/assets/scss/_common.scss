@@ -18,3 +18,19 @@
   }
 }
 
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+// Every homepage section wraps its content in Bootstrap's `.container`;
+// overriding it once here gives every section the design's 1280px/40px
+// content measure without any template markup changes. Safe on narrow
+// viewports: `max-width` only caps rendering above 1280px, `width: 100%`
+// (from Bootstrap's own rule) still governs everything narrower.
+.container {
+  max-width: $content-max-width;
+  padding-left: $content-padding-x;
+  padding-right: $content-padding-x;
+}
+

@@ -1,49 +1,23 @@
 {{ with hugo.Data.testimonialSection }}
 {{ if .enable }}
-<section class="section testimonial">
-    <div class="testimonial__background_shape">
-        <svg viewBox="0 0 1920 79">
-            <path d="M0 0h1920v79L0 0z" data-name="Path 1450" />
-        </svg>
-    </div>
+<section class="section testimonial" id="testimonials">
     <div class="container">
-        <div class="row text-center">
+        <div class="row text-center mb-5">
             <div class="col-lg-6 offset-lg-3">
-                <div class="testimonial__header">
-                    <span class="top-title">{{ .topTitle }}</span>
-                    {{ .title | markdownify }}
-                </div>
+                <span class="testimonial__eyebrow">{{ .topTitle }}</span>
+                {{ .title | markdownify }}
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="testimonial__slider">
-                    {{ $section := .testimonial }}
-                    <div class="testimonial__slider_track">
-                    {{ range $section }}
-                    <div class="testimonial__slider_item">
-                        {{ if .star }}
-                        <ul class="testimonial__slider_item-rating">
-                            {{ $rating := .star | int }}
-                            {{ $rating := sub $rating 1 }}
-                            {{ range $i, $sequence := (seq 5) }}
-                            {{ if le $i $rating }}
-                            <li>{{ partial "icon.html" (dict "name" "fa-star") }}</li>
-                            {{ else }}
-                            <li>{{ partial "icon.html" (dict "name" "fa-star" "class" "inactive") }}</li>
-                            {{ end }}
-                            {{ end }}
-                        </ul>
-                        {{ end }}
-                        <p class="testimonial__slider_item-content"> {{ .comment | markdownify }} </p>
-                        <p class="testimonial__slider_item-author"><span>{{ .name }}</span> | {{ .time }}</p>
-                    </div>
-                    {{ end }}
-                    </div>
-                    <div class="testimonial__slider_dots"></div>
-                    <button type="button" class="testimonial__slider_pause btn btn-sm btn-outline-secondary" aria-pressed="false" aria-label="Pause testimonials">Pause</button>
+        <div class="row testimonial__grid">
+            {{ range $index, $item := .testimonial }}
+            <div class="col-md-4">
+                <div class="testimonial__card{{ if eq (mod $index 2) 1 }} testimonial__card--inverted{{ end }}">
+                    <span class="testimonial__card_quote">&ldquo;</span>
+                    <p class="testimonial__card_content">{{ $item.comment | markdownify }}</p>
+                    <p class="testimonial__card_author"><span>{{ $item.name }}</span> | {{ $item.time }}</p>
                 </div>
             </div>
+            {{ end }}
         </div>
     </div>
 </section>

@@ -1,0 +1,54 @@
+/*!------------------------------------------------------------------
+[DESIGN TOKENS — 2026-07 homepage redesign]
+
+Colors are CSS custom properties (needed so `--accentSoft` can be
+derived from `--accent` at paint time via `color-mix()`, instead of
+hardcoded and going stale if the accent ever changes again). Layout,
+radius, and type-scale values are plain Sass variables, consumed
+directly by component partials at build time.
+-------------------------------------------------------------------*/
+
+:root {
+  --bg: oklch(96.5% 0.006 250);
+  --bgAlt: oklch(92% 0.015 250);
+  --ink: oklch(23% 0.02 260);
+  --inkSoft: oklch(46% 0.025 260);
+  --accent: #0e8a8f;
+  // Derived from --accent, not hardcoded -- this is the fix for the
+  // design handoff's flagged bug (accentSoft was authored against an
+  // earlier violet accent and never re-derived when it changed to teal).
+  --accentSoft: color-mix(in oklch, var(--accent) 12%, white);
+  --accentInk: oklch(99% 0.006 290);
+  --line: oklch(0% 0 0 / 0.08);
+}
+
+// Layout
+$content-max-width: 1280px;
+$content-padding-x: 40px;
+$section-padding-y: 70px;
+
+// Radius
+$radius-pill: 999px;
+$radius-card: 20px;
+$radius-card-lg: 24px;
+$radius-image: 16px;
+$radius-hero-image: 24px;
+$radius-about-image: 20px;
+
+// Fonts
+$font-display: "Bricolage Grotesque", sans-serif;
+$font-body: "Instrument Sans", sans-serif;
+$font-mono: ui-monospace, Menlo, monospace;
+
+// Type scale
+// unquote() preserves the literal CSS min() function through Dart Sass
+// compilation (Hugo's Sass rejects raw px/vw arithmetic). This makes
+// $fs-hero a non-numeric string in Sass -- do not use it in calc()/arithmetic.
+$fs-hero: unquote("min(6vw, 74px)");
+$fs-h2: 38px;
+$fs-h2-section: 34px;
+$fs-h3: 26px;
+$fs-lead: 19px;
+$fs-body: 17px;
+$fs-small: 14px;
+$fs-mono-label: 12px;
