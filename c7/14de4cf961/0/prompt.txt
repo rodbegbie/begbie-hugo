@@ -830,3 +830,18 @@ None. The two deferred Minors (teal-accent WCAG contrast, design-locked; and the
 **Reasoning:** Every one of the five approved fixes is verified in source and in the freshly-rebuilt `public/` output, the fix report's claims all check out against the actual tree (including the correctly-explained `grep -c → 1` caveat), the build is clean, and none of the previously-praised patterns (token discipline, blob consistency, SVG accent gradients, the recent-posts CTA) regressed.</result>
 <usage><subagent_tokens>63198</subagent_tokens><tool_uses>4</tool_uses><duration_ms>124487</duration_ms></usage>
 </task-notification>
+
+---
+
+Some notes from a first review:
+
+1. On the homepage, the blobs are too hidden behind the photos.  They're barely visible.  Move them so they are more exposed, and slighly decrease their transparency.
+2. On the "Contact me" button in the hero, don't change the text color to black on hover.
+3. My two headshots trim off the top of my head.  Recrop them so my hair is visible.
+4. Also, the previous version of this page used a SVG mask to make the photos a bit less "right angled".  Can you implement something like that again?
+5. In About Me: Remove the "An experienced engineering leader with over two decades of product engineering and leadership experience." subheading.  Change the heading to "Over two decades of shipping great software and helping others do the same."  Link "Splice" in the first bullet to https://splice.com/ and set the link to open in a new tab.  In the second bullet, tweak it to "he led product engineering for Splice Sound, ran the Smart TV Games engineering org at Volley, and…"
+6. IN the Experience section: Job title for Volley should be "Director of Engineering, TV Games".  The title for Discord should be "Senior Engineering Manager, Monetization".
+
+---
+
+Try committing and pushing again
