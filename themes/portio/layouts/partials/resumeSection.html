@@ -1,30 +1,32 @@
 {{ with hugo.Data.resumeSection }}
 {{ if .enable }}
 <section class="section resume" id="resume">
-    <div class="resume__background"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
+        <div class="row mb-5">
+            <div class="col-lg-8">
                 <div class="resume__heading">
-                    <div class="text-light">
-                        <!-- <span class="top-title pre-line">{{ .topTitle }}</span> -->
-                        {{ .title | markdownify }}
-                    </div>
+                    {{ .title | markdownify }}
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="tab-content ">
-                    <div class="resume__education tab-pane active" id="{{.tab1Target}}">
-                        {{ $Section := .education }}
-                        {{ range $Section }}
-                        <div class="resume__education_item">
-                            <span class="pre-line text-primary"> {{ .time }} </span>
-                            {{ .content | markdownify }}
-                        </div>
-                        {{ end }}
-
-                    </div>
-
+        </div>
+        <div class="row resume__grid">
+            {{ range first 4 .education }}
+            <div class="col-lg-3 col-md-6">
+                <div class="resume__card">
+                    <span class="resume__card_year">{{ .year }}</span>
+                    <h3 class="resume__card_title">{{ .title }}</h3>
+                    <p class="resume__card_company">{{ .company }}</p>
+                    <p class="resume__card_description">{{ .description }}</p>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="resume__earlier">
+                    <span class="resume__earlier_text">{{ .earlier }}</span>
+                    <a class="resume__earlier_link" href="{{ .earlierLinkedIn }}" target="_blank"
+                        rel="noopener">Full story on LinkedIn →</a>
                 </div>
             </div>
         </div>
