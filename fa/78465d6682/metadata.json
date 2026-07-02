@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "fa78465d6682",
+  "strategy": "manual-commit",
+  "branch": "chore/refresh-profile-photos",
+  "checkpoints_count": 5,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/fa/78465d6682/0/metadata.json",
+      "transcript": "/fa/78465d6682/0/full.jsonl",
+      "compact_transcript": "/fa/78465d6682/0/transcript.jsonl",
+      "content_hash": "/fa/78465d6682/0/content_hash.txt",
+      "prompt": "/fa/78465d6682/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 129392,
+    "cache_creation_tokens": 4213523,
+    "cache_read_tokens": 196271043,
+    "output_tokens": 475919,
+    "api_call_count": 679
+  }
+}
