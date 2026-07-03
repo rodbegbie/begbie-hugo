@@ -3,23 +3,26 @@
 	<div class="blog-preview__card_thumb">
 		{{ $anchor := $page.Params.featureImageAnchor | default "smart" }}
 		{{ with resources.Get $page.Params.featureImage }}
+		{{ $thumb332 := .Fill (printf "332x208 %s jpg q60" $anchor) }}
 		{{ $thumb400 := .Fill (printf "400x250 %s jpg q60" $anchor) }}
 		{{ $thumb600 := .Fill (printf "600x375 %s jpg q60" $anchor) }}
 		{{ $thumb900 := .Fill (printf "900x562 %s jpg q60" $anchor) }}
+		{{ $thumb332Webp := .Fill (printf "332x208 %s webp q60 drawing" $anchor) }}
 		{{ $thumb400Webp := .Fill (printf "400x250 %s webp q60 drawing" $anchor) }}
 		{{ $thumb600Webp := .Fill (printf "600x375 %s webp q60 drawing" $anchor) }}
 		{{ $thumb900Webp := .Fill (printf "900x562 %s webp q60 drawing" $anchor) }}
+		{{ $thumb332Avif := .Fill (printf "332x208 %s avif q50 drawing" $anchor) }}
 		{{ $thumb400Avif := .Fill (printf "400x250 %s avif q50 drawing" $anchor) }}
 		{{ $thumb600Avif := .Fill (printf "600x375 %s avif q50 drawing" $anchor) }}
 		{{ $thumb900Avif := .Fill (printf "900x562 %s avif q50 drawing" $anchor) }}
-		{{ $sizes := "(min-width: 1200px) 373px, (min-width: 768px) 226px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
+		{{ $sizes := "(min-width: 1280px) 384px, (min-width: 768px) calc((100vw - 56px) / 3 - 24px), calc(100vw - 80px)" }}
 		<picture>
 			<source type="image/avif" sizes="{{ $sizes }}"
-				srcset="{{ $thumb400Avif.RelPermalink }} 400w, {{ $thumb600Avif.RelPermalink }} 600w, {{ $thumb900Avif.RelPermalink }} 900w">
+				srcset="{{ $thumb332Avif.RelPermalink }} 332w, {{ $thumb400Avif.RelPermalink }} 400w, {{ $thumb600Avif.RelPermalink }} 600w, {{ $thumb900Avif.RelPermalink }} 900w">
 			<source type="image/webp" sizes="{{ $sizes }}"
-				srcset="{{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w">
+				srcset="{{ $thumb332Webp.RelPermalink }} 332w, {{ $thumb400Webp.RelPermalink }} 400w, {{ $thumb600Webp.RelPermalink }} 600w, {{ $thumb900Webp.RelPermalink }} 900w">
 			<img src="{{ $thumb600.RelPermalink }}" sizes="{{ $sizes }}"
-				srcset="{{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w"
+				srcset="{{ $thumb332.RelPermalink }} 332w, {{ $thumb400.RelPermalink }} 400w, {{ $thumb600.RelPermalink }} 600w, {{ $thumb900.RelPermalink }} 900w"
 				width="{{ $thumb600.Width }}" height="{{ $thumb600.Height }}" alt="">
 		</picture>
 		{{ end }}
