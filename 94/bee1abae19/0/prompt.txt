@@ -223,3 +223,7 @@ Formula: `containerWidth = min(viewport, 1280px)`; `containerContentWidth = cont
 This confirms the Lighthouse flag: because the `sizes` fallback and mid-range buckets overstate the true rendered width (e.g., claiming ~332–516px in ranges where the real image is only ~205–280px), the browser picks the 900w (900×562) srcset candidate when a 400w (400×250) or 600w (600×375) candidate would suffice.</result>
 <usage><subagent_tokens>38146</subagent_tokens><tool_uses>16</tool_uses><duration_ms>261616</duration_ms></usage>
 </task-notification>
+
+---
+
+Create a branch. Then Let's fix the hero/about ones too, and open a PR once they're fixed.
