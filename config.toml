@@ -1,5 +1,5 @@
 baseURL = "https://coaching.begbie.com/"
-languageCode = "en-gb"
+locale = "en-gb"
 theme = "portio"
 title = "Rod Begbie"
 enableRobotsTXT = true
