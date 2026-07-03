@@ -98,3 +98,7 @@ Both hero.html and aboutSection.html use exactly the same sizes/format/quality/a
 - `data/*.yml`/`hugo.Data` is only used to supply the *source image path* (`.image` for hero/about) or per-page anchor override — not to control resize/format/quality parameters directly.</result>
 <usage><subagent_tokens>29086</subagent_tokens><tool_uses>6</tool_uses><duration_ms>34464</duration_ms></usage>
 </task-notification>
+
+---
+
+open a PR
