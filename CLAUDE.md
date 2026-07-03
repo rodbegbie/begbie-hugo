@@ -153,3 +153,7 @@ top of the frame."
 ## Deployment
 
 Cloudflare Pages, configured by `wrangler.jsonc`. `pages_build_output_dir` points at `public/`.
+
+Pages project name is `begbie-hugo` (matches `name` in `wrangler.jsonc`). To check deployment
+status/logs, use the `cloudflare-api` MCP tool against
+`/accounts/{accountId}/pages/projects/begbie-hugo/deployments` rather than the dashboard.
