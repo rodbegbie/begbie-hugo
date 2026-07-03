@@ -34,7 +34,7 @@
           {{ $hero750Avif := .Fill "750x938 Top avif q60 picture" }}
           {{ $hero1000Avif := .Fill "1000x1250 Top avif q60 picture" }}
           {{ $hero1400Avif := .Fill "1400x1750 Top avif q60 picture" }}
-          {{ $sizes := "(min-width: 1400px) 500px, (min-width: 1200px) 430px, (min-width: 992px) 360px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
+          {{ $sizes := "(min-width: 1280px) 476px, (min-width: 992px) calc((100vw - 80px) * 0.4167 - 24px), calc(100vw - 104px)" }}
           <picture class="hero_figure-photo">
             <source type="image/avif" sizes="{{ $sizes }}"
               srcset="{{ $hero500Avif.RelPermalink }} 500w, {{ $hero750Avif.RelPermalink }} 750w, {{ $hero1000Avif.RelPermalink }} 1000w, {{ $hero1400Avif.RelPermalink }} 1400w">

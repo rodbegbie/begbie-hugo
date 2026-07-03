@@ -12,7 +12,7 @@
 		{{ $thumb400Avif := .Fill (printf "400x250 %s avif q50 drawing" $anchor) }}
 		{{ $thumb600Avif := .Fill (printf "600x375 %s avif q50 drawing" $anchor) }}
 		{{ $thumb900Avif := .Fill (printf "900x562 %s avif q50 drawing" $anchor) }}
-		{{ $sizes := "(min-width: 1200px) 373px, (min-width: 768px) 226px, (min-width: 576px) 516px, calc(100vw - 48px)" }}
+		{{ $sizes := "(min-width: 1280px) 376px, (min-width: 768px) calc((100vw - 152px) / 3), calc(100vw - 104px)" }}
 		<picture>
 			<source type="image/avif" sizes="{{ $sizes }}"
 				srcset="{{ $thumb400Avif.RelPermalink }} 400w, {{ $thumb600Avif.RelPermalink }} 600w, {{ $thumb900Avif.RelPermalink }} 900w">
