@@ -1,0 +1,30 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "94bee1abae19",
+  "strategy": "manual-commit",
+  "branch": "fix/responsive-image-sizes",
+  "checkpoints_count": 6,
+  "files_touched": [
+    "themes/portio/layouts/blog/single.html",
+    "themes/portio/layouts/partials/aboutSection.html",
+    "themes/portio/layouts/partials/blogCard.html",
+    "themes/portio/layouts/partials/hero.html"
+  ],
+  "sessions": [
+    {
+      "metadata": "/94/bee1abae19/0/metadata.json",
+      "transcript": "/94/bee1abae19/0/full.jsonl",
+      "compact_transcript": "/94/bee1abae19/0/transcript.jsonl",
+      "content_hash": "/94/bee1abae19/0/content_hash.txt",
+      "prompt": "/94/bee1abae19/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 21838,
+    "cache_creation_tokens": 246303,
+    "cache_read_tokens": 6978492,
+    "output_tokens": 31435,
+    "api_call_count": 83
+  }
+}
