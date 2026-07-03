@@ -27,16 +27,22 @@
                   </div>
                   {{ $anchor := .Params.featureImageAnchor | default "smart" }}
                   {{ with resources.Get .Params.featureImage }}
-                  {{ $banner700 := .Fill (printf "700x361 %s jpg q85" $anchor) }}
-                  {{ $banner1000 := .Fill (printf "1000x515 %s jpg q85" $anchor) }}
-                  {{ $banner1400 := .Fill (printf "1400x722 %s jpg q85" $anchor) }}
-                  {{ $banner2000 := .Fill (printf "2000x1031 %s jpg q85" $anchor) }}
-                  {{ $banner700Webp := .Fill (printf "700x361 %s webp q80 drawing" $anchor) }}
-                  {{ $banner1000Webp := .Fill (printf "1000x515 %s webp q80 drawing" $anchor) }}
-                  {{ $banner1400Webp := .Fill (printf "1400x722 %s webp q80 drawing" $anchor) }}
-                  {{ $banner2000Webp := .Fill (printf "2000x1031 %s webp q80 drawing" $anchor) }}
+                  {{ $banner700 := .Fill (printf "700x361 %s jpg q60" $anchor) }}
+                  {{ $banner1000 := .Fill (printf "1000x515 %s jpg q60" $anchor) }}
+                  {{ $banner1400 := .Fill (printf "1400x722 %s jpg q60" $anchor) }}
+                  {{ $banner2000 := .Fill (printf "2000x1031 %s jpg q60" $anchor) }}
+                  {{ $banner700Webp := .Fill (printf "700x361 %s webp q60 drawing" $anchor) }}
+                  {{ $banner1000Webp := .Fill (printf "1000x515 %s webp q60 drawing" $anchor) }}
+                  {{ $banner1400Webp := .Fill (printf "1400x722 %s webp q60 drawing" $anchor) }}
+                  {{ $banner2000Webp := .Fill (printf "2000x1031 %s webp q60 drawing" $anchor) }}
+                  {{ $banner700Avif := .Fill (printf "700x361 %s avif q50 drawing" $anchor) }}
+                  {{ $banner1000Avif := .Fill (printf "1000x515 %s avif q50 drawing" $anchor) }}
+                  {{ $banner1400Avif := .Fill (printf "1400x722 %s avif q50 drawing" $anchor) }}
+                  {{ $banner2000Avif := .Fill (printf "2000x1031 %s avif q50 drawing" $anchor) }}
                   {{ $sizes := "(min-width: 1400px) 1096px, (min-width: 1200px) 916px, (min-width: 992px) 736px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
                   <picture>
+                      <source type="image/avif" sizes="{{ $sizes }}"
+                          srcset="{{ $banner700Avif.RelPermalink }} 700w, {{ $banner1000Avif.RelPermalink }} 1000w, {{ $banner1400Avif.RelPermalink }} 1400w, {{ $banner2000Avif.RelPermalink }} 2000w">
                       <source type="image/webp" sizes="{{ $sizes }}"
                           srcset="{{ $banner700Webp.RelPermalink }} 700w, {{ $banner1000Webp.RelPermalink }} 1000w, {{ $banner1400Webp.RelPermalink }} 1400w, {{ $banner2000Webp.RelPermalink }} 2000w">
                       <img src="{{ $banner1000.RelPermalink }}" sizes="{{ $sizes }}"

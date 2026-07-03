@@ -22,16 +22,22 @@
             {{ partial "blob.html" (dict "id" "hero-blob-gradient") }}
           </div>
           {{ with resources.Get .image }}
-          {{ $hero500 := .Fill "500x625 Top jpg q82" }}
-          {{ $hero750 := .Fill "750x938 Top jpg q82" }}
-          {{ $hero1000 := .Fill "1000x1250 Top jpg q82" }}
-          {{ $hero1400 := .Fill "1400x1750 Top jpg q82" }}
+          {{ $hero500 := .Fill "500x625 Top jpg q75" }}
+          {{ $hero750 := .Fill "750x938 Top jpg q75" }}
+          {{ $hero1000 := .Fill "1000x1250 Top jpg q75" }}
+          {{ $hero1400 := .Fill "1400x1750 Top jpg q75" }}
           {{ $hero500Webp := .Fill "500x625 Top webp q75 picture" }}
           {{ $hero750Webp := .Fill "750x938 Top webp q75 picture" }}
           {{ $hero1000Webp := .Fill "1000x1250 Top webp q75 picture" }}
           {{ $hero1400Webp := .Fill "1400x1750 Top webp q75 picture" }}
+          {{ $hero500Avif := .Fill "500x625 Top avif q60 picture" }}
+          {{ $hero750Avif := .Fill "750x938 Top avif q60 picture" }}
+          {{ $hero1000Avif := .Fill "1000x1250 Top avif q60 picture" }}
+          {{ $hero1400Avif := .Fill "1400x1750 Top avif q60 picture" }}
           {{ $sizes := "(min-width: 1400px) 500px, (min-width: 1200px) 430px, (min-width: 992px) 360px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" }}
           <picture class="hero_figure-photo">
+            <source type="image/avif" sizes="{{ $sizes }}"
+              srcset="{{ $hero500Avif.RelPermalink }} 500w, {{ $hero750Avif.RelPermalink }} 750w, {{ $hero1000Avif.RelPermalink }} 1000w, {{ $hero1400Avif.RelPermalink }} 1400w">
             <source type="image/webp" sizes="{{ $sizes }}"
               srcset="{{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
             <img src="{{ $hero750.RelPermalink }}" sizes="{{ $sizes }}"
