@@ -22,14 +22,17 @@
             {{ partial "blob.html" (dict "id" "hero-blob-gradient") }}
           </div>
           {{ with resources.Get .image }}
+          {{ $hero332 := .Fill "332x415 Top jpg q75" }}
           {{ $hero500 := .Fill "500x625 Top jpg q75" }}
           {{ $hero750 := .Fill "750x938 Top jpg q75" }}
           {{ $hero1000 := .Fill "1000x1250 Top jpg q75" }}
           {{ $hero1400 := .Fill "1400x1750 Top jpg q75" }}
+          {{ $hero332Webp := .Fill "332x415 Top webp q75 picture" }}
           {{ $hero500Webp := .Fill "500x625 Top webp q75 picture" }}
           {{ $hero750Webp := .Fill "750x938 Top webp q75 picture" }}
           {{ $hero1000Webp := .Fill "1000x1250 Top webp q75 picture" }}
           {{ $hero1400Webp := .Fill "1400x1750 Top webp q75 picture" }}
+          {{ $hero332Avif := .Fill "332x415 Top avif q60 picture" }}
           {{ $hero500Avif := .Fill "500x625 Top avif q60 picture" }}
           {{ $hero750Avif := .Fill "750x938 Top avif q60 picture" }}
           {{ $hero1000Avif := .Fill "1000x1250 Top avif q60 picture" }}
@@ -37,11 +40,11 @@
           {{ $sizes := "(min-width: 1280px) 486px, (min-width: 992px) calc((100vw - 56px) * 5 / 12 - 24px), calc(100vw - 80px)" }}
           <picture class="hero_figure-photo">
             <source type="image/avif" sizes="{{ $sizes }}"
-              srcset="{{ $hero500Avif.RelPermalink }} 500w, {{ $hero750Avif.RelPermalink }} 750w, {{ $hero1000Avif.RelPermalink }} 1000w, {{ $hero1400Avif.RelPermalink }} 1400w">
+              srcset="{{ $hero332Avif.RelPermalink }} 332w, {{ $hero500Avif.RelPermalink }} 500w, {{ $hero750Avif.RelPermalink }} 750w, {{ $hero1000Avif.RelPermalink }} 1000w, {{ $hero1400Avif.RelPermalink }} 1400w">
             <source type="image/webp" sizes="{{ $sizes }}"
-              srcset="{{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
+              srcset="{{ $hero332Webp.RelPermalink }} 332w, {{ $hero500Webp.RelPermalink }} 500w, {{ $hero750Webp.RelPermalink }} 750w, {{ $hero1000Webp.RelPermalink }} 1000w, {{ $hero1400Webp.RelPermalink }} 1400w">
             <img src="{{ $hero750.RelPermalink }}" sizes="{{ $sizes }}"
-              srcset="{{ $hero500.RelPermalink }} 500w, {{ $hero750.RelPermalink }} 750w, {{ $hero1000.RelPermalink }} 1000w, {{ $hero1400.RelPermalink }} 1400w"
+              srcset="{{ $hero332.RelPermalink }} 332w, {{ $hero500.RelPermalink }} 500w, {{ $hero750.RelPermalink }} 750w, {{ $hero1000.RelPermalink }} 1000w, {{ $hero1400.RelPermalink }} 1400w"
               width="{{ $hero750.Width }}" height="{{ $hero750.Height }}" fetchpriority="high"
               alt="{{ site.Title }}, {{ site.Params.subtitle }}" style='
                 -webkit-mask: url({{ "images/hero/hero-mask-svg.svg" | absURL }});
