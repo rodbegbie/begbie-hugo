@@ -116,6 +116,21 @@ goes through the CSS cascade. Applies to any gradient referencing a design token
 `public/` output for `ZgotmplZ` after adding a partial with dynamic inline styles — it fails
 silently, no build error.
 
+**Bootstrap's `$utilities` map is trimmed to only what's currently used** (see
+`themes/portio/assets/scss/_utilities-trim.scss`) — down from Bootstrap's ~50
+default utility categories to the 11 this site actually uses (`display`,
+`justify-content`, `align-items`, `margin-top`/`-end`/`-bottom`/`-x`/`-y`,
+`padding`, `text-align`, `color`), each restricted to only its in-use values.
+`$grid-breakpoints`/`$container-max-widths` are similarly trimmed to
+`xs`/`sm`/`md`/`lg` (`xl`/`xxl` unused). If a template needs a stock Bootstrap
+utility class not already covered (e.g. `mt-3`, `bg-primary`, `rounded-pill`),
+it silently resolves to no CSS — not a build error. Add the missing key/value
+to `_utilities-trim.scss` rather than assuming any Bootstrap utility class
+will work out of the box. The `forms` and `pagination` Bootstrap SCSS modules
+are no longer imported either (zero/near-zero usage) — re-add the import in
+`style.scss` if a future page actually needs form controls or paginated
+listings.
+
 **`position: relative` alone does NOT create a stacking context.** A child with `z-index: -1`
 needs its positioned ancestor to also declare `z-index` (even `z-index: 0`), or the negative
 z-index escapes to a page-wide shared layer *below every section's own background* — including

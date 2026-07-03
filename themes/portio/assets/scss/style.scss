@@ -14,18 +14,17 @@ VERSION:	1.0.0
 @import "../bootstrap-5.3.8/scss/maps";
 @import "../bootstrap-5.3.8/scss/mixins";
 @import "../bootstrap-5.3.8/scss/utilities";
+@import "utilities-trim";
 @import "../bootstrap-5.3.8/scss/root";
 @import "../bootstrap-5.3.8/scss/reboot";
 @import "../bootstrap-5.3.8/scss/type";
 @import "../bootstrap-5.3.8/scss/containers";
 @import "../bootstrap-5.3.8/scss/grid";
-@import "../bootstrap-5.3.8/scss/forms";
 @import "../bootstrap-5.3.8/scss/buttons";
 @import "../bootstrap-5.3.8/scss/transitions";
 @import "../bootstrap-5.3.8/scss/nav";
 @import "../bootstrap-5.3.8/scss/navbar";
 @import "../bootstrap-5.3.8/scss/breadcrumb";
-@import "../bootstrap-5.3.8/scss/pagination";
 @import "../bootstrap-5.3.8/scss/utilities/api";
 
 @import "typography";

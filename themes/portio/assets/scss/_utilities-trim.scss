@@ -1,0 +1,91 @@
+//
+// Trims Bootstrap's default $utilities map (built by the "utilities" partial,
+// imported just before this file) down to only the utility categories and
+// values this site's templates/data actually use. Full audit:
+// docs/superpowers/specs/2026-07-02-css-purge-unused-utilities-design.md
+//
+// If a future template needs a Bootstrap utility class not covered by the
+// "values" list below (e.g. a new `mt-3` or `bg-primary`), it will resolve
+// to no CSS at all — silently, not a build error. Add the missing key/value
+// here rather than assuming a stock Bootstrap utility class will work.
+
+$utilities: map-remove(
+  $utilities,
+  "align", "float", "object-fit", "opacity", "overflow", "overflow-x", "overflow-y",
+  "shadow", "focus-ring", "position", "top", "bottom", "start", "end", "translate-middle",
+  "border", "border-top", "border-end", "border-bottom", "border-start", "border-color",
+  "subtle-border-color", "border-width", "border-opacity",
+  "width", "max-width", "viewport-width", "min-viewport-width",
+  "height", "max-height", "viewport-height", "min-viewport-height",
+  "flex", "flex-direction", "flex-grow", "flex-shrink", "flex-wrap",
+  "align-content", "align-self", "order",
+  "margin", "margin-start",
+  "negative-margin", "negative-margin-x", "negative-margin-y",
+  "negative-margin-top", "negative-margin-end", "negative-margin-bottom", "negative-margin-start",
+  "padding-x", "padding-y", "padding-top", "padding-end", "padding-bottom", "padding-start",
+  "gap", "row-gap", "column-gap",
+  "font-family", "font-size", "font-style", "font-weight", "line-height",
+  "text-decoration", "text-transform", "white-space", "word-wrap",
+  "text-opacity", "text-color",
+  "link-opacity", "link-offset", "link-underline", "link-underline-opacity",
+  "background-color", "bg-opacity", "subtle-background-color", "gradient",
+  "user-select", "pointer-events",
+  "rounded", "rounded-top", "rounded-end", "rounded-bottom", "rounded-start",
+  "visibility", "z-index"
+);
+
+$utilities: map-merge($utilities, (
+  "display": map-merge(map-get($utilities, "display"), (
+    responsive: false,
+    values: inline-block flex,
+  )),
+  "justify-content": map-merge(map-get($utilities, "justify-content"), (
+    responsive: false,
+    values: (
+      center: center,
+      between: space-between,
+    ),
+  )),
+  "align-items": map-merge(map-get($utilities, "align-items"), (
+    responsive: false,
+    values: (
+      center: center,
+    ),
+  )),
+  "margin-top": map-merge(map-get($utilities, "margin-top"), (
+    responsive: false,
+    values: (5: map-get($spacers, 5)),
+  )),
+  "margin-end": map-merge(map-get($utilities, "margin-end"), (
+    responsive: false,
+    values: (3: map-get($spacers, 3)),
+  )),
+  "margin-bottom": map-merge(map-get($utilities, "margin-bottom"), (
+    responsive: false,
+    values: (
+      3: map-get($spacers, 3),
+      5: map-get($spacers, 5),
+    ),
+  )),
+  "margin-x": map-merge(map-get($utilities, "margin-x"), (
+    responsive: false,
+    values: (
+      2: map-get($spacers, 2),
+      auto: auto,
+    ),
+  )),
+  "margin-y": map-merge(map-get($utilities, "margin-y"), (
+    responsive: false,
+    values: (0: map-get($spacers, 0)),
+  )),
+  "padding": map-merge(map-get($utilities, "padding"), (
+    responsive: false,
+    values: (2: map-get($spacers, 2)),
+  )),
+  "text-align": map-merge(map-get($utilities, "text-align"), (
+    values: (center: center),
+  )),
+  "color": map-merge(map-get($utilities, "color"), (
+    values: (dark: map-get(map-get(map-get($utilities, "color"), "values"), "dark")),
+  )),
+));
