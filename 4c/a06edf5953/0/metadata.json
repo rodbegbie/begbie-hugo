@@ -1,0 +1,79 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_id": "4ca06edf5953",
+  "session_id": "a250bb60-15e4-48bb-9a3d-02b3ffa0f9bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-03T03:28:47.762554Z",
+  "branch": "chore/claude-md-cloudflare-deployment-notes",
+  "checkpoints_count": 3,
+  "save_step_count": 1,
+  "files_touched": [
+    "CLAUDE.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5",
+  "turn_id": "1976acb3a3b0",
+  "token_usage": {
+    "input_tokens": 14000,
+    "cache_creation_tokens": 104302,
+    "cache_read_tokens": 728194,
+    "output_tokens": 3609,
+    "api_call_count": 15
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-claude-md-management:revise-claude-md-2026-07-03T03:22:41.648345Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "claude-md-management:revise-claude-md"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "16b458f09e1c",
+      "timestamp": "2026-07-03T03:22:41.648345Z",
+      "native": {
+        "command": "/claude-md-management:revise-claude-md"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/claude-md-management:revise-claude-md",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-03T03:28:47.753767Z",
+    "agent_lines": 4,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 4,
+    "total_lines_changed": 4,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 4,
+      "agent_lines_removed": 0
+    }
+  ]
+}

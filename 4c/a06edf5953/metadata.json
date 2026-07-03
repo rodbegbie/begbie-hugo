@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.7.8",
+  "checkpoint_version": "branch-v1",
+  "checkpoint_id": "4ca06edf5953",
+  "strategy": "manual-commit",
+  "branch": "chore/claude-md-cloudflare-deployment-notes",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "CLAUDE.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/4c/a06edf5953/0/metadata.json",
+      "transcript": "/4c/a06edf5953/0/full.jsonl",
+      "compact_transcript": "/4c/a06edf5953/0/transcript.jsonl",
+      "content_hash": "/4c/a06edf5953/0/content_hash.txt",
+      "prompt": "/4c/a06edf5953/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 14000,
+    "cache_creation_tokens": 104302,
+    "cache_read_tokens": 728194,
+    "output_tokens": 3609,
+    "api_call_count": 15
+  }
+}

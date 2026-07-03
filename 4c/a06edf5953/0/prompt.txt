@@ -1,0 +1,9 @@
+Are you able to see the logs from the last deployment of the site on Cloudflare?  What time did it happen?
+
+---
+
+/claude-md-management:revise-claude-md
+
+---
+
+yes
