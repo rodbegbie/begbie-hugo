@@ -1,0 +1,4 @@
+Address the hugo warnings when the site is built:
+
+2026-07-02T20:54:34.418305Z    WARN  deprecated: project config key languageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use locale instead.
+2026-07-02T20:54:34.450147Z    WARN  deprecated: .Site.LanguageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use .Site.Language.Locale instead.
