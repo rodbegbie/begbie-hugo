@@ -22,7 +22,7 @@
                         {{ $about750Avif := .Fill "750x938 Top avif q60 picture" }}
                         {{ $about1000Avif := .Fill "1000x1250 Top avif q60 picture" }}
                         {{ $about1400Avif := .Fill "1400x1750 Top avif q60 picture" }}
-                        {{ $sizes := "(min-width: 1280px) 376px, (min-width: 992px) calc((100vw - 80px) / 3 - 24px), calc(100vw - 104px)" }}
+                        {{ $sizes := "(min-width: 1280px) 384px, (min-width: 992px) calc((100vw - 56px) / 3 - 24px), calc(100vw - 80px)" }}
                         <picture>
                             <source type="image/avif" sizes="{{ $sizes }}"
                                 srcset="{{ $about500Avif.RelPermalink }} 500w, {{ $about750Avif.RelPermalink }} 750w, {{ $about1000Avif.RelPermalink }} 1000w, {{ $about1400Avif.RelPermalink }} 1400w">
